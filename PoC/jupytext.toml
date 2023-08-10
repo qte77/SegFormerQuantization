@@ -1,0 +1,7 @@
+# https://jupytext.readthedocs.io/en/latest/config.html
+# formats = "ipynb,py:percent,md"
+
+[formats]
+# "notebooks/" = "ipynb"
+"scripts" = "py:percent"
+"md" = "md"
