@@ -10,7 +10,7 @@ from torch import (
   device, rand, randint
 )
 from torch.cuda import (
-    memory_allocated, mem_get_info,
+    mem_get_info, # memory_allocated,
     is_available, device_count
 )
 from datasets import (
@@ -120,7 +120,7 @@ def get_and_save_sf_model(
 
 def get_model_as_dict(
   model_checkpoint: str, save_path: str,
-  max_memory: int, kwparams: dict, device_map: str = "cuda:0"
+  max_memory: int, kwparams: dict #, device_map: str = "cuda:0"
 ) -> dict:
   """Returns a dict containing model, load_time and memory_footprint."""
   m = {}
@@ -172,7 +172,7 @@ def get_calculation_speed(
   if device_to_use == "cuda":
     devices = ["cuda", "cpu"]
   elif device_to_use == "cpu":
-    devices = device_to_use
+    devices = device_to_use  
   else:
     raise NotImplementedError
 
@@ -190,8 +190,7 @@ def get_calculation_speed(
           o = rand(tsize) < 0.5
         else:
           o = randint(0, 1, tsize, dtype=dt)
-        #TODO line magic not valid in py
-        #t = %timeit -r 7 -n 77 -o o**2
+        # t = %timeit -r 7 -n 77 -o o**2 # ipynb line magic
         t = repeat(stmt='o**2', repeat=runs, number=number, globals=locals())
         timings[dev][dt_str]["mean"] = mean(t)
         timings[dev][dt_str]["stdev"] = stdev(t)
