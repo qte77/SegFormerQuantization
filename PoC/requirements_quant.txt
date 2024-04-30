@@ -1,12 +1,13 @@
 datasets
+# git+https://github.com/Hugging Face/transformers
 transformers
+# git+https://github.com/huggingface/accelerate.git
 accelerate
 evaluate
 # peft
-# https://github.com/TimDettmers/bitsandbytes >=0.37.2 -U
 # 8-bit CUDA functions for PyTorch, LLM.int8() paper matmul and quant fn
+# https://github.com/TimDettmers/bitsandbytes >=0.37.2 -U
+# %pip install -iq https://test.pypi.org/simple/ bitsandbytes
 bitsandbytes
-#%pip install -q git+https://github.com/huggingface/accelerate.git
-#%pip install -iq https://test.pypi.org/simple/ bitsandbytes
 torchinfo
 datasize
