@@ -9,9 +9,9 @@ from torch import (
   bfloat16, int8, uint8, bool,
   device, rand, randint
 )
+# memory_allocated
 from torch.cuda import (
-    memory_allocated, mem_get_info,
-    is_available, device_count
+    mem_get_info, is_available, device_count
 )
 from datasets import (
   Dataset, DatasetDict,
@@ -76,7 +76,8 @@ def get_image_processor(
   tok_loc = save_path if exists(save_path) else model_checkpoint
   print(f"Loading from {tok_loc}.")
   image_processor = AutoImageProcessor.from_pretrained(model_checkpoint)
-  if tok_loc != save_path: image_processor.save_pretrained(save_path)
+  if tok_loc != save_path:
+    image_processor.save_pretrained(save_path)
   return image_processor
 
 def get_and_save_sf_model(
@@ -175,11 +176,13 @@ def get_calculation_speed(
     raise NotImplementedError
 
   for dev in devices:
-    if tee: print(f"{dev=}")
+    if tee:
+      print(f"{dev=}")
     timings[dev] = {}
 
     for dt in dtypes:
-      if tee: print(dt)
+      if tee:
+        print(dt)
       dt_str = str(dt)
       timings[dev][dt_str] = {}
       with device(dev):
