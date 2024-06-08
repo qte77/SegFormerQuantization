@@ -23,7 +23,8 @@ test_image = './ADE20k_toy_dataset/images/training/ADE_train_00000001.jpg'
 test_image_annotation = './ADE20k_toy_dataset/annotations/training/ADE_train_00000001.png'
 
 # %% [code]
-!pip install -qq transformers datasets evaluate
+# TODO implement !pip install fr notebooks
+pip install -qq transformers datasets evaluate
 
 # %% [code]
 import requests, zipfile, io
@@ -183,8 +184,8 @@ optimizer = torch.optim.AdamW(model_fined.parameters(), lr=0.00006)
 device_type = "cuda" if torch.cuda.is_available() else "cpu"
 device = torch.device(device_type)
 
-model_orig.to(device);
-model_fined.to(device);
+model_orig.to(device)
+model_fined.to(device)
 
 # %% [code]
 %%time
@@ -265,7 +266,7 @@ with torch.no_grad():
         "fined_half": model_fined_half(pixel_values=pixel_values.half())
     }
 # logits are of shape (batch_size, num_labels, height/4, width/4)
-[print(f"pred_{k}_logits.shape={pred_outputs[k].logits.cpu().shape}") for k in pred_outputs.keys()];
+[print(f"pred_{k}_logits.shape={pred_outputs[k].logits.cpu().shape}") for k in pred_outputs.keys()]
 
 # %% [code]
 pred_seg_map = {
