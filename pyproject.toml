@@ -44,7 +44,7 @@ ruff = "*"
 # https://github.com/c4urself/bump2version
 # bump2version = "*" # no longer maintained
 # https://github.com/callowayproject/bump-my-version
-bump-my-version
+"bump-my-version" = "*"
 # https://pypi.org/project/interrogate/
 # docstring coverage
 interogate = "*"
