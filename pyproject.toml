@@ -37,34 +37,50 @@ keywords = [
 # https://download.pytorch.org/whl/cu113/torch-1.11.0%2Bcu113-cp38-cp38-linux_x86_64.whl
 # git+https://github.com/huggingface/transformers
 
-[tool.poetry.dev-dependencies]
-# Python linter and code formatter, written in Rust
-ruff = "*"
-# "blacken-docs" = "*"
-# https://github.com/c4urself/bump2version
-# bump2version = "*" # no longer maintained
-# https://github.com/callowayproject/bump-my-version
-# simplify releasing software by updating all version strings
-# in your source code by the correct increment and optionally
-# commit and tag the changes 
-"bump-my-version" = "*"
-# https://pypi.org/project/interrogate/
-# docstring coverage
-interogate = "*"
-# https://github.com/aio-libs/aiohttp
-# Building newsfiles for your project
-towncrier = "*"
-# Black on Python code blocks in docs
-# Optional static typing for Python
-# mypy = "*"
-# "pre-commit" = "*"
-# automatically upgrade syntax for newer versions
-# pyupgrade = "*"
-# "pytest-cov" = "*"
-# pytest = "*"
-# tox = "*"
-# watchdog = "==2.1.9"
-# sphinx = "==5.0.2"
+[project.optional-dependencies]
+dev = [
+  # https://github.com/astral-sh/ruff
+  # Python linter and code formatter, written in Rust
+  "ruff" = "*",
+  # Run Black on Python code blocks in docs
+  # "blacken-docs" = "*",
+  # https://github.com/c4urself/bump2version
+  # bump2version = "*" # no longer maintained
+  # https://github.com/callowayproject/bump-my-version
+  # simplify releasing software by updating all version strings
+  # in your source code by the correct increment and optionally
+  # commit and tag the changes 
+  "bump-my-version" = "*",
+  # https://pypi.org/project/interrogate/
+  # docstring coverage
+  "interogate" = "*",
+  # https://github.com/aio-libs/aiohttp
+  # Building newsfiles for your project
+  "towncrier" = "*",
+  # Black on Python code blocks in docs
+  # Optional static typing for Python
+  # mypy = "*",
+  # "pre-commit" = "*",
+  # automatically upgrade syntax for newer versions
+  # pyupgrade = "*",
+  # TODO
+  # "git-fame>=1.12.2",
+  # "generate-changelog>=0.7.6",
+  # "pip-tools",
+  # "pre-commit",
+]
+test = [
+  # "pytest-cov" = "*",
+  # "pytest" = "*",
+  # "tox" = "*",
+  # watchdog = "==2.1.9",
+]
+docs = [
+  # "sphinx" = "==5.0.2",
+  # https://github.com/mkdocs/mkdocs
+  "mkdocs",
+]
+
 
 [tool.ruff]
 # https://docs.astral.sh/ruff/faq/#does-ruff-support-jupyter-notebooks
