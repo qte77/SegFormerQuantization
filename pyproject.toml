@@ -44,6 +44,9 @@ ruff = "*"
 # https://github.com/c4urself/bump2version
 # bump2version = "*" # no longer maintained
 # https://github.com/callowayproject/bump-my-version
+# simplify releasing software by updating all version strings
+# in your source code by the correct increment and optionally
+# commit and tag the changes 
 "bump-my-version" = "*"
 # https://pypi.org/project/interrogate/
 # docstring coverage
