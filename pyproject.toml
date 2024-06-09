@@ -1,0 +1,125 @@
+# https://github.com/python-poetry/poetry
+# Python packaging and dependency management made easy 
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+version = "3.0.0"
+name = "SegFormerQuantization"
+description = ""
+license = "BSD 3-Clause"
+authors = ["qte77 <qte@77>"]
+readme = "README.md"
+repository = "https://github.com/qte77/SegFormerQuantization"
+documentation = "https://github.com/qte77/SegFormerQuantization/docs"
+keywords = [
+  "SegFormer", "Transformer", "Quantization", "Segmentation", "Classification",
+  "TIME", "SPACE", "Hugging Face", "Nvidia", "NVLabs", "Weights&Biases"
+]
+
+[tool.poetry.urls]
+"Issues" = "https://github.com/qte77/SegFormerQuantization/issues"
+"Personal website" = "https://qte77.github.io"
+
+[tool.poetry.dependencies]
+# datasets = "==2.3.2"
+# PyYAML = "*"
+# transformers = "==4.19.4"
+# wandb = "==0.12.21"
+# watermark = "*"
+# torch = "*"
+# transformers "==4.20.1"
+# torch ==1.11.0 #+cu113"
+# numpy = "==1.21.6"
+# hydra= "==1.2"
+# omegaconf= "2.2.2"
+# https://download.pytorch.org/whl/cu113/torch-1.11.0%2Bcu113-cp38-cp38-linux_x86_64.whl
+# git+https://github.com/huggingface/transformers
+
+[tool.poetry.dev-dependencies]
+# Python linter and code formatter, written in Rust
+ruff = "*"
+# "blacken-docs" = "*"
+# https://github.com/c4urself/bump2version
+# bump2version = "*" # no longer maintained
+# https://github.com/callowayproject/bump-my-version
+bump-my-version
+# https://pypi.org/project/interrogate/
+# docstring coverage
+interogate = "*"
+# https://github.com/aio-libs/aiohttp
+# Building newsfiles for your project
+towncrier = "*"
+# Black on Python code blocks in docs
+# Optional static typing for Python
+# mypy = "*"
+# "pre-commit" = "*"
+# automatically upgrade syntax for newer versions
+# pyupgrade = "*"
+# "pytest-cov" = "*"
+# pytest = "*"
+# tox = "*"
+# watchdog = "==2.1.9"
+# sphinx = "==5.0.2"
+
+[tool.ruff]
+# https://docs.astral.sh/ruff/faq/#does-ruff-support-jupyter-notebooks
+extend-include = ["*.ipynb"]
+
+[tool.ruff.lint]
+# https://docs.astral.sh/ruff/faq/#can-i-write-my-own-linter-plugins-for-ruff
+select = [
+    # Pyflakes
+    "F",
+    # Pycodestyle
+    "E",
+    "W",
+    # isort
+    "I001"
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-rfEX -svv --color=yes --code-highlight=yes --doctest-modules"
+testpaths = [
+    "tests"
+]
+log_format = "%(asctime)s %(levelname)s %(message)s"
+log_date_format = "%Y-%m-%d %H:%M:%S"
+# norecursedirs = [
+#    "tests/example_scripts"
+# ]
+# markers = [
+#    "requires_gpu: mark a test that requires a GPU to run.",
+#    "slow: mark a test that takes a long time to run.",
+# ]
+
+[tool.interrogate]
+fail-under = 95
+exclude = ["setup.py", "docs", "build", "tests"]
+# ignore-regex = ["^get$", "^mock_.*", ".*BaseClass.*"]
+# possible values: 0 (minimal output), 1 (-v), 2 (-vv)
+verbose = 0
+
+# https://mypy.readthedocs.io/en/stable/config_file.html#using-a-pyproject-toml
+# https://mypy.readthedocs.io/en/stable/config_file.html#example-pyproject-toml
+[tool.mypy]
+warn_unused_configs = true
+warn_unused_ignores = true
+warn_unreachable = true
+warn_return_any = true
+
+# [[tool.mypy.overrides]]
+# module = 'mypy-pytest'
+# ignore_missing_imports = true
+
+# https://github.com/aio-libs/aiohttp
+# Building newsfiles for your project
+# [tool.towncrier]
+# package = "aiohttp"
+# filename = "CHANGES.rst"
+# directory = "CHANGES/"
+# title_format = "{version} ({project_date})"
+# template = "CHANGES/.TEMPLATE.rst"
+# issue_format = "`#{issue} <https://github.com/aio-libs/aiohttp/issues/{issue}>`_"
