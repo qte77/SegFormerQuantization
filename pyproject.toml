@@ -117,8 +117,6 @@ warn_return_any = true
 # module = 'mypy-pytest'
 # ignore_missing_imports = true
 
-# https://github.com/aio-libs/aiohttp
-# Building newsfiles for your project
 # [tool.towncrier]
 # package = "aiohttp"
 # filename = "CHANGES.rst"
