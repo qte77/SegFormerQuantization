@@ -1,4 +1,5 @@
 # https://github.com/python-poetry/poetry
+# https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
 # Python packaging and dependency management made easy 
 [build-system]
 requires = ["poetry-core"]
@@ -19,8 +20,11 @@ keywords = [
 ]
 
 [tool.poetry.urls]
-"Issues = https://github.com/qte77/SegFormerQuantization/issues"
-"Personal website = https://qte77.github.io"
+Homepage = "https://qte77.github.io"
+# Documentation = "https://readthedocs.org"
+Repository = "https://github.com/qte77/SegFormerQuantization.git"
+Issues = "https://github.com/qte77/SegFormerQuantization/issues"
+Changelog = "https://github.com/qte77/SegFormerQuantization/CHANGELOG.md"
 
 [tool.poetry.dependencies]
 # datasets = "==2.3.2"
