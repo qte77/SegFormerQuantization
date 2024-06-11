@@ -19,8 +19,8 @@ keywords = [
 ]
 
 [tool.poetry.urls]
-"Issues" = "https://github.com/qte77/SegFormerQuantization/issues"
-"Personal website" = "https://qte77.github.io"
+"Issues = https://github.com/qte77/SegFormerQuantization/issues"
+"Personal website = https://qte77.github.io"
 
 [tool.poetry.dependencies]
 # datasets = "==2.3.2"
@@ -41,42 +41,42 @@ keywords = [
 dev = [
   # https://github.com/astral-sh/ruff
   # Python linter and code formatter, written in Rust
-  "ruff" = "*",
+  "ruff = *",
   # Run Black on Python code blocks in docs
-  # "blacken-docs" = "*",
+  # "blacken-docs = *",
   # https://github.com/c4urself/bump2version
   # bump2version = "*" # no longer maintained
   # https://github.com/callowayproject/bump-my-version
   # simplify releasing software by updating all version strings
   # in your source code by the correct increment and optionally
   # commit and tag the changes 
-  "bump-my-version" = "*",
+  "bump-my-version = *",
   # https://pypi.org/project/interrogate/
   # docstring coverage
-  "interogate" = "*",
+  "interogate = *",
   # https://github.com/aio-libs/aiohttp
   # Building newsfiles for your project
-  "towncrier" = "*",
+  "towncrier = *",
   # Black on Python code blocks in docs
   # Optional static typing for Python
-  # mypy = "*",
-  # "pre-commit" = "*",
+  # "mypy = *",
+  # "pre-commit = *",
   # automatically upgrade syntax for newer versions
-  # pyupgrade = "*",
+  # "pyupgrade = *",
   # TODO
-  # "git-fame>=1.12.2",
-  # "generate-changelog>=0.7.6",
+  # "git-fame >= 1.12.2",
+  # "generate-changelog >= 0.7.6",
   # "pip-tools",
   # "pre-commit",
 ]
 test = [
-  # "pytest-cov" = "*",
-  # "pytest" = "*",
-  # "tox" = "*",
-  # watchdog = "==2.1.9",
+  # "pytest-cov = *",
+  # "pytest = *",
+  # "tox = *",
+  # "watchdog = ==2.1.9",
 ]
 docs = [
-  # "sphinx" = "==5.0.2",
+  # "sphinx = 5.0.2",
   # https://github.com/mkdocs/mkdocs
   "mkdocs",
 ]
