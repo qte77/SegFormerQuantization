@@ -57,7 +57,6 @@ from transformers import SegformerImageProcessor
 from transformers import SegformerForSemanticSegmentation
 from huggingface_hub import hf_hub_download
 import evaluate
-from sklearn.metrics import accuracy_score
 
 # %% [code]
 def download_data():
@@ -384,8 +383,8 @@ def plot_coloured_map(map, image, ade_palette):
 # %% [code]
 map = get_annotation_map()
 unique_cls = get_anno_map_unique_classes(map)
-unique_cls_ids = [label2id[k] for k in unique_cls if k != None]
-# ade_palette = ade_palette()
+unique_cls_ids = [label2id[k] for k in unique_cls if k is not None]
+ade_palette = ade_palette()
 # plot_pred_map(predicted_segmentation_map, ade_palette)
 # plot_coloured_map(map, image, ade_palette)
 
