@@ -25,19 +25,21 @@ test_image = './ADE20k_toy_dataset/images/training/ADE_train_00000001.jpg'
 test_image_annotation = './ADE20k_toy_dataset/annotations/training/ADE_train_00000001.png'
 
 # %% [code]
-# TODO implement !pip install for notebooks
-# TODO use req.txt for multi import
-# avoid ruff 29:5: E999 SyntaxError: Simple statements must be separated by newlines or semicolons
-pip install -qq transformers
-pip install -qq datasets
-pip install -qq evaluate
-
-# %% [code]
+# get basic libraries
 import requests, zipfile, io
 from PIL import Image
 import os
 import json
 import copy
+from subprocess import check_call
+from sys import executable
+
+# %% [code]
+# TODO implement !pip install for notebooks
+# Using pip from your program
+# https://pip.pypa.io/en/latest/user_guide/#using-pip-from-your-program
+for module in ['transformers', 'datasets', 'evaluate']:
+    check_call([executable, '-m', 'pip', 'install', '-qq', module])
 
 # %% [code]
 from tqdm.notebook import tqdm
