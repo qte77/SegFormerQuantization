@@ -1,4 +1,5 @@
 # %% [markdown]
+'''
 # # SegFormer baseline to fine-tune model and quantize weights
 # 
 # This notebook fine-tunes a SegFormer on a (toy) dataset and test on a single image to establish a baseline. It also uses [torch.Tensor.half](https://pytorch.org/docs/stable/generated/torch.Tensor.half.html) to quantize the wights to fp16 as a baseline as well. 
@@ -9,6 +10,7 @@
 # - [Fine-tune SegFormer on a custom dataset](https://github.com/NielsRogge/Transformers-Tutorials/blob/master/SegFormer/Fine_tune_SegFormer_on_custom_dataset.ipynb)
 # - [Hugging Face - SegFormerForSemanticSegmentation](https://huggingface.co/docs/transformers/main/model_doc/segformer#transformers.SegformerForSemanticSegmentation)
 #
+'''
 
 # https://peps.python.org/pep-0008/#maximum-line-length
 # %% [code]
@@ -369,7 +371,7 @@ def get_anno_map_unique_classes(map, print_cls=True):
 
 def plot_coloured_map(map, image, ade_palette):
     color_seg = np.zeros((map.shape[0], map.shape[1], 3), dtype=np.uint8) # height, width, 3
-    palette = np.array(ade_pallete)
+    palette = np.array(ade_palette)
     for label, color in enumerate(palette):
         color_seg[map == label, :] = color
     # Convert to BGR
@@ -387,7 +389,7 @@ def plot_coloured_map(map, image, ade_palette):
 map = get_annotation_map()
 unique_cls = get_anno_map_unique_classes(map)
 unique_cls_ids = [label2id[k] for k in unique_cls if k is not None]
-ade_palette = ade_palette()
+# ade_palette = ade_palette()
 # plot_pred_map(predicted_segmentation_map, ade_palette)
 # plot_coloured_map(map, image, ade_palette)
 
