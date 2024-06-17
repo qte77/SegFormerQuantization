@@ -10,6 +10,43 @@
 # - [Hugging Face - SegFormerForSemanticSegmentation](https://huggingface.co/docs/transformers/main/model_doc/segformer#transformers.SegformerForSemanticSegmentation)
 #
 
+# https://peps.python.org/pep-0008/#maximum-line-length
+# %% [code]
+# get basic libraries
+import requests
+import zipfile
+import io
+import os
+import json
+import copy
+from PIL import Image
+from subprocess import check_call
+from sys import executable
+
+# %% [code]
+# TODO implement !pip install for notebooks
+# Using pip from your program
+# https://pip.pypa.io/en/latest/user_guide/#using-pip-from-your-program
+for module in ['transformers', 'datasets', 'evaluate']:
+    check_call([executable, '-m', 'pip', 'install', '-qq', module])
+
+# %% [code]
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from tqdm.notebook import tqdm
+
+# %% [code]
+import torch
+from torch import nn
+from torch.utils.data import Dataset
+from torch.utils.data import DataLoader
+import evaluate
+from datasets import load_dataset
+from huggingface_hub import hf_hub_download
+from transformers import SegformerImageProcessor
+from transformers import SegformerForSemanticSegmentation
+
 # %% [code]
 repo_id = "huggingface/label-files"
 filename = "ade20k-id2label.json"
@@ -23,40 +60,6 @@ dataset_full_name = "scene_parse_150"
 root_dir = './ADE20k_toy_dataset'
 test_image = './ADE20k_toy_dataset/images/training/ADE_train_00000001.jpg'
 test_image_annotation = './ADE20k_toy_dataset/annotations/training/ADE_train_00000001.png'
-
-# %% [code]
-# get basic libraries
-import requests, zipfile, io
-from PIL import Image
-import os
-import json
-import copy
-from subprocess import check_call
-from sys import executable
-
-# %% [code]
-# TODO implement !pip install for notebooks
-# Using pip from your program
-# https://pip.pypa.io/en/latest/user_guide/#using-pip-from-your-program
-for module in ['transformers', 'datasets', 'evaluate']:
-    check_call([executable, '-m', 'pip', 'install', '-qq', module])
-
-# %% [code]
-from tqdm.notebook import tqdm
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-
-# %% [code]
-import torch
-from torch.utils.data import Dataset
-from torch import nn
-from torch.utils.data import DataLoader
-from datasets import load_dataset
-from transformers import SegformerImageProcessor
-from transformers import SegformerForSemanticSegmentation
-from huggingface_hub import hf_hub_download
-import evaluate
 
 # %% [code]
 def download_data():
