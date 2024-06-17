@@ -167,7 +167,7 @@ id2label = { int(k): v for k, v in id2label.items() }
 label2id = { v: k for k, v in id2label.items() }
 
 # %% [code]
-%%time
+# %%time
 # define model
 model_orig = SegformerForSemanticSegmentation.from_pretrained(
     model_name, num_labels=150, id2label=id2label, label2id=label2id,
@@ -196,7 +196,7 @@ model_orig.to(device)
 model_fined.to(device)
 
 # %% [code]
-%%time
+# %%time
 #@title `train model`
 #TODO export to utils
 model_fined.train()
