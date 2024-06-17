@@ -22,8 +22,8 @@ import os
 import json
 import copy
 from PIL import Image
-from subprocess import check_call
-from sys import executable
+# from subprocess import check_call
+# from sys import executable
 
 # %% [code]
 import numpy as np
