@@ -301,7 +301,7 @@ pred_seg_map = {
 def ade_palette(num_labels: int = 150, num_colors: int = 256):
     """ADE20K palette that maps each class of 'num_labels' to 'num_colors' values."""
     scale = num_colors / num_labels
-    return [[k * scale for i in range(0,3)] for k in range(0, num_labels)]
+    return [[int(k * scale) for i in range(0,3)] for k in range(0, num_labels)]
 
 # %% [code]
 #TODO export to utils
