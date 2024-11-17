@@ -20,4 +20,13 @@ Types of changes:
 
 ### Added
 
+- Documentation: `PRD.md`, `FRD.md`, `DRD.md`
+- Versioning: `CHANGELOG.md`, GHA Bump2version
+- Standarization: `.gitmessage`
+- Third-party LICENSES
+
 ### Changed
+
+- `LICENSE`
+- `.gitignore`
+
