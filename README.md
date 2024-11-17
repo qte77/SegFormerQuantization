@@ -73,7 +73,11 @@ Adjust settings in `app/config.py` for model, dataset, and evaluation parameters
 
 ## TODO [↑](#toc)
 
-- [ ] Insert link and report of WandB project 
+- [ ] Add .txt ot LICENSE/LICENSES to avoid download instead of open
+- README.md
+	- [ ] Insert link to and report of WandB project
+	- [ ] Remove/Change #href ↑(#toc) to avoid conflict with gh-pages
+	- [ ] Remove/Change #href for light/dark png to avoid conflict with gh-pages
 
 ## License [↑](#toc)
 
