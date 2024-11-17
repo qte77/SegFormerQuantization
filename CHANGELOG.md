@@ -36,4 +36,4 @@ Types of changes:
 ## Removed
 
 - `.bumpversion.cfg`
-
+- `requirements.txt`
