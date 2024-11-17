@@ -25,7 +25,8 @@ Types of changes:
 - Documentation gh-pages: `generate-deploy-mkdocs-ghpages.yml` 
 - Versioning: `CHANGELOG.md`, GHA Bump2version
 - Standarization: `.gitmessage`
-- Third-party LICENSES
+- Third-party `LICENSES`
+- mkdocs: `__init__.py`
 
 ### Changed
 
@@ -37,3 +38,4 @@ Types of changes:
 
 - `.bumpversion.cfg`
 - `requirements.txt`
+
