@@ -31,7 +31,7 @@ Types of changes:
 
 - `LICENSE`
 - `.gitignore`
-- `links-fail-fast.yml`
+- Actions: `links-fail-fast.yml`, `codeql.yml`
 
 ## Removed
 
