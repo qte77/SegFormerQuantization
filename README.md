@@ -11,7 +11,7 @@ An end-to-end evaluation pipeline for SegFormer models on semantic segmentation 
 
 [DRAFT] [WIP] ----> Not fully implemented yet
 
-The current version is <0.2.0>. For version history have a look at the [CHANGELOG](CHANGELOG.md).
+The current version is <0.2.1>. For version history have a look at the [CHANGELOG](CHANGELOG.md).
 
 ## TOC
 
