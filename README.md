@@ -39,7 +39,16 @@ The current version is <0.2.1>. For version history have a look at the [CHANGELO
 
 ## Usage [↑](#toc)
 
-Run the main script: `python app/app.py`
+```python
+python -m app/app.py
+```
+
+or
+
+```bash
+docker build -t segformer-quant-eval .
+docker run segformer-quant-eval
+```
 
 ## Configuration [↑](#toc)
 
@@ -73,6 +82,8 @@ Adjust settings in `app/config.py` for model, dataset, and evaluation parameters
 
 ## TODO [↑](#toc)
 
+- [ ] Implement tests before concrete function (TDD)
+- [ ] Use pydantic or similar
 - [ ] Add .txt ot LICENSE/LICENSES to avoid download instead of open
 - README.md
 	- [ ] Insert link to and report of WandB project

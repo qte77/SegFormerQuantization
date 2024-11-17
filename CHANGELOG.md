@@ -21,6 +21,10 @@ Types of changes:
 [0.2.1] - 2024-11-17
 ---
 
+### Added
+
+- Dockerfile
+
 [0.2.0] - 2024-11-17
 ---
 
