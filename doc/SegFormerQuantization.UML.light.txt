@@ -1,0 +1,56 @@
+@startuml
+'https://www.plantuml.com
+
+left to right direction
+
+package "SegFormerQuantization" {
+  [main.py]
+  [config.py]
+  
+  package "app" {
+    [__init__.py]
+    [__main__.py]
+    
+    package "utils" {
+      [data_processing.py]
+      [model_loader.py]
+      [quantization.py]
+      [evaluator.py]
+      [wandb_utils.py]
+      [general_utils.py]
+    }
+  }
+  
+  package "docs" {
+    [index.md]
+    [PRD.md]
+    [FRD.md]
+    [DRD.md]
+    [CHANGELOG.md]
+    [LICENSE.md]
+    [LICENSES.md]
+  }
+}
+
+[main.py] --> [config.py] : imports
+[main.py] --> [app/__main__.py] : runs
+[app/__main__.py] --> [app/utils/data_processing.py] : uses
+[app/__main__.py] --> [app/utils/model_loader.py] : uses
+[app/__main__.py] --> [app/utils/quantization.py] : uses
+[app/__main__.py] --> [app/utils/evaluator.py] : uses
+[app/__main__.py] --> [app/utils/wandb_utils.py] : uses
+[app/__main__.py] --> [app/utils/general_utils.py] : uses
+
+note right of [main.py]
+  Entry point for the application
+end note
+
+note right of [config.py]
+  Contains configuration settings
+end note
+
+note right of [app/__main__.py]
+  Main logic for SegFormer evaluation
+end note
+
+@enduml

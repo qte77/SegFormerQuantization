@@ -51,18 +51,16 @@ jobs:
           - mkdocstrings:
               handlers:
                 python:
-                  paths:
-                    - app
-                    - app/utils
+                  paths: [app]
         nav:
           - Home: index.md
-          - Code: docstrings.md
           - PRD: PRD.md
           - FRD: FRD.md
           - DRD: DRD.md
+          - Code: docstrings.md
           - Change Log: CHANGELOG.md
-          - License: LICENSE.md
-          - Third-Party Licenses: LICENSES.md
+          - License: LICENSE
+          - Third-Party Licenses: LICENSES
         EOF
         #  - Configuration: pyproject.md
 
@@ -70,13 +68,13 @@ jobs:
       run: |
         mkdir -p docs
         cp README.md docs/index.md
-        cp CHANGELOG.md docs/CHANGELOG.md
-        cp LICENSE docs/LICENSE.md
-        cp LICENSES docs/LICENSES.md
-        # cp pyproject.toml docs/pyproject.md
         cp doc/PRD.md docs/PRD.md
         cp doc/FRD.md docs/FRD.md
         cp doc/DRD.md docs/DRD.md
+        cp CHANGELOG.md docs/CHANGELOG.md
+        cp LICENSE docs/LICENSE
+        cp LICENSES docs/LICENSES
+        # cp pyproject.toml docs/pyproject.md
         
     - name: Create docstrings file
       run: |
@@ -84,8 +82,6 @@ jobs:
         # Code Documentation
         
         ::: app
-        
-        ::: app.utils
         EOF
 
     - name: Build documentation
