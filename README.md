@@ -63,7 +63,7 @@ Adjust settings in `app/config.py` for model, dataset, and evaluation parameters
 │   ├── model_loader.py
 │   ├── quantization.py
 │   └── wandb_utils.py
-└── requirements.txt
+└── pyproject.toml
 ```
 
 ## UML [↑](#toc)
