@@ -27,6 +27,7 @@ Types of changes:
 - Standarization: `.gitmessage`
 - Third-party `LICENSES`
 - mkdocs: `__init__.py`
+- Packaging: `__main__.py`
 
 ### Changed
 

@@ -60,7 +60,7 @@ search = 'version = "{current_version}"'
 replace = 'version = "{new_version}"'
 
 [[tool.bumpversion.files]]
-filename = "app/__version__.py"
+filename = "__version__.py"
 search = '__version__: str = "{current_version}"'
 replace = '__version__: str = "{new_version}"'
 

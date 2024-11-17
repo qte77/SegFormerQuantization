@@ -20,12 +20,12 @@ Environment variables:
 """
 
 from config import *
-from utils.data_processing import load_dataset, get_processed_inputs
-from utils.model_loader import load_base_model, load_image_processor
-from utils.quantization import quantize_models
-from utils.evaluator import evaluate_model
-from utils.wandb_utils import create_wandb_run, create_wandb_run_meta, log_wandb_results
-from utils.general_utils import print_model_sizes
+from .utils.data_processing import load_dataset, get_processed_inputs
+from .utils.model_loader import load_base_model, load_image_processor
+from .utils.quantization import quantize_models
+from .utils.evaluator import evaluate_model
+from .utils.wandb_utils import create_wandb_run, create_wandb_run_meta, log_wandb_results
+from .utils.general_utils import print_model_sizes
 import wandb
 
 def main():
