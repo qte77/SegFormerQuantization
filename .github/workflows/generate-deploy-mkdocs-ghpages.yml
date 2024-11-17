@@ -63,12 +63,6 @@ jobs:
           - Third-Party Licenses: LICENSES.md
         EOF
         #  - Configuration: pyproject.md
-        
-    - name: Create docstrings file
-      run: |
-        echo "# Code Documentation" > docs/docstrings.md
-        echo "" >> docs/docstrings.md
-        echo "::: app" >> docs/docstrings.md
 
     - name: Copy repo files
       run: |
@@ -81,6 +75,14 @@ jobs:
         cp doc/PRD.md docs/PRD.md
         cp doc/FRD.md docs/FRD.md
         cp doc/DRD.md docs/DRD.md
+        
+    - name: Create docstrings file
+      run: |
+        cat << EOF > docs/docstrings.md
+        # Code Documentation
+        
+        ::: app
+        EOF
 
     - name: Build documentation
       run: mkdocs build
