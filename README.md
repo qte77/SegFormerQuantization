@@ -34,7 +34,7 @@ The current version is <0.2.1>. For version history have a look at the [CHANGELO
 	
 ## Setup [↑](#toc)
 
-1. Install dependencies: `pip install --no-cache-dir poetry==1.8.4 && poetry install`.
+1. Install dependencies: `pip install poetry==1.8.4 && poetry install`.
 2. Set up Weights & Biases API key in environment variables
 
 ## Usage [↑](#toc)
@@ -75,7 +75,7 @@ Adjust settings in `app/config.py` for model, dataset, and evaluation parameters
 └── pyproject.toml
 ```
 
-## UML [↑](#toc)
+## UML [↑](#toc)	
 
 [<img src="assets/SegFormerQuantization.UML.dark.png" alt="SegFormerQuantization.UML.dark.png" />](./#gh-dark-mode-only)
 [<img src="assets/SegFormerQuantization.UML.light.png" alt="SegFormerQuantization.UML.light.png" />](./#gh-light-mode-only)
