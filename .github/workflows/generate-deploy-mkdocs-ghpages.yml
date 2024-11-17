@@ -29,6 +29,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install mkdocs mkdocs-material mkdocstrings[python]
         
+    - name: Install package
+      run: pip install -e .
+        
     - name: Get repo info
       id: repo_info
       run: |
@@ -51,7 +54,7 @@ jobs:
           - mkdocstrings:
               handlers:
                 python:
-                  paths: [app]
+                  paths: [.]
         nav:
           - Home: index.md
           - Code: docstrings.md

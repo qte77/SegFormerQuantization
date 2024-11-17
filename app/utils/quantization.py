@@ -10,7 +10,7 @@ Functions:
 The module uses Quanto for quantization and supports float8, int8, int4, and int2 quantization.
 """
 
-from transformers import QuantoConfig
+from transformers import QuantoConfig, SegformerForSemanticSegmentation
 import quanto
 
 def quantize_models(base_model, model_name, model_save_path, device):
@@ -39,7 +39,7 @@ def quantize_models(base_model, model_name, model_save_path, device):
         try:
             print(f"loading local {model_htype}")
             models[model_htype] = SegformerForSemanticSegmentation.from_pretrained(model_save_path_quanto)
-        except:
+        except Exception as e:
             try:
                 print(f"loading local {model_name}")
                 models[model_htype] = SegformerForSemanticSegmentation.from_pretrained(
@@ -48,7 +48,7 @@ def quantize_models(base_model, model_name, model_save_path, device):
                     torch_dtype=base_model.config.torch_dtype,
                     quantization_config=config_quanto[nbits],
                 )
-            except:
+            except Exception as f:
                 print(f"loading online {model_name}")
                 models[model_htype] = SegformerForSemanticSegmentation.from_pretrained(
                     model_name,

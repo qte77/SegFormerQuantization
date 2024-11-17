@@ -32,8 +32,11 @@ def load_base_model(model_name, model_save_path, compute_dtype, device):
     try:
         print("loading from disk")
         model = SegformerForSemanticSegmentation.from_pretrained(model_save_path)
-    except:
-        print("loading from source and saving to disk")
+    except Exception as e:
+        print(
+            f"Error loading local model: {e}."
+            f"Loading from source and saving to disk."
+        )
         if not exists(model_save_path):
             makedirs(model_save_path, exist_ok=True)
         model = SegformerForSemanticSegmentation.from_pretrained(
@@ -56,8 +59,12 @@ def load_image_processor(model_name, tokenizer_save_path):
     """
 
     try:
-        return SegformerImageProcessor.from_pretrained(tokenizer_save_path)
-    except:
+        return SegformerImageProcessor.from_pretrained(tokenizer_save_path))
+    except Exception as e:
+        print(
+            f"Error loading local ImageProcessor: {e}."
+            f"Loading from source and saving to disk."
+        )
         image_processor = SegformerImageProcessor.from_pretrained(model_name)
         image_processor.save_pretrained(tokenizer_save_path)
         return image_processor

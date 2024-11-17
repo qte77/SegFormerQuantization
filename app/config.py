@@ -1,6 +1,6 @@
 """Configuration settings for the SegFormer evaluation pipeline."""
 
-import torch
+from torch import device, cuda, float32
 from os import environ
 
 # Global configuration
@@ -25,4 +25,3 @@ environ['WANDB_ENTITY'] = 'ba-segformer'
 # Device configuration
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 compute_dtype = torch.float32
-

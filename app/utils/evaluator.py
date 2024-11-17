@@ -12,8 +12,9 @@ The module uses PyTorch for model inference and the 'evaluate' library
 for computing semantic segmentation metrics.
 """
 
-import torch
 from evaluate import load
+from .data_processing import get_processed_inputs
+import torch
 
 def infer_model(model, pixel_values, labels):  
     """

@@ -19,8 +19,14 @@ Environment variables:
     WANDB_ENTITY: Name of the W&B entity (team or user)
 """
 
-from config import *
-from .utils.data_processing import load_dataset, get_processed_inputs
+from config import (
+    wandb_tag_mode, wandb_tag_runmode, metric_name,
+    dataset_name, ds_num_shards, ds_shards_mod,
+    model_name_short, model_name,
+    model_save_path, tokenizer_save_path, dataset_save_path, 
+    device, compute_dtype
+)
+from .utils.data_processing import load_dataset_custom, get_processed_inputs
 from .utils.model_loader import load_base_model, load_image_processor
 from .utils.quantization import quantize_models
 from .utils.evaluator import evaluate_model
@@ -38,7 +44,7 @@ def main():
     
     base_model = load_base_model(model_name, model_save_path, compute_dtype, device)
     image_processor = load_image_processor(model_name, tokenizer_save_path)
-    dataset = load_dataset(dataset_save_path, dataset_name)
+    dataset = load_dataset_custom(dataset_save_path, dataset_name)
     wandb.login(relogin=True, force=True, key=environ['WANDB_API_KEY'])
     
     # Quantize models

@@ -15,9 +15,9 @@ tools to prepare data for SegFormer model evaluation.
 
 from datasets import load_dataset, load_from_disk
 from datasets.utils.logging import set_verbosity_error
-from PIL import Image
+import torch
 
-def load_dataset(dataset_save_path, dataset_name):
+def load_dataset_custom(dataset_save_path, dataset_name):
     """
     Load or download and save the dataset.
     
@@ -31,7 +31,7 @@ def load_dataset(dataset_save_path, dataset_name):
     
     try:
         return load_from_disk(dataset_save_path)
-    except:
+    except Exception as e:
         dataset = load_dataset(dataset_name, trust_remote_code=True)
         dataset.save_to_disk(dataset_save_path)
         return dataset
