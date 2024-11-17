@@ -54,6 +54,7 @@ jobs:
                   paths: [app]
         nav:
           - Home: index.md
+          - Code: docstrings.md
           - PRD: PRD.md
           - FRD: FRD.md
           - DRD: DRD.md
@@ -61,9 +62,15 @@ jobs:
           - License: LICENSE.md
           - Third-Party Licenses: LICENSES.md
         EOF
-        #  - Project Configuration: pyproject.md
+        #  - Configuration: pyproject.md
+        
+    - name: Create docstrings file
+      run: |
+        echo "# Code Documentation" > docs/docstrings.md
+        echo "" >> docs/docstrings.md
+        echo "::: app" >> docs/docstrings.md
 
-    - name: Prepare documentation files
+    - name: Copy repo files
       run: |
         mkdir -p docs
         cp README.md docs/index.md
@@ -85,5 +92,5 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-...
         publish_dir: ./site
+...
