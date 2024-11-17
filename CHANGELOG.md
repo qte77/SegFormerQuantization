@@ -18,6 +18,9 @@ Types of changes:
 [Unreleased]
 ---
 
+[0.2.0] - 2024-11-17
+---
+
 ### Added
 
 - Management: `pyproject.toml`
