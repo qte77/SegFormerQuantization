@@ -48,7 +48,7 @@ def quantize_models(base_model, model_name, model_save_path, device):
                     torch_dtype=base_model.config.torch_dtype,
                     quantization_config=config_quanto[nbits],
                 )
-            except Exception as f:
+            except Exception as e:
                 print(f"loading online {model_name}")
                 models[model_htype] = SegformerForSemanticSegmentation.from_pretrained(
                     model_name,

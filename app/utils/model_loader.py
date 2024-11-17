@@ -59,7 +59,7 @@ def load_image_processor(model_name, tokenizer_save_path):
     """
 
     try:
-        return SegformerImageProcessor.from_pretrained(tokenizer_save_path))
+        return SegformerImageProcessor.from_pretrained(tokenizer_save_path)
     except Exception as e:
         print(
             f"Error loading local ImageProcessor: {e}."
