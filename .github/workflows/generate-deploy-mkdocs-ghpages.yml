@@ -29,15 +29,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install mkdocs mkdocs-material mkdocstrings[python]
         
-    - name: Install package
-      run: pip install -e .
-        
     - name: Get repo info
       id: repo_info
       run: |
         REPO_INFO=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-                     -H "Accept: application/vnd.github.v3+json" \
-                     https://api.github.com/repos/${{ github.repository }})
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ github.repository }})
         REPO_NAME=$(echo $REPO_INFO | jq -r .name)
         REPO_DESCRIPTION=$(echo $REPO_INFO | jq -r .description)
         echo "repo_name=$REPO_NAME" >> $GITHUB_OUTPUT
@@ -54,7 +51,9 @@ jobs:
           - mkdocstrings:
               handlers:
                 python:
-                  paths: [.]
+                  paths:
+                    - app
+                    - app/utils
         nav:
           - Home: index.md
           - Code: docstrings.md
