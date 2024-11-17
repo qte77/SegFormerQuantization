@@ -5,16 +5,22 @@ on:
   push:
     branches:
       - main 
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.x'
 
@@ -25,27 +31,28 @@ jobs:
 
     - name: Create mkdocs.yml
       run: |
-        echo "site_name: Your Project Name" > mkdocs.yml
-        echo "theme: material" >> mkdocs.yml
-        echo "plugins:" >> mkdocs.yml
-        echo "  - search" >> mkdocs.yml
-        echo "  - mkdocstrings:" >> mkdocs.yml
-        echo "      handlers:" >> mkdocs.yml
-        echo "        python:" >> mkdocs.yml
-        echo "          paths: [app]" >> mkdocs.yml
-        echo "nav:" >> mkdocs.yml
-        echo "  - Home: index.md" >> mkdocs.yml
-        echo "  - License: license.md" >> mkdocs.yml
-        echo "  - Third-Party Licenses: licenses.md" >> mkdocs.yml
-        echo "  - Project Configuration: pyproject.md" >> mkdocs.yml
-        echo "  - PRD: PRD.md" >> mkdocs.yml
-        echo "  - FRD: FRD.md" >> mkdocs.yml
-        echo "  - DRD: DRD.md" >> mkdocs.yml
-        # echo "  - API Documentation: api.md" >> mkdocs.yml
+        cat << EOF > mkdocs.yml
+        site_name: Your Project Name
+        theme: material
+        plugins:
+          - search
+          - mkdocstrings:
+              handlers:
+                python:
+                  paths: [app]
+        nav:
+          - Home: index.md
+          - License: license.md
+          - Third-Party Licenses: licenses.md
+          - Project Configuration: pyproject.md
+          - PRD: PRD.md
+          - FRD: FRD.md
+          - DRD: DRD.md
+        EOF
 
     - name: Prepare documentation files
       run: |
-        mkdir docs
+        mkdir -p docs
         cp README.md docs/index.md
         cp LICENSE docs/license.md
         cp LICENSES docs/licenses.md
@@ -53,9 +60,6 @@ jobs:
         cp doc/PRD.md docs/PRD.md
         cp doc/FRD.md docs/FRD.md
         cp doc/DRD.md docs/DRD.md
-        # echo "# API Documentation" > docs/api.md
-        # echo "" >> docs/api.md
-        # echo "::: app" >> docs/api.md
 
     - name: Build documentation
       run: mkdocs build
