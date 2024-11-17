@@ -20,6 +20,7 @@ Types of changes:
 
 ### Added
 
+- Management: `pyproject.toml`
 - Documentation: `PRD.md`, `FRD.md`, `DRD.md`
 - Versioning: `CHANGELOG.md`, GHA Bump2version
 - Standarization: `.gitmessage`
@@ -29,4 +30,8 @@ Types of changes:
 
 - `LICENSE`
 - `.gitignore`
+
+## Removed
+
+- `.bumpversion.cfg`
 

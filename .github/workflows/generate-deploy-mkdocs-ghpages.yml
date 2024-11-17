@@ -37,10 +37,10 @@ jobs:
         echo "  - Home: index.md" >> mkdocs.yml
         echo "  - License: license.md" >> mkdocs.yml
         echo "  - Third-Party Licenses: licenses.md" >> mkdocs.yml
-        echo "  - PRD: prd.md" >> mkdocs.yml
-        echo "  - FRD: frd.md" >> mkdocs.yml
-        echo "  - DRD: drd.md" >> mkdocs.yml
         echo "  - Project Configuration: pyproject.md" >> mkdocs.yml
+        echo "  - PRD: PRD.md" >> mkdocs.yml
+        echo "  - FRD: FRD.md" >> mkdocs.yml
+        echo "  - DRD: DRD.md" >> mkdocs.yml
         # echo "  - API Documentation: api.md" >> mkdocs.yml
 
     - name: Prepare documentation files
@@ -49,16 +49,19 @@ jobs:
         cp README.md docs/index.md
         cp LICENSE docs/license.md
         cp LICENSES docs/licenses.md
-        cp PRD.md docs/prd.md
-        cp FRD.md docs/frd.md
-        cp DRD.md docs/drd.md
         cp pyproject.toml docs/pyproject.md
+        cp doc/PRD.md docs/PRD.md
+        cp doc/FRD.md docs/FRD.md
+        cp doc/DRD.md docs/DRD.md
         # echo "# API Documentation" > docs/api.md
         # echo "" >> docs/api.md
         # echo "::: app" >> docs/api.md
 
     - name: Build documentation
       run: mkdocs build
+      
+#    - name: Push to gh-pages
+#      run: mkdocs gh-deploy --force
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
