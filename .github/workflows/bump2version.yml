@@ -1,0 +1,55 @@
+---
+# https://github.com/callowayproject/bump-my-version?tab=readme-ov-file#github-actions
+name: Bump Version with bump-my-version
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      bump_type:
+        description: 'Bump type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+        - major
+        - minor
+        - patch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Bump version
+        id: bump
+        uses: callowayproject/bump-my-version@master
+        env:
+          BUMPVERSION_TAG: "true"
+        with:
+          args: ${{ inputs.bump_type }}
+          github-token: ${{ secrets.GH_TOKEN }}
+
+      - name: Check
+        if: steps.bump.outputs.bumped == 'true'
+        run: |
+          echo "Version was bumped from ${{ steps.bump.outputs.previous-version }} to ${{ steps.bump.outputs.current-version }}!"
+          
+#      - name: Get new version
+#        id: get_version
+#        run: echo "new_version=$(cat version.md | tr -d '\n')" >> $GITHUB_OUTPUT
+
+#      - name: Create Release
+#        uses: actions/create-release@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          tag_name: v${{ steps.get_version.outputs.new_version }}
+#          release_name: Release ${{ steps.get_version.outputs.new_version }}
+#          draft: false
+#          prerelease: false
+...
