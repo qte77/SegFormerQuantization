@@ -1,0 +1,42 @@
+[tool.poetry]
+name = "segformer-quantization-pipeline"
+version = "0.1.0"
+description = "An end-to-end quantization evaluation pipeline for SegFormer models on semantic segmentation tasks"
+# authors = ["name <your.email@example.com>"]
+readme = "README.md"
+packages = [{include = "segformer_quantization_pipeline"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+torch = "2.1.2"
+transformers = "4.44.0"
+evaluate = "0.4.2"
+quanto = "0.2.0"
+optimum-quanto = "^0.1.0"
+wandb = "0.17.8"
+pillow = "^9.0.0"
+datasets = "^2.0.0"
+accelerate = "0.33.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.0.0"
+black = "^22.0.0"
+isort = "^5.0.0"
+flake8 = "^4.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ['py310']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.flake8]
+max-line-length = 100
+extend-ignore = "E203, W503"
+

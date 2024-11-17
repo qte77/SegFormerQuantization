@@ -1,0 +1,68 @@
+---
+name: Generate and deploy MkDocs to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install mkdocs mkdocs-material mkdocstrings[python]
+
+    - name: Create mkdocs.yml
+      run: |
+        echo "site_name: Your Project Name" > mkdocs.yml
+        echo "theme: material" >> mkdocs.yml
+        echo "plugins:" >> mkdocs.yml
+        echo "  - search" >> mkdocs.yml
+        echo "  - mkdocstrings:" >> mkdocs.yml
+        echo "      handlers:" >> mkdocs.yml
+        echo "        python:" >> mkdocs.yml
+        echo "          paths: [app]" >> mkdocs.yml
+        echo "nav:" >> mkdocs.yml
+        echo "  - Home: index.md" >> mkdocs.yml
+        echo "  - License: license.md" >> mkdocs.yml
+        echo "  - Third-Party Licenses: licenses.md" >> mkdocs.yml
+        echo "  - PRD: prd.md" >> mkdocs.yml
+        echo "  - FRD: frd.md" >> mkdocs.yml
+        echo "  - DRD: drd.md" >> mkdocs.yml
+        echo "  - Project Configuration: pyproject.md" >> mkdocs.yml
+        # echo "  - API Documentation: api.md" >> mkdocs.yml
+
+    - name: Prepare documentation files
+      run: |
+        mkdir docs
+        cp README.md docs/index.md
+        cp LICENSE docs/license.md
+        cp LICENSES docs/licenses.md
+        cp PRD.md docs/prd.md
+        cp FRD.md docs/frd.md
+        cp DRD.md docs/drd.md
+        cp pyproject.toml docs/pyproject.md
+        # echo "# API Documentation" > docs/api.md
+        # echo "" >> docs/api.md
+        # echo "::: app" >> docs/api.md
+
+    - name: Build documentation
+      run: mkdocs build
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./site
+...
