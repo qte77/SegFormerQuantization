@@ -6,7 +6,7 @@ build-backend = "poetry.core.masonry.api"
 version = "0.1.0"
 name = "segformer-quantization-pipeline"
 description = "An end-to-end quantization evaluation pipeline for SegFormer models on semantic segmentation tasks"
-# authors = ["name <your.email@example.com>"]
+authors = ["qte77 <qte@77.gh>"]
 readme = "README.md"
 packages = [{include = "segformer_quantization_pipeline"}]
 
