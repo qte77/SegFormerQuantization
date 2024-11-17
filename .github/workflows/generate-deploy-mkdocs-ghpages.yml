@@ -82,6 +82,8 @@ jobs:
         # Code Documentation
         
         ::: app
+        
+        ::: app.utils
         EOF
 
     - name: Build documentation
