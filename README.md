@@ -34,7 +34,7 @@ The current version is <0.2.1>. For version history have a look at the [CHANGELO
 	
 ## Setup [↑](#toc)
 
-1. Install dependencies: `poetry install` or `pip install -r requirements.txt`
+1. Install dependencies: `pip install --no-cache-dir poetry==1.8.4 && poetry install`.
 2. Set up Weights & Biases API key in environment variables
 
 ## Usage [↑](#toc)
