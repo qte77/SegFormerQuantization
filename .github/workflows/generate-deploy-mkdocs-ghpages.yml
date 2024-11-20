@@ -59,8 +59,8 @@ jobs:
           - DRD: DRD.md
           - Code: docstrings.md
           - Change Log: CHANGELOG.md
-          - License: LICENSE
-          - Third-Party Licenses: LICENSES
+          - License: LICENSE.md
+          - Third-Party Licenses: LICENSES.md
         EOF
         #  - Configuration: pyproject.md
 
@@ -72,8 +72,8 @@ jobs:
         cp doc/FRD.md docs/FRD.md
         cp doc/DRD.md docs/DRD.md
         cp CHANGELOG.md docs/CHANGELOG.md
-        cp LICENSE docs/LICENSE
-        cp LICENSES docs/LICENSES
+        cp LICENSE.md docs/LICENSE.md
+        cp LICENSES.md docs/LICENSES.md
         # cp pyproject.toml docs/pyproject.md
         
     - name: Create docstrings file
