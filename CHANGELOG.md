@@ -18,6 +18,9 @@ Types of changes:
 [Unreleased]
 ---
 
+[0.5.3] - 2024-11-20
+---
+
 ### Fixed
 
 - Script gen docstring to eclude __init__.py
