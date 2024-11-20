@@ -81,8 +81,8 @@ Adjust settings in `app/config.py` for model, dataset, and evaluation parameters
 
 ## UML [↑](#toc)
 
-<img src="assets/SegFormerQuantization.UML.dark.png#gh-dark-mode-only" alt="SegFormerQuantization.UML.dark.png" /> <!-- mkdocs exclude { data-search-exclude } -->
-<img src="assets/SegFormerQuantization.UML.light.png#gh-light-mode-only" alt="SegFormerQuantization.UML.light.png" />
+<img src="assets/SegFormerQuantization.UML.dark.png#gh-dark-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" /> <!-- mkdocs exclude { data-search-exclude } -->
+<img src="assets/SegFormerQuantization.UML.light.png#gh-light-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" />
 
 ## TODO [↑](#toc)
 
@@ -101,4 +101,5 @@ Adjust settings in `app/config.py` for model, dataset, and evaluation parameters
 
 This project is licensed under the BSD 3-Clause License. See the [LICENSE](LICENSE.md) file for details.
 For third-party licenses, see the [LICENSES](LICENSES.md) file.
+
 

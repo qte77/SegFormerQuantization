@@ -4,19 +4,9 @@ name: Bump Version with bump-my-version
 
 on:
   pull_request:
-    inputs:
-      bump_type:
-        required: true
-        default: minor
-        type: string
     branches:
       - main
   push:
-    inputs:
-      bump_type:
-        required: true
-        default: patch
-        type: string
     branches:
       - main
   workflow_dispatch:
@@ -27,9 +17,9 @@ on:
         default: 'patch'
         type: choice
         options:
-        - major
-        - minor
-        - patch
+        - 'major'
+        - 'minor'
+        - 'patch'
 
 jobs:
   build:
@@ -40,13 +30,22 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v4
 
+      - name: Determine bump type
+        id: determine_bump
+        run: |
+          if [[ "${{ github.event_name }}" == "push" || "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "bump_type=minor" >> $GITHUB_OUTPUT
+          else
+            echo "bump_type=${{ github.event.inputs.bump_type }}" >> $GITHUB_OUTPUT
+          fi
+
       - name: Bump version
         id: bump
         uses: callowayproject/bump-my-version@0.28.0
         env:
           BUMPVERSION_TAG: "true"
         with:
-          args: ${{ inputs.bump_type }}
+          args: ${{ steps.determine_bump.outputs.bump_type }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check

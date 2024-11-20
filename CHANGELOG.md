@@ -18,6 +18,19 @@ Types of changes:
 [Unreleased]
 ---
 
+### Added
+
+- `gen_mkdocs_docstring_pages.py` containing script to recurse package for mkdocs docstrings
+
+### Changed
+
+- Workflow ghpages generate and deploy to include recurse docstring script
+
+### Fixed
+
+- Image size in README
+- Check `bump_type` instead of `input` in push and PR
+
 [0.3.0] - 2024-11-20
 ---
 
