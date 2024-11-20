@@ -63,12 +63,13 @@ jobs:
               scripts: scripts/gen_mkdocs_docstring_pages.py
           - literate-nav:
               nav_file: ${{ env.CODE_INDEX }}
-          - search
+          - search:
               lang: en
           - mkdocstrings:
               handlers:
                 python:
-                  paths: [${{ env.APP_FOLDER }}]
+                  paths:
+                    - ${{ env.APP_FOLDER }}
                   show_source: false
         nav:
           - Home: index.md

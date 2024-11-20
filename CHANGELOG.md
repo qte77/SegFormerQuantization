@@ -18,6 +18,10 @@ Types of changes:
 [Unreleased]
 ---
 
+### Fixed
+
+- Indenting in ghpages workflow
+
 [0.4.0] - 2024-11-20
 ---
 
