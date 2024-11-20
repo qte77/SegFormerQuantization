@@ -14,7 +14,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.45">
     
     
       
@@ -450,7 +450,7 @@
   
   
     <li class="md-nav__item">
-      <a href="LICENSE" class="md-nav__link">
+      <a href="LICENSE/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -470,7 +470,7 @@
   
   
     <li class="md-nav__item">
-      <a href="LICENSES" class="md-nav__link">
+      <a href="LICENSES/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -634,40 +634,40 @@
 <p>The current version is &lt;0.2.1&gt;. For version history have a look at the <a href="CHANGELOG/">CHANGELOG</a>.</p>
 <h2 id="toc">TOC</h2>
 <ul>
-<li><a href="#features-">Features</a></li>
-<li><a href="#setup-">Setup</a></li>
-<li><a href="#usage-">Usage</a></li>
-<li><a href="#configuration-">Configuration</a></li>
-<li><a href="#project-structure-">Project Structure</a></li>
-<li><a href="#documentation-">Documentation</a></li>
-<li><a href="#uml-">UML</a></li>
-<li><a href="#todo-">TODO</a></li>
-<li><a href="#license-">License</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#setup">Setup</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#project-structure">Project Structure</a></li>
+<li><a href="#documentation">Documentation</a></li>
+<li><a href="#uml">UML</a></li>
+<li><a href="#todo">TODO</a></li>
+<li><a href="#license">License</a></li>
 </ul>
-<h2 id="features">Features <a href="#toc">↑</a></h2>
+<h2 id="features">Features<a href="#toc"> ↑</a></h2>
 <ul>
 <li>Model loading and quantization (float8, int8, int4, int2)</li>
 <li>Dataset processing and sharding</li>
 <li>Evaluation metrics computation (mean IoU, mean accuracy, overall accuracy)</li>
 <li>Integration with Weights &amp; Biases for experiment tracking</li>
 </ul>
-<h2 id="setup">Setup <a href="#toc">↑</a></h2>
+<h2 id="setup">Setup<a href="#toc"> ↑</a></h2>
 <ol>
 <li>Install dependencies: <code>pip install poetry==1.8.4 &amp;&amp; poetry install</code>.</li>
 <li>Set up Weights &amp; Biases API key in environment variables</li>
 </ol>
-<h2 id="usage">Usage <a href="#toc">↑</a></h2>
+<h2 id="usage">Usage<a href="#toc"> ↑</a></h2>
 <pre><code class="language-python">python -m app/app.py
 </code></pre>
 <p>or</p>
 <pre><code class="language-bash">docker build -t segformer-quant-eval .
 docker run segformer-quant-eval
 </code></pre>
-<h2 id="configuration">Configuration <a href="#toc">↑</a></h2>
+<h2 id="configuration">Configuration<a href="#toc"> ↑</a></h2>
 <p>Adjust settings in <code>app/config.py</code> for model, dataset, and evaluation parameters.</p>
-<h2 id="documentation">Documentation <a href="#toc">↑</a></h2>
+<h2 id="documentation">Documentation<a href="#toc"> ↑</a></h2>
 <p>[Documentation SegFormer Quantization Pipeline](https://qte77.github.io/SegFormerQuantization/</p>
-<h2 id="project-structure">Project Structure <a href="#toc">↑</a></h2>
+<h2 id="project-structure">Project Structure<a href="#toc"> ↑</a></h2>
 <pre><code>/
 ├── app/
 │ ├── app.py
@@ -681,24 +681,24 @@ docker run segformer-quant-eval
 │   └── wandb_utils.py
 └── pyproject.toml
 </code></pre>
-<h2 id="uml">UML <a href="#toc">↑</a></h2>
-<p><a href="./#gh-dark-mode-only"><img src="assets/SegFormerQuantization.UML.dark.png" alt="SegFormerQuantization.UML.dark.png" /></a>
-<a href="./#gh-light-mode-only"><img src="assets/SegFormerQuantization.UML.light.png" alt="SegFormerQuantization.UML.light.png" /></a></p>
-<h2 id="todo">TODO <a href="#toc">↑</a></h2>
+<h2 id="uml">UML<a href="#toc"> ↑</a></h2>
+<p><img src="assets/SegFormerQuantization.UML.dark.png#gh-dark-mode-only" alt="SegFormerQuantization.UML.dark.png" /> <!-- mkdocs exclude { data-search-exclude } -->
+<img src="assets/SegFormerQuantization.UML.light.png#gh-light-mode-only" alt="SegFormerQuantization.UML.light.png" /></p>
+<h2 id="todo">TODO<a href="#toc"> ↑</a></h2>
 <ul>
 <li>[ ] Implement tests before concrete function (TDD)</li>
 <li>[ ] Use pydantic or similar</li>
-<li>[ ] Add .txt ot LICENSE/LICENSES to avoid download instead of open</li>
-<li>README.md<ul>
 <li>[ ] Insert link to and report of WandB project</li>
-<li>[ ] Remove/Change #href ↑(#toc) to avoid conflict with gh-pages</li>
-<li>[ ] Remove/Change #href for light/dark png to avoid conflict with gh-pages</li>
+<li>mkdocs<ul>
+<li>[x] Add .md to LICENSE/LICENSES to avoid download instead of open</li>
+<li>[x] Remove/Change #href ↑(#toc) to avoid conflict with gh-pages</li>
+<li>[x] Remove/Change #href for light/dark png to avoid conflict with gh-pages</li>
 </ul>
 </li>
 </ul>
-<h2 id="license">License <a href="#toc">↑</a></h2>
-<p>This project is licensed under the BSD 3-Clause License. See the <a href="LICENSE">LICENSE</a> file for details.
-For third-party licenses, see the <a href="LICENSES">LICENSES</a> file.</p>
+<h2 id="license">License<a href="#toc"> ↑</a></h2>
+<p>This project is licensed under the BSD 3-Clause License. See the <a href="LICENSE/">LICENSE</a> file for details.
+For third-party licenses, see the <a href="LICENSES/">LICENSES</a> file.</p>
 
 
 
