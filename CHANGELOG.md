@@ -18,8 +18,13 @@ Types of changes:
 [Unreleased]
 ---
 
+### Changed
+
+- Separated patch and PR bump type
+
 [0.5.0] - 2024-11-20
 ---
+=======
 
 ### Fixed
 

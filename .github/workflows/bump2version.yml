@@ -33,8 +33,10 @@ jobs:
       - name: Determine bump type
         id: determine_bump
         run: |
-          if [[ "${{ github.event_name }}" == "push" || "${{ github.event_name }}" == "pull_request" ]]; then
-            echo "bump_type=minor" >> $GITHUB_OUTPUT
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            echo "bump_type=patch" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "bump_type=patch" >> $GITHUB_OUTPUT
           else
             echo "bump_type=${{ github.event.inputs.bump_type }}" >> $GITHUB_OUTPUT
           fi
