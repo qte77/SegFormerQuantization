@@ -624,6 +624,10 @@
 
 
 <h1 id="segformer-quantization-pipeline">SegFormer Quantization Pipeline</h1>
+<!-- mkdocs only start
+## TOC
+mkdocs only start -->
+
 <p>An end-to-end evaluation pipeline for SegFormer models on semantic segmentation tasks, with support for various quantization methods.</p>
 <p><a href="https://www.codefactor.io/repository/github/qte77/SegFormerQuantization"><img alt="CodeFactor" src="https://www.codefactor.io/repository/github/qte77/SegFormerQuantization/badge" /></a>
 <a href="https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yml"><img alt="Ruff" src="https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yml/badge.svg" /></a>
@@ -632,42 +636,42 @@
 <h2 id="status">Status</h2>
 <p>[DRAFT][WIP] ----&gt; Not fully implemented yet</p>
 <p>The current version is &lt;0.2.1&gt;. For version history have a look at the <a href="CHANGELOG/">CHANGELOG</a>.</p>
-<h2 id="toc">TOC</h2>
+<h2 id="toc">TOC <!-- mkdocs exclude { data-search-exclude } --></h2>
 <ul>
-<li><a href="#features">Features</a></li>
-<li><a href="#setup">Setup</a></li>
-<li><a href="#usage">Usage</a></li>
-<li><a href="#configuration">Configuration</a></li>
-<li><a href="#project-structure">Project Structure</a></li>
-<li><a href="#documentation">Documentation</a></li>
-<li><a href="#uml">UML</a></li>
-<li><a href="#todo">TODO</a></li>
-<li><a href="#license">License</a></li>
+<li><a href="#features-">Features</a></li>
+<li><a href="#setup-">Setup</a></li>
+<li><a href="#usage-">Usage</a></li>
+<li><a href="#configuration-">Configuration</a></li>
+<li><a href="#project-structure-">Project Structure</a></li>
+<li><a href="#documentation-">Documentation</a></li>
+<li><a href="#uml-">UML</a></li>
+<li><a href="#todo-">TODO</a></li>
+<li><a href="#license-">License</a></li>
 </ul>
-<h2 id="features">Features<a href="#toc"> ↑</a></h2>
+<h2 id="features">Features <a href="#toc">↑</a></h2>
 <ul>
 <li>Model loading and quantization (float8, int8, int4, int2)</li>
 <li>Dataset processing and sharding</li>
 <li>Evaluation metrics computation (mean IoU, mean accuracy, overall accuracy)</li>
 <li>Integration with Weights &amp; Biases for experiment tracking</li>
 </ul>
-<h2 id="setup">Setup<a href="#toc"> ↑</a></h2>
+<h2 id="setup">Setup <a href="#toc">↑</a></h2>
 <ol>
 <li>Install dependencies: <code>pip install poetry==1.8.4 &amp;&amp; poetry install</code>.</li>
 <li>Set up Weights &amp; Biases API key in environment variables</li>
 </ol>
-<h2 id="usage">Usage<a href="#toc"> ↑</a></h2>
+<h2 id="usage">Usage <a href="#toc">↑</a></h2>
 <pre><code class="language-python">python -m app/app.py
 </code></pre>
 <p>or</p>
 <pre><code class="language-bash">docker build -t segformer-quant-eval .
 docker run segformer-quant-eval
 </code></pre>
-<h2 id="configuration">Configuration<a href="#toc"> ↑</a></h2>
+<h2 id="configuration">Configuration <a href="#toc">↑</a></h2>
 <p>Adjust settings in <code>app/config.py</code> for model, dataset, and evaluation parameters.</p>
-<h2 id="documentation">Documentation<a href="#toc"> ↑</a></h2>
-<p>[Documentation SegFormer Quantization Pipeline](https://qte77.github.io/SegFormerQuantization/</p>
-<h2 id="project-structure">Project Structure<a href="#toc"> ↑</a></h2>
+<h2 id="documentation">Documentation <a href="#toc">↑</a></h2>
+<p><a href="https://qte77.github.io/SegFormerQuantization/">Documentation SegFormer Quantization Pipeline</a></p>
+<h2 id="project-structure">Project Structure <a href="#toc">↑</a></h2>
 <pre><code>/
 ├── app/
 │ ├── app.py
@@ -681,13 +685,18 @@ docker run segformer-quant-eval
 │   └── wandb_utils.py
 └── pyproject.toml
 </code></pre>
-<h2 id="uml">UML<a href="#toc"> ↑</a></h2>
+<h2 id="uml">UML <a href="#toc">↑</a></h2>
 <p><img src="assets/SegFormerQuantization.UML.dark.png#gh-dark-mode-only" alt="SegFormerQuantization.UML.dark.png" /> <!-- mkdocs exclude { data-search-exclude } -->
 <img src="assets/SegFormerQuantization.UML.light.png#gh-light-mode-only" alt="SegFormerQuantization.UML.light.png" /></p>
-<h2 id="todo">TODO<a href="#toc"> ↑</a></h2>
+<h2 id="todo">TODO <a href="#toc">↑</a></h2>
 <ul>
-<li>[ ] Implement tests before concrete function (TDD)</li>
-<li>[ ] Use pydantic or similar</li>
+<li>[ ] Implement tests before concrete function (TDD)<ul>
+<li>test_model_loading, test_image_preprocessing</li>
+<li>test_quantization, test_predict, test_end_to_end</li>
+</ul>
+</li>
+<li>[ ] Include option to call HF API instead of saving model locally</li>
+<li>[ ] Use pydantic and python typing</li>
 <li>[ ] Insert link to and report of WandB project</li>
 <li>mkdocs<ul>
 <li>[x] Add .md to LICENSE/LICENSES to avoid download instead of open</li>
@@ -696,7 +705,7 @@ docker run segformer-quant-eval
 </ul>
 </li>
 </ul>
-<h2 id="license">License<a href="#toc"> ↑</a></h2>
+<h2 id="license">License <a href="#toc">↑</a></h2>
 <p>This project is licensed under the BSD 3-Clause License. See the <a href="LICENSE/">LICENSE</a> file for details.
 For third-party licenses, see the <a href="LICENSES/">LICENSES</a> file.</p>
 
