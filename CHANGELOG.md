@@ -18,6 +18,10 @@ Types of changes:
 [Unreleased]
 ---
 
+### Fixed
+
+- ghpages script indent
+
 [0.5.4] - 2024-11-20
 ---
 

@@ -17,8 +17,8 @@ for path in src_dir.glob("**/*.py"):
             #    print(f"# {path.parent.name}", file=f)
             #    print(f"::: {path.parent.name}", file=f)
             #else:
-                print(f"# {module_path}", file=f)
-                print(f"::: {module_path}", file=f)
+            print(f"# {module_path}", file=f)
+            print(f"::: {module_path}", file=f)
         mkdocs_gen_files.set_edit_path(doc_path, path)
 
 # append docstrings to navigation file
