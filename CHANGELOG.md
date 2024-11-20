@@ -18,6 +18,10 @@ Types of changes:
 [Unreleased]
 ---
 
+### Fixed
+
+- ghpages docstring nav file
+
 [0.5.3] - 2024-11-20
 ---
 

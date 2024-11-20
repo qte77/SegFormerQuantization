@@ -60,7 +60,7 @@ jobs:
               permalink: true
         plugins:
           - gen-files:
-              scripts: [scripts/gen_mkdocs_docstring_pages.py]
+              scripts: [.github/scripts/gen_mkdocs_docstring_pages.py]
           - literate-nav:
               nav_file: ${{ env.CODE_INDEX }}
           - search:
