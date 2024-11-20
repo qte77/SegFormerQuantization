@@ -3,7 +3,20 @@
 name: Bump Version with bump-my-version
 
 on:
+  pull_request:
+    inputs:
+      bump_type:
+        required: true
+        default: minor
+        type: string
+    branches:
+      - main
   push:
+    inputs:
+      bump_type:
+        required: true
+        default: patch
+        type: string
     branches:
       - main
   workflow_dispatch:
@@ -39,8 +52,10 @@ jobs:
       - name: Check
         if: steps.bump.outputs.bumped == 'true'
         run: |
-          echo "Version was bumped from ${{ steps.bump.outputs.previous-version }} to ${{ steps.bump.outputs.current-version }}!"
-          
+          previous=${{ steps.bump.outputs.previous-version }}
+          current=${{ steps.bump.outputs.current-version }}
+          echo "Version was bumped from ${previous} to ${current}!"
+
 #      - name: Get new version
 #        id: get_version
 #        run: echo "new_version=$(cat version.md | tr -d '\n')" >> $GITHUB_OUTPUT

@@ -1,5 +1,9 @@
 # SegFormer Quantization Pipeline
 
+<!-- mkdocs only start
+## TOC
+mkdocs only start -->
+
 An end-to-end evaluation pipeline for SegFormer models on semantic segmentation tasks, with support for various quantization methods.
 
 [![CodeFactor](https://www.codefactor.io/repository/github/qte77/SegFormerQuantization/badge)](https://www.codefactor.io/repository/github/qte77/SegFormerQuantization)
@@ -13,31 +17,31 @@ An end-to-end evaluation pipeline for SegFormer models on semantic segmentation 
 
 The current version is <0.2.1>. For version history have a look at the [CHANGELOG](CHANGELOG.md).
 
-## TOC
+## TOC <!-- mkdocs exclude { data-search-exclude } -->
 
-* [Features](#features)
-* [Setup](#setup)
-* [Usage](#usage)
-* [Configuration](#configuration)
-* [Project Structure](#project-structure)
-* [Documentation](#documentation)
-* [UML](#uml)
-* [TODO](#todo)
-* [License](#license)
+* [Features](#features-)
+* [Setup](#setup-)
+* [Usage](#usage-)
+* [Configuration](#configuration-)
+* [Project Structure](#project-structure-)
+* [Documentation](#documentation-)
+* [UML](#uml-)
+* [TODO](#todo-)
+* [License](#license-)
 
-## Features[ ↑](#toc)
+## Features [↑](#toc)
 
 - Model loading and quantization (float8, int8, int4, int2)
 - Dataset processing and sharding
 - Evaluation metrics computation (mean IoU, mean accuracy, overall accuracy)
 - Integration with Weights & Biases for experiment tracking
 	
-## Setup[ ↑](#toc)
+## Setup [↑](#toc)
 
 1. Install dependencies: `pip install poetry==1.8.4 && poetry install`.
 2. Set up Weights & Biases API key in environment variables
 
-## Usage[ ↑](#toc)
+## Usage [↑](#toc)
 
 ```python
 python -m app/app.py
@@ -50,15 +54,15 @@ docker build -t segformer-quant-eval .
 docker run segformer-quant-eval
 ```
 
-## Configuration[ ↑](#toc)
+## Configuration [↑](#toc)
 
 Adjust settings in `app/config.py` for model, dataset, and evaluation parameters.
 
-## Documentation[ ↑](#toc)
+## Documentation [↑](#toc)
 
-[Documentation SegFormer Quantization Pipeline](https://qte77.github.io/SegFormerQuantization/
+[Documentation SegFormer Quantization Pipeline](https://qte77.github.io/SegFormerQuantization/)
 
-## Project Structure[ ↑](#toc)
+## Project Structure [↑](#toc)
 
 ```
 /
@@ -75,22 +79,25 @@ Adjust settings in `app/config.py` for model, dataset, and evaluation parameters
 └── pyproject.toml
 ```
 
-## UML[ ↑](#toc)
+## UML [↑](#toc)
 
 <img src="assets/SegFormerQuantization.UML.dark.png#gh-dark-mode-only" alt="SegFormerQuantization.UML.dark.png" /> <!-- mkdocs exclude { data-search-exclude } -->
 <img src="assets/SegFormerQuantization.UML.light.png#gh-light-mode-only" alt="SegFormerQuantization.UML.light.png" />
 
-## TODO[ ↑](#toc)
+## TODO [↑](#toc)
 
 - [ ] Implement tests before concrete function (TDD)
-- [ ] Use pydantic or similar
+	- test_model_loading, test_image_preprocessing
+	- test_quantization, test_predict, test_end_to_end
+- [ ] Include option to call HF API instead of saving model locally
+- [ ] Use pydantic and python typing
 - [ ] Insert link to and report of WandB project
 - mkdocs
 	- [x] Add .md to LICENSE/LICENSES to avoid download instead of open
 	- [x] Remove/Change #href ↑(#toc) to avoid conflict with gh-pages
 	- [x] Remove/Change #href for light/dark png to avoid conflict with gh-pages
 
-## License[ ↑](#toc)
+## License [↑](#toc)
 
 This project is licensed under the BSD 3-Clause License. See the [LICENSE](LICENSE.md) file for details.
 For third-party licenses, see the [LICENSES](LICENSES.md) file.

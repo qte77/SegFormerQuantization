@@ -24,6 +24,11 @@ Types of changes:
 ### Added
 
 - Dockerfile
+- Bumpversion for push and PR on `main`
+
+### Changed
+
+- Extension .md for LICENSE(S) for mkdocs output
 
 [0.2.0] - 2024-11-17
 ---
