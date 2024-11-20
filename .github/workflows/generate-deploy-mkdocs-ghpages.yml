@@ -68,8 +68,7 @@ jobs:
           - mkdocstrings:
               handlers:
                 python:
-                  paths:
-                    - ${{ env.APP_FOLDER }}
+                  paths: [${{ env.APP_FOLDER }}]
                   show_source: false
         nav:
           - Home: index.md

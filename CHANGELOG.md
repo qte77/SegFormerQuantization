@@ -20,6 +20,11 @@ Types of changes:
 
 [0.5.1] - 2024-11-20
 ---
+=======
+
+### Fixed
+
+- Typo in ghpages workflow
 
 ### Changed
 
