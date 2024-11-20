@@ -18,6 +18,9 @@ Types of changes:
 [Unreleased]
 ---
 
+[0.4.0] - 2024-11-20
+---
+
 ### Added
 
 - `gen_mkdocs_docstring_pages.py` containing script to recurse package for mkdocs docstrings
