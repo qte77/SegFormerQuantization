@@ -45,12 +45,12 @@ plugins:
 #      nav_file: Code.md
   - search:
       lang: en
-  - mkdocstrings
-              handlers:
-                python:
-                  # [${{ env.APP_FOLDER }}]
-                  paths: [app] 
-                  show_source: false
+  - mkdocstrings:
+      handlers:
+        python:
+          # [${{ env.APP_FOLDER }}]
+          paths: [app]
+          show_source: false
 markdown_extensions:
   - attr_list
   - pymdownx.highlight:
