@@ -73,8 +73,10 @@ jobs:
 #        ::: app
 #        EOF
 
+      # --strict
+      # builds only if validation succeeds while threating warnings as errors
+      # also checks for broken links
     - name: Build documentation
-      description: Builds documentation only if validation succeeds while threating warnings as errors, strict also checks for broken links
       run: poetry run mkdocs build --strict
 
 #    - name: Push to gh-pages
