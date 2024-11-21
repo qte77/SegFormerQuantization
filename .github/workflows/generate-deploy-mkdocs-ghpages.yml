@@ -1,18 +1,13 @@
 ---
 name: Generate and deploy MkDocs to GitHub Pages
+
+on:
+  push:
+  workflow_dispatch:
   
 env:
   APP_FOLDER: 'app'
   CODE_INDEX: 'Code.md'
-  # github.head_ref set when workflow triggered by pull_request and contains source branch PR
-  # github.ref_name set if workflow not triggered by pull_request and it also just contains the branch name
-  CURRENT_BRANCH: ${{ github.head_ref || github.ref_name }} 
-
-on:
-  push:
-    branches:
-      - ${{ env.CURRENT_BRANCH }}
-  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -22,20 +17,34 @@ jobs:
       pages: write
 
     steps:
-    - uses: actions/checkout@v3
+
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
+    - uses: actions/configure-pages@v3
+
+    - uses: actions/setup-python@v5
       with:
-        python-version: '3.x'
+        python-version: '3.11'
+        
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+      with:
+        version: 1.7.1
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+
+    - name: Cache Poetry virtual environment
+      uses: actions/cache@v3
+      with:
+        path: .venv
+        key: ${{ runner.os }}-py${{ matrix.python-version }}-poetry${{ steps.poetry.outputs.version }}-${{ hashFiles('**/poetry.lock') }}
+
+        restore-keys: ${{ runner.os }}-venv-
 
     - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install mkdocs mkdocs-material mkdocstrings[python]
-        pip install mkdocs-gen-files mkdocs-literate-nav
+      run: poetry install --with docs
         
     - name: Get repo info
       id: repo_info
@@ -52,12 +61,8 @@ jobs:
       run: |
         mkdir -p docs
         cp README.md docs/index.md
-        cp doc/PRD.md docs/PRD.md
-        cp doc/FRD.md docs/FRD.md
-        cp doc/DRD.md docs/DRD.md
-        cp CHANGELOG.md docs/CHANGELOG.md
-        cp LICENSE.md docs/LICENSE.md
-        cp LICENSES.md docs/LICENSES.md
+        cp doc/{PRD,FRD,DRD}.md docs/
+        cp {CHANGELOG,LICENSE,LICENSES}.md docs/
         # cp pyproject.toml docs/pyproject.md
         
 #    - name: Create docstrings file
@@ -69,14 +74,18 @@ jobs:
 #        EOF
 
     - name: Build documentation
-      run: mkdocs build
-      
+      description: Builds documentation only if validation succeeds while threating warnings as errors, strict also checks for broken links
+      run: poetry run mkdocs build --strict
+
 #    - name: Push to gh-pages
 #      run: mkdocs gh-deploy --force
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v2
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./site
+        path: ./site
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v3
 ...

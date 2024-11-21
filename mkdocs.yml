@@ -44,6 +44,7 @@ plugins:
       nav_file: ${{ env.CODE_INDEX }}
   - search:
       lang: en
+  - linkcheck
   - mkdocstrings
 #              handlers:
 #                python:
@@ -58,4 +59,8 @@ markdown_extensions:
       custom_checkbox: true
   - toc:
       permalink: true
+validation:
+  links:
+    not_found: warn
+    anchors: warn
 

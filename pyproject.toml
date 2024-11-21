@@ -18,11 +18,27 @@ pillow = "^9.0.0"
 datasets = "^2.0.0"
 accelerate = "0.33.0"
 
+[tool.poetry.group.dev]
+optional = true
+
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.0.0"
 black = "^22.0.0"
 isort = "^5.0.0"
 flake8 = "^4.0.0"
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.6.1"
+mkdocs-awesome-pages-plugin = "^2.9.3"
+mkdocs-gen-files = "^0.5.0"
+mkdocs-linkcheck = "^1.1.1"
+mkdocs-literate-nav = "^0.6.1"
+mkdocs-material = "^9.5.44"
+mkdocs-section-index = "^0.3.8"
+mkdocstrings = {version = "^0.24.0", extras = ["python"]}
 
 [build-system]
 requires = ["poetry-core"]
@@ -30,7 +46,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = 100
-target-version = ['py310']
+target-version = ['py311']
 
 [tool.isort]
 profile = "black"
