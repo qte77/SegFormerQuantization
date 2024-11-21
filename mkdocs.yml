@@ -1,3 +1,4 @@
+---
 # https://github.com/james-willett/mkdocs-material-youtube-tutorial
 site_name: ${{ steps.repo_info.outputs.repo_name }}
 site_description: ${{ steps.repo_info.outputs.repo_description }}
@@ -63,4 +64,8 @@ validation:
   links:
     not_found: warn
     anchors: warn
-
+# builds only if validation succeeds while threating warnings as errors
+# also checks for broken links
+# poetry run mkdocs build --strict
+strict: true
+...
