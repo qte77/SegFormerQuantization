@@ -1,0 +1,61 @@
+# https://github.com/james-willett/mkdocs-material-youtube-tutorial
+site_name: ${{ steps.repo_info.outputs.repo_name }}
+site_description: ${{ steps.repo_info.outputs.repo_description }}
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+  language: en
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline 
+        name: Switch to dark mode
+      primary: teal
+      accent: purple 
+    - scheme: slate 
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode    
+      primary: teal
+      accent: lime
+nav:
+  - Home: index.md
+  - PRD: PRD.md
+  - FRD: FRD.md
+  - DRD: DRD.md
+  - Code: ${{ env.CODE_INDEX }}
+  - Change Log: CHANGELOG.md
+  - License: LICENSE.md
+  - Third-Party Licenses: LICENSES.md
+#  - Configuration: pyproject.md
+plugins:
+  - gen-files:
+      scripts: [.github/scripts/gen_mkdocs_docstring_pages.py]
+  - literate-nav:
+      nav_file: ${{ env.CODE_INDEX }}
+  - search:
+      lang: en
+  - mkdocstrings
+#              handlers:
+#                python:
+#                  paths: [${{ env.APP_FOLDER }}]
+#                  show_source: false
+markdown_extensions:
+  - attr_list
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - toc:
+      permalink: true
+

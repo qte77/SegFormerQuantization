@@ -1,17 +1,24 @@
 ---
 name: Generate and deploy MkDocs to GitHub Pages
+  
+env:
+  APP_FOLDER: 'app'
+  CODE_INDEX: 'Code.md'
+  # github.head_ref set when workflow triggered by pull_request and contains source branch PR
+  # github.ref_name set if workflow not triggered by pull_request and it also just contains the branch name
+  CURRENT_BRANCH: ${{ github.head_ref || github.ref_name }} 
 
 on:
   push:
     branches:
-      - main 
+      - ${{ env.CURRENT_BRANCH }}
   workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       pages: write
 
     steps:
@@ -28,6 +35,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install mkdocs mkdocs-material mkdocstrings[python]
+        pip install mkdocs-gen-files mkdocs-literate-nav
         
     - name: Get repo info
       id: repo_info
@@ -39,30 +47,6 @@ jobs:
         REPO_DESCRIPTION=$(echo $REPO_INFO | jq -r .description)
         echo "repo_name=$REPO_NAME" >> $GITHUB_OUTPUT
         echo "repo_description=$REPO_DESCRIPTION" >> $GITHUB_OUTPUT
-
-    - name: Create mkdocs.yml
-      run: |
-        cat << EOF > mkdocs.yml
-        site_name: ${{ steps.repo_info.outputs.repo_name }}
-        site_description: ${{ steps.repo_info.outputs.repo_description }}
-        theme: material
-        plugins:
-          - search
-          - mkdocstrings:
-              handlers:
-                python:
-                  paths: [app]
-        nav:
-          - Home: index.md
-          - PRD: PRD.md
-          - FRD: FRD.md
-          - DRD: DRD.md
-          - Code: docstrings.md
-          - Change Log: CHANGELOG.md
-          - License: LICENSE.md
-          - Third-Party Licenses: LICENSES.md
-        EOF
-        #  - Configuration: pyproject.md
 
     - name: Copy repo files
       run: |
@@ -76,13 +60,13 @@ jobs:
         cp LICENSES.md docs/LICENSES.md
         # cp pyproject.toml docs/pyproject.md
         
-    - name: Create docstrings file
-      run: |
-        cat << EOF > docs/docstrings.md
-        # Code Documentation
-        
-        ::: app
-        EOF
+#    - name: Create docstrings file
+#      run: |
+#        cat << EOF > docs/docstrings.md
+#        # Code Documentation
+#        
+#        ::: app
+#        EOF
 
     - name: Build documentation
       run: mkdocs build
