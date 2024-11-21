@@ -43,9 +43,9 @@ jobs:
 
         restore-keys: ${{ runner.os }}-venv-
 
-    - name: Install dependencies
-      run: poetry install --only docs
-        
+    - name: Install only doc deps
+      run: poetry install --only docs --no-root
+
     - name: Get repo info
       id: repo_info
       run: |
