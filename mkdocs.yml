@@ -33,7 +33,7 @@ nav:
   - PRD: PRD.md
   - FRD: FRD.md
   - DRD: DRD.md
-  - Code: ${{ env.CODE_INDEX }}
+  - Code: Code.md
   - Change Log: CHANGELOG.md
   - License: LICENSE.md
   - Third-Party Licenses: LICENSES.md
@@ -42,13 +42,14 @@ plugins:
   - gen-files:
       scripts: [.github/scripts/gen_mkdocs_docstring_pages.py]
   - literate-nav:
-      nav_file: ${{ env.CODE_INDEX }}
+      nav_file: Code.md
   - search:
       lang: en
   - mkdocstrings
 #              handlers:
 #                python:
-#                  paths: [${{ env.APP_FOLDER }}]
+#                  # [${{ env.APP_FOLDER }}]
+#                  paths: [app] 
 #                  show_source: false
 markdown_extensions:
   - attr_list

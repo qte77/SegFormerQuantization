@@ -4,10 +4,6 @@ name: Generate and deploy MkDocs to GitHub Pages
 on:
   push:
   workflow_dispatch:
-  
-env:
-  APP_FOLDER: 'app'
-  CODE_INDEX: 'Code.md'
 
 jobs:
   build-and-deploy:
