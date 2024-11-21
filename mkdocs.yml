@@ -15,29 +15,29 @@ theme:
     - content.code.annotation
     - content.code.copy
   language: en
-  palette:
-    - scheme: default
-      toggle:
-        icon: material/toggle-switch-off-outline 
-        name: Switch to dark mode
-      primary: teal
-      accent: purple 
-    - scheme: slate 
-      toggle:
-        icon: material/toggle-switch
-        name: Switch to light mode    
-      primary: teal
-      accent: lime
+#  palette:
+#    - scheme: default
+#      toggle:
+#        icon: material/toggle-switch-off-outline 
+#        name: Switch to dark mode
+#      primary: teal
+#      accent: purple 
+#    - scheme: slate 
+#      toggle:
+#        icon: material/toggle-switch
+#        name: Switch to light mode    
+#      primary: teal
+#      accent: lime
 nav:
   - Home: index.md
   - PRD: PRD.md
   - FRD: FRD.md
   - DRD: DRD.md
-  - Code: Code.md
+#  - Code: Code.md
+#  - Configuration: pyproject.md
   - Change Log: CHANGELOG.md
   - License: LICENSE.md
   - Third-Party Licenses: LICENSES.md
-#  - Configuration: pyproject.md
 plugins:
 #  - gen-files:
 #      scripts: [scripts/gen_mkdocs_docstring_pages.py]
@@ -48,7 +48,6 @@ plugins:
   - mkdocstrings:
       handlers:
         python:
-          # [${{ env.APP_FOLDER }}]
           paths: [app]
           show_source: false
 markdown_extensions:
