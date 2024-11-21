@@ -16,6 +16,11 @@ Types of changes:
 - `Security` in case of vulnerabilities.
 
 [Unreleased]
+
+### Changed
+
+- ghpages action back to simple version
+
 ---
 
 [0.5.6] - 2024-11-20
