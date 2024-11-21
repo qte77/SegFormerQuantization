@@ -9,6 +9,7 @@ env:
   POETRY_VER: '1.7.1'
   PYTHON_VER: '3.11.0'
 
+  deploy:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -16,6 +17,8 @@ jobs:
       contents: read
       pages: write
       id-token: write
+    environment:
+      name: github-pages
 
     steps:
 
