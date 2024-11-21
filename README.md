@@ -13,35 +13,39 @@ An end-to-end evaluation pipeline for SegFormer models on semantic segmentation 
 
 ## Status
 
-[DRAFT] [WIP] ----> Not fully implemented yet
+(DRAFT) (WIP) ----> Not fully implemented yet
 
 The current version is <0.5.7>. For version history have a look at the [CHANGELOG](CHANGELOG.md).
 
 ## TOC <!-- mkdocs exclude { data-search-exclude } -->
 
-* [Features](#features-)
-* [Setup](#setup-)
-* [Usage](#usage-)
-* [Configuration](#configuration-)
-* [Project Structure](#project-structure-)
-* [Documentation](#documentation-)
-* [UML](#uml-)
-* [TODO](#todo-)
-* [License](#license-)
+* [Features](#features)
+* [Setup](#setup)
+* [Usage](#usage)
+* [Configuration](#configuration)
+* [Project Structure](#project-structure)
+* [Documentation](#documentation)
+* [UML](#uml)
+* [TODO](#todo)
+* [License](#license)
 
-## Features [↑](#toc)
+## Features
 
 - Model loading and quantization (float8, int8, int4, int2)
 - Dataset processing and sharding
 - Evaluation metrics computation (mean IoU, mean accuracy, overall accuracy)
 - Integration with Weights & Biases for experiment tracking
+
+[↑](#toc)
 	
-## Setup [↑](#toc)
+## Setup
 
 1. Install dependencies: `pip install poetry==1.8.4 && poetry install`.
 2. Set up Weights & Biases API key in environment variables
 
-## Usage [↑](#toc)
+[↑](#toc)
+
+## Usage
 
 ```python
 python -m app/app.py
@@ -54,15 +58,19 @@ docker build -t segformer-quant-eval .
 docker run segformer-quant-eval
 ```
 
-## Configuration [↑](#toc)
+[↑](#toc)
+
+## Configuration
 
 Adjust settings in `app/config.py` for model, dataset, and evaluation parameters.
 
-## Documentation [↑](#toc)
+## Documentation
 
 [Documentation SegFormer Quantization Pipeline](https://qte77.github.io/SegFormerQuantization/)
 
-## Project Structure [↑](#toc)
+[↑](#toc)
+
+## Project Structure
 
 ```
 /
@@ -79,12 +87,16 @@ Adjust settings in `app/config.py` for model, dataset, and evaluation parameters
 └── pyproject.toml
 ```
 
-## UML [↑](#toc)
+[↑](#toc)
+
+## UML
 
 <img src="assets/SegFormerQuantization.UML.dark.png#gh-dark-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" /> <!-- mkdocs exclude { data-search-exclude } -->
 <img src="assets/SegFormerQuantization.UML.light.png#gh-light-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" />
 
-## TODO [↑](#toc)
+[↑](#toc)
+
+## TODO
 
 - [ ] Implement tests before concrete function (TDD)
 	- test_model_loading, test_image_preprocessing
@@ -97,9 +109,12 @@ Adjust settings in `app/config.py` for model, dataset, and evaluation parameters
 	- [x] Remove/Change #href ↑(#toc) to avoid conflict with gh-pages
 	- [x] Remove/Change #href for light/dark png to avoid conflict with gh-pages
 
-## License [↑](#toc)
+[↑](#toc)
+
+## License
 
 This project is licensed under the BSD 3-Clause License. See the [LICENSE](LICENSE.md) file for details.
 For third-party licenses, see the [LICENSES](LICENSES.md) file.
 
+[↑](#toc)
 

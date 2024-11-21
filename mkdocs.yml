@@ -33,6 +33,7 @@ nav:
   - PRD: PRD.md
   - FRD: FRD.md
   - DRD: DRD.md
+  - Code: docstrings.md
 #  - Code: Code.md
 #  - Configuration: pyproject.md
   - Change Log: CHANGELOG.md
