@@ -45,7 +45,6 @@ plugins:
       nav_file: ${{ env.CODE_INDEX }}
   - search:
       lang: en
-  - linkcheck
   - mkdocstrings
 #              handlers:
 #                python:
