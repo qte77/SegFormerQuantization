@@ -30,7 +30,7 @@ flake8 = "^4.0.0"
 [tool.poetry.group.docs]
 optional = true
 
-[tool.poetry.	]
+[tool.poetry.dev.dependencies]
 griffe = "^1.5.1"
 mkdocs = "^1.6.1"
 mkdocs-awesome-pages-plugin = "^2.9.3"
