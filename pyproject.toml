@@ -8,10 +8,10 @@ packages = [{include = "segformer_quantization_pipeline"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-torch = "2.1.2"
+torch = "^2.2.0"
 transformers = "4.44.0"
 evaluate = "0.4.2"
-quanto = "0.2.0"
+quanto = "^0.2.0"
 optimum-quanto = "^0.2.0"
 wandb = "0.17.8"
 pillow = "^9.0.0"
