@@ -39,18 +39,18 @@ nav:
   - Third-Party Licenses: LICENSES.md
 #  - Configuration: pyproject.md
 plugins:
-  - gen-files:
-      scripts: [.github/scripts/gen_mkdocs_docstring_pages.py]
-  - literate-nav:
-      nav_file: Code.md
+#  - gen-files:
+#      scripts: [scripts/gen_mkdocs_docstring_pages.py]
+#  - literate-nav:
+#      nav_file: Code.md
   - search:
       lang: en
   - mkdocstrings
-#              handlers:
-#                python:
-#                  # [${{ env.APP_FOLDER }}]
-#                  paths: [app] 
-#                  show_source: false
+              handlers:
+                python:
+                  # [${{ env.APP_FOLDER }}]
+                  paths: [app] 
+                  show_source: false
 markdown_extensions:
   - attr_list
   - pymdownx.highlight:

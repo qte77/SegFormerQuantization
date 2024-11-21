@@ -2,8 +2,9 @@ from pathlib import Path
 from os import environ
 import mkdocs_gen_files
 
-src_dir = Path(environ["APP_FOLDER"])
-code_index_file = environ["CODE_INDEX"]
+#TODO get APP_FOLDER and CODE_INDEX if not present in GHA workflow
+#src_dir = Path(environ["APP_FOLDER"])
+#code_index_file = environ["CODE_INDEX"]
 path_prefix = "docstrings"
 path_suffix = ".md"
 

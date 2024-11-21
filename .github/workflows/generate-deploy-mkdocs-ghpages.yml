@@ -4,6 +4,10 @@ name: Generate and deploy MkDocs to GitHub Pages
 on:
   push:
   workflow_dispatch:
+  
+env:
+  POETRY_VER: '1.7.1'
+  PYTHON_VER: '3.11.0'
 
 jobs:
   build-and-deploy:
@@ -22,12 +26,12 @@ jobs:
 
     - uses: actions/setup-python@v5
       with:
-        python-version: '3.11'
+        python-version: ${{ env.PYTHON_VER }}
         
     - name: Install Poetry
       uses: snok/install-poetry@v1
       with:
-        version: 1.7.1
+        version: ${{ env.POETRY_VER }}
         virtualenvs-create: true
         virtualenvs-in-project: true
 
@@ -35,8 +39,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: .venv
-        key: ${{ runner.os }}-py${{ matrix.python-version }}-poetry${{ steps.poetry.outputs.version }}-${{ hashFiles('**/poetry.lock') }}
-
+        key: ${{ runner.os }}-py${{ env.PYTHON_VER }}-poetry${{ env.POETRY_VER }}-${{ hashFiles('**/poetry.lock') }}
         restore-keys: ${{ runner.os }}-venv-
 
     - name: Install only doc deps
@@ -61,13 +64,13 @@ jobs:
         cp {CHANGELOG,LICENSE,LICENSES}.md docs/
         # cp pyproject.toml docs/pyproject.md
         
-#    - name: Create docstrings file
-#      run: |
-#        cat << EOF > docs/docstrings.md
-#        # Code Documentation
-#        
-#        ::: app
-#        EOF
+    - name: Create docstrings file
+      run: |
+        cat << EOF > docs/docstrings.md
+        # Code Documentation
+        
+        ::: app
+        EOF
 
     - name: Build documentation
       run: poetry run mkdocs build
