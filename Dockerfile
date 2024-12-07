@@ -4,15 +4,15 @@ LABEL site="https://qte77.github.io/SegFormerQuantization/"
 LABEL author="qte77"
 
 ARG USER="appuser"
-ARG APP_ROOT="./app"
+ARG APP_ROOT="/app"
 ARG APP_EP="app.py"
 ARG REQS="./pyproject.toml"
 # ARG WANDB_KEYFILE=".wandb/wandb.key"
 # ARG WANDB_KEY="<token>"
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-ENV PATH="${APP}:/home/user/.local/bin:${PATH}"
+ENV PYTHONDONTWRITEBYTECOD=1
+ENV PYTHONUNBUFFERED=1
+ENV PATH="${APP_ROOT}:/home/user/.local/bin:${PATH}"
 # ENV WANDB_KEY=${WANDB_KEY}
 
 # several RUN to produce separate pip layers ?
@@ -34,17 +34,16 @@ COPY --chown=${USER}:${USER} ${APP_ROOT} .
 #   "${HOME}/${WANDB_KEYFILE}"
 
 RUN set -xe \
-    && poetry config virtualenvs.create false \
-    && poetry install --no-interaction --no-ansi \
+    && poetry config virtualenvs.create true \
+    && poetry install --no-interaction --no-ansi
 
-EXPOSE 8080
-# CMD ["poetry", "run", "python", "${APP_EP}"]
-CMD ["python", "-m", "${APP_EP}"]
+# EXPOSE 8080
 
+CMD ["poetry", "run", "python", "${APP_EP}"]
+# CMD ["python", "-m", "${APP_EP}"]
 # RUN chmod +x ${APP_EP}
 # ENTRYPOINT ["${APP_EP}"]
 
 # TODO FastAPI etc.
 # CMD ["gunicorn", "--bind", "0.0.0.0:8080", "-k", \
 #     "uvicorn.workers.UvicornWorker", "app.py:app"]
-
