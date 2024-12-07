@@ -16,10 +16,19 @@ Types of changes:
 - `Security` in case of vulnerabilities.
 
 [Unreleased]
+---
 
 ### Changed
 
 - ghpages action back to simple version
+- Import of config.py to relative
+- bump-my-version targets in files
+- README.md usage infos to contain venv and test
+
+### Fixed
+
+- Moved package files to ./app
+- Removed typos from Dockerfile 
 
 ---
 
