@@ -47,11 +47,21 @@ The current version is <0.5.7>. For version history have a look at the [CHANGELO
 
 ## Usage
 
-```python
-python -m app/app.py
+### Python
+
+If inside `poetry` venv
+
+```sh
+python -m app
 ```
 
-or
+or if outside
+
+```sh
+poetry run python -m app
+```
+
+### Docker
 
 ```bash
 docker build -t segformer-quant-eval .

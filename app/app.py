@@ -19,7 +19,7 @@ Environment variables:
     WANDB_ENTITY: Name of the W&B entity (team or user)
 """
 
-from config import (
+from .config import (
     wandb_tag_mode, wandb_tag_runmode, metric_name,
     dataset_name, ds_num_shards, ds_shards_mod,
     model_name_short, model_name,
@@ -32,6 +32,8 @@ from .utils.quantization import quantize_models
 from .utils.evaluator import evaluate_model
 from .utils.wandb_utils import create_wandb_run, create_wandb_run_meta, log_wandb_results
 from .utils.general_utils import print_model_sizes
+
+from os import environ
 import wandb
 
 def main():

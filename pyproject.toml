@@ -14,7 +14,7 @@ evaluate = "0.4.2"
 quanto = "^0.2.0"
 optimum-quanto = "^0.2.0"
 wandb = "0.17.8"
-pillow = "^9.0.0"
+pillow = "^11.0.0"
 datasets = "^2.0.0"
 accelerate = "0.33.0"
 
