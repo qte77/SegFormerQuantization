@@ -24,6 +24,7 @@ Types of changes:
 - Import of config.py to relative
 - bump-my-version targets in files
 - README.md usage infos to contain venv and test
+- Renamed workflow bump2version to bump-my-version
 
 ### Fixed
 
