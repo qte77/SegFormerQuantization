@@ -18,6 +18,10 @@ Types of changes:
 [Unreleased]
 ---
 
+### Added
+
+- Explicit push step to workflow bump-my-version
+
 ### Changed
 
 - ghpages action back to simple version

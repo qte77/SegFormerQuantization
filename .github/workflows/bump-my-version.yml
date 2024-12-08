@@ -7,8 +7,8 @@ on:
 #    branches:
 #      - main
   push:
-    branches:
-      - dev-docu-mkdocs
+#    branches:
+#      - main
   workflow_dispatch:
     inputs:
       bump_type:
@@ -29,9 +29,11 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Determine bump type
-        id: determine_bump
+        id: determine_bump_type
         run: |
           if [[ "${{ github.event_name }}" == "push" ]]; then
             echo "bump_type=patch" >> $GITHUB_OUTPUT
@@ -47,7 +49,7 @@ jobs:
         env:
           BUMPVERSION_TAG: "true"
         with:
-          args: ${{ steps.determine_bump.outputs.bump_type }}
+          args: ${{ steps.determine_bump_type.outputs.bump_type }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check
@@ -56,6 +58,14 @@ jobs:
           previous=${{ steps.bump.outputs.previous-version }}
           current=${{ steps.bump.outputs.current-version }}
           echo "Version was bumped from ${previous} to ${current}!"
+
+      - name: Push changes
+        if: steps.bump.outputs.bumped == 'true'
+        run: |
+          git config user.name bump-version-gha
+          git config user.email github-actions@github.com
+          git push origin HEAD:${{ github.ref }}
+          git push --tags
 
 #      - name: Get new version
 #        id: get_version
