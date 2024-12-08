@@ -28,7 +28,8 @@ Types of changes:
 ### Fixed
 
 - Moved package files to ./app
-- Removed typos from Dockerfile 
+- Removed typos from Dockerfile
+- Disabled GHA bump-my-version trigger pull-request and push to main
 
 ---
 

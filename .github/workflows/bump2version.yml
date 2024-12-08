@@ -3,12 +3,12 @@
 name: Bump Version with bump-my-version
 
 on:
-  pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - main
+#  pull_request:
+#    branches:
+#      - main
+#  push:
+#    branches:
+#      - main
   workflow_dispatch:
     inputs:
       bump_type:
