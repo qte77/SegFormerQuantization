@@ -7,8 +7,8 @@ on:
 #    branches:
 #      - main
   push:
-#    branches:
-#      - main
+    branches:
+      - dev-docu-mkdocs
   workflow_dispatch:
     inputs:
       bump_type:
