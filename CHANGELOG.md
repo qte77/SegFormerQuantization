@@ -20,7 +20,7 @@ Types of changes:
 
 ### Added
 
-- Explicit push step to workflow bump-my-version
+- Optional step to explicitly push to workflow bump-my-version
 
 ### Changed
 

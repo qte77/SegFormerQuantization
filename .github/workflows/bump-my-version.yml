@@ -59,17 +59,13 @@ jobs:
           current=${{ steps.bump.outputs.current-version }}
           echo "Version was bumped from ${previous} to ${current}!"
 
-      - name: Push changes
-        if: steps.bump.outputs.bumped == 'true'
-        run: |
-          git config user.name bump-version-gha
-          git config user.email github-actions@github.com
-          git push origin HEAD:${{ github.ref }}
-          git push --tags
-
-#      - name: Get new version
-#        id: get_version
-#        run: echo "new_version=$(cat version.md | tr -d '\n')" >> $GITHUB_OUTPUT
+#      - name: Push changes
+#        if: steps.bump.outputs.bumped == 'true'
+#        run: |
+#          git config user.name bump-version-gha
+#          git config user.email github-actions@github.com
+#          git push origin HEAD:${{ github.ref }}
+#          git push --tags
 
 #      - name: Create Release
 #        uses: actions/create-release@v1
