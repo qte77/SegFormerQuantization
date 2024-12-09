@@ -9,7 +9,7 @@ packages = [{include = "segformer_quantization_pipeline"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 torch = "^2.2.0"
-transformers = "4.44.0"
+transformers = "4.47.0"
 evaluate = "0.4.2"
 quanto = "^0.2.0"
 optimum-quanto = "^0.2.0"
