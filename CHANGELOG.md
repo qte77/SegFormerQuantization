@@ -18,6 +18,9 @@ Types of changes:
 [Unreleased]
 ---
 
+[0.5.8] - 2024-12-09
+---
+
 ### Added
 
 - Optional step to explicitly push to workflow bump-my-version
