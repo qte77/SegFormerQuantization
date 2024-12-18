@@ -30,7 +30,7 @@ Types of changes:
 - ghpages action back to simple version
 - Import of config.py to relative
 - bump-my-version targets in files
-- README.md usage infos to contain venv and test
+- README.md usage infos to contain venv and test, TODO to use pytorch or cuda images 
 - Renamed workflow bump2version to bump-my-version
 
 ### Fixed
