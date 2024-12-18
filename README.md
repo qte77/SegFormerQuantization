@@ -2,7 +2,7 @@
 
 An end-to-end evaluation pipeline for SegFormer models on semantic segmentation tasks, with support for various quantization methods.
 
-![version](https://img.shields.io/badge/version-0.5.7-8A2BE2)
+![version](https://img.shields.io/badge/version-0.5.8-8A2BE2)
 [![CodeFactor](https://www.codefactor.io/repository/github/qte77/SegFormerQuantization/badge)](https://www.codefactor.io/repository/github/qte77/SegFormerQuantization)
 [![Ruff](https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yml)
 [![Links (Fail Fast)](https://github.com/qte77/SegFormerQuantization/actions/workflows/links-fail-fast.yml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/links-fail-fast.yml)
@@ -44,8 +44,9 @@ For version history have a look at the [CHANGELOG](CHANGELOG.md).
 	
 ## Setup
 
-1. Install dependencies: `pip install poetry==1.8.4 && poetry install`.
-2. Set up Weights & Biases API key in environment variables
+1. Install uv: `pip install uv>=0.5.0`.
+2. Install dependencies: `uv lock`
+3. Set up Weights & Biases API key in environment variables
 
 [↑](#toc)
 
@@ -56,14 +57,7 @@ For version history have a look at the [CHANGELOG](CHANGELOG.md).
 If inside `poetry` venv
 
 ```sh
-# poetry shell
-python -m app
-```
-
-or if outside
-
-```sh
-poetry run python -m app
+uv run app
 ```
 
 ### Docker
