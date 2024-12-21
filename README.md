@@ -125,7 +125,10 @@ Adjust settings in `app/config.py` for model, dataset, and evaluation parameters
 	- test_quantization, test_predict, test_end_to_end
 - [ ] Include option to call HF API instead of saving model locally
 - [ ] Use pydantic and python typing
-- [ ] Insert link to and report of WandB project
+- [ ] Insert link to report and project within WandB
+- [ ] Use pt or cuda images to reduce loading time size, e.g.
+  - `pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime`
+  - `nvidia/12.6.3-base-ubuntu24.04`
 - mkdocs
 	- [x] Add .md to LICENSE/LICENSES to avoid download instead of open
 	- [x] Remove/Change #href ↑(#toc) to avoid conflict with gh-pages
