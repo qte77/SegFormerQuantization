@@ -25,6 +25,7 @@ dev = [
     "black>=22.0.0",
     "isort>=5.0.0",
     "flake8>=4.0.0",
+    "git-changelog>=2.5.2"
 ]
 docs = [
     "griffe>=1.5.1",
@@ -40,6 +41,7 @@ docs = [
 
 [tool.uv]
 package = false
+exclude-newer = "2024–12–21T00:00:00Z"
 
 [tool.ruff]
 line-length = 100
