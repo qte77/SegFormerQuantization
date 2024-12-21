@@ -67,6 +67,15 @@ docker build -t segformer-quant-eval .
 docker run segformer-quant-eval
 ```
 
+To build with different versions
+
+```sh
+docker build --build-arg \
+	UV_VERSION=<uv_version> \
+	PYTHON_VERSION=<py_version> \
+	.
+```
+
 ### Test
 
 ```sh
@@ -125,6 +134,7 @@ Adjust settings in `app/config.py` for model, dataset, and evaluation parameters
 - [ ] Auto-generate `CHANGELOG.md`
   - Conventional Commits `.gitmessage`
   - Tools like `git-changelog`
+- [ ] Evaluate Docker `buildx` instead of `build`
 - [ ] Push to main with PR only branch protection rules
   - [ ] Use dedicated branch `dev-auto-push-to-main`
   - [ ] Incorporate branch to workflow `bump-my-version.yml`

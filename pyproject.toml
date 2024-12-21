@@ -19,7 +19,14 @@ dependencies = [
     "accelerate==0.33.0",
 ]
 
-[project.optional-dependencies]
+# https://docs.astral.sh/uv/concepts/projects/dependencies/#optional-dependencies
+# [project.optional-dependencies]
+
+# Dependency groups
+# https://docs.astral.sh/uv/concepts/projects/dependencies/#development-dependencies
+# By default, uv includes the dev dependency group in the environment
+# https://docs.astral.sh/uv/concepts/projects/dependencies/#default-groups
+[dependency-groups]
 dev = [
     "pytest>=7.0.0",
     "black>=22.0.0",
@@ -41,7 +48,7 @@ docs = [
 
 [tool.uv]
 package = false
-exclude-newer = "2024–12–21T00:00:00Z"
+exclude-newer = "2024-12-21T00:00:00Z"
 
 [tool.ruff]
 line-length = 100

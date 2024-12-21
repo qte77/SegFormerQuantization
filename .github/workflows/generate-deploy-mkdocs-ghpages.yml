@@ -6,8 +6,7 @@ on:
   workflow_dispatch:
   
 env:
-  POETRY_VER: '1.7.1'
-  PYTHON_VER: '3.11.0'
+  UV_VER: '0.5.11'
 
 jobs:
   build-and-deploy:
@@ -26,26 +25,23 @@ jobs:
 
     - uses: actions/configure-pages@v3
 
-    - uses: actions/setup-python@v5
+    # caching instead of actions/cache@v4
+    # https://docs.astral.sh/uv/guides/integration/github/#caching
+    - name: Install uv with cache dependency glob
+      uses: astral-sh/setup-uv@v4
       with:
-        python-version: ${{ env.PYTHON_VER }}
-        
-    - name: Install Poetry
-      uses: snok/install-poetry@v1
-      with:
-        version: ${{ env.POETRY_VER }}
-        virtualenvs-create: true
-        virtualenvs-in-project: true
+        version: ${{ env.UV_VER }}
+        enable-cache: true
+        cache-dependency-glob: "uv.lock"
 
-    - name: Cache Poetry virtual environment
-      uses: actions/cache@v3
-      with:
-        path: .venv
-        key: ${{ runner.os }}-py${{ env.PYTHON_VER }}-poetry${{ env.POETRY_VER }}-${{ hashFiles('**/poetry.lock') }}
-        restore-keys: ${{ runner.os }}-venv-
+    # setup python from pyproject.toml using uv
+    # instead of using actions/setup-python@v5
+    # https://docs.astral.sh/uv/guides/integration/github/#setting-up-python
+    - name: "Set up Python"
+      run: uv python install
 
     - name: Install only doc deps
-      run: poetry install --only docs --no-root
+      run: uv sync --only-group docs
 
     - name: Get repo info
       id: repo_info
@@ -62,9 +58,9 @@ jobs:
       run: |
         mkdir -p docs
         cp README.md docs/index.md
-        cp doc/{PRD,FRD,DRD}.md docs/
-        cp {CHANGELOG,LICENSE,LICENSES}.md docs/
-        # cp pyproject.toml docs/pyproject.md
+        cp doc/PRD.md docs/
+        cp {CHANGELOG,LICENSE}.md docs/
+        cp pyproject.toml docs/pyproject.md
         
     - name: Create docstrings file
       run: |
@@ -75,10 +71,10 @@ jobs:
         EOF
 
     - name: Build documentation
-      run: poetry run mkdocs build
+      run: uv run mkdocs build
 
 #    - name: Push to gh-pages
-#      run: mkdocs gh-deploy --force
+#      run: uv run mkdocs gh-deploy --force
 
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v2
