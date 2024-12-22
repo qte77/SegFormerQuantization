@@ -114,7 +114,7 @@ Types of changes:
 
 - Management: `pyproject.toml`
 - Documentation: `PRD.md`, `FRD.md`, `DRD.md`
-- Documentation gh-pages: `generate-deploy-mkdocs-ghpages.yml` 
+- Documentation gh-pages: `generate-deploy-mkdocs-ghpages.yml`
 - Versioning: `CHANGELOG.md`, GHA Bump2version
 - Standarization: `.gitmessage`
 - Third-party `LICENSES`

@@ -29,7 +29,9 @@ For version history have a look at the [CHANGELOG](CHANGELOG.md).
   - [Configuration](#configuration)
   - [Documentation](#documentation)
   - [Project Structure](#project-structure)
-  - [UML](#uml)
+  - [Architecture](#architecture)
+    - [System](#system)
+    - [Code](#code)
   - [TODO](#todo)
     - [DONE](#done)
   - [License](#license)
@@ -114,10 +116,17 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
 
 [↑](#toc)
 
-## UML
+## Architecture
 
-<img src="assets/SegFormerQuantization.UML.dark.png#gh-dark-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" /> <!-- mkdocs exclude { data-search-exclude } -->
-<img src="assets/SegFormerQuantization.UML.light.png#gh-light-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" />
+### System
+
+<img src="assets/SegFormerQuantization.C4.System.dark.png#gh-dark-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" /> <!-- mkdocs exclude { data-search-exclude } -->
+<img src="assets/SegFormerQuantization.C4.System.light.png#gh-light-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" />
+
+### Code
+
+<img src="assets/SegFormerQuantization.C4.Code.dark.png#gh-dark-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" /> <!-- mkdocs exclude { data-search-exclude } -->
+<img src="assets/SegFormerQuantization.C4.Code.light.png#gh-light-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" />
 
 [↑](#toc)
 
@@ -133,7 +142,9 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
 - [ ] Auto-generate `CHANGELOG.md`
   - Conventional Commits `.gitmessage`
   - Tools like `git-changelog`
-- [ ] Evaluate Docker `buildx` instead of `build`
+- [ ] Docker
+  - Where are site-packages in Dockerfile for copy to runtime located?
+  - Evaluate `callisto` for fast cloud-native builds
 - [ ] Push to main with PR only branch protection rules
   - [ ] Use dedicated branch `dev-auto-push-to-main`
   - [ ] Incorporate branch to workflow `bump-my-version.yml`
