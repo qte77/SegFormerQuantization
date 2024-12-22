@@ -26,8 +26,8 @@ dist/
 Thumbs.db
 
 # IDE specific files (adjust as needed)
-.vscode/
-.idea/
+# .vscode/
+# .idea/
 
 # Project specific
 models/
@@ -46,4 +46,3 @@ wandb/
 *.h5
 *.hdf5
 *.npz
-
