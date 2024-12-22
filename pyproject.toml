@@ -55,7 +55,7 @@ line-length = 100
 target-version = "py311"
 ignore = [
     "E203",  # Whitespace before ':'
-    "W503",  # Line break before binary operator
+#    "W503",  # unknown to ruff? Line break before binary operator
 ]
 
 [tool.bumpversion]

@@ -18,21 +18,21 @@ For version history have a look at the [CHANGELOG](CHANGELOG.md).
 ## TOC
 
 - [SegFormer Quantization Pipeline](#segformer-quantization-pipeline)
-	- [Status](#status)
-	- [TOC](#toc)
-	- [Features](#features)
-	- [Setup](#setup)
-	- [Usage](#usage)
-		- [Python](#python)
-		- [Docker](#docker)
-		- [Test](#test)
-	- [Configuration](#configuration)
-	- [Documentation](#documentation)
-	- [Project Structure](#project-structure)
-	- [UML](#uml)
-	- [TODO](#todo)
-		- [DONE](#done)
-	- [License](#license)
+  - [Status](#status)
+  - [TOC](#toc)
+  - [Features](#features)
+  - [Setup](#setup)
+  - [Usage](#usage)
+    - [Python](#python)
+    - [Docker](#docker)
+    - [Test](#test)
+  - [Configuration](#configuration)
+  - [Documentation](#documentation)
+  - [Project Structure](#project-structure)
+  - [UML](#uml)
+  - [TODO](#todo)
+    - [DONE](#done)
+  - [License](#license)
 
 ## Features
 
@@ -42,10 +42,10 @@ For version history have a look at the [CHANGELOG](CHANGELOG.md).
 - Integration with Weights & Biases for experiment tracking
 
 [↑](#toc)
-	
+
 ## Setup
 
-1. Install uv: `pip install uv>=0.5.0`.
+1. Install uv: `pip install "uv>=0.5.0"`.
 2. Install dependencies: `uv lock`
 3. Set up Weights & Biases API key in environment variables
 
@@ -71,16 +71,16 @@ To build with different versions
 
 ```sh
 docker build --build-arg \
-	UV_VERSION=<uv_version> \
-	PYTHON_VERSION=<py_version> \
-	.
+  UV_VERSION=<uv_version> \
+  PYTHON_VERSION=<py_version> \
+  .
 ```
 
 ### Test
 
 ```sh
-poetry install --with dev
-poetry run pytest [tests/]
+uv sync --only-group docs
+uv run pytest [tests/]
 ```
 
 [↑](#toc)
@@ -97,7 +97,7 @@ Adjust settings in `app/config.py` for model, dataset, and evaluation parameters
 
 ## Project Structure
 
-```
+```sh
 /
 ├── app/
 │ ├── app.py
@@ -124,8 +124,8 @@ Adjust settings in `app/config.py` for model, dataset, and evaluation parameters
 ## TODO
 
 - [ ] Implement tests before concrete function (TDD)
-	- test_model_loading, test_image_preprocessing
-	- test_quantization, test_predict, test_end_to_end
+  - test_model_loading, test_image_preprocessing
+  - test_quantization, test_predict, test_end_to_end
 - [ ] Use pydantic and python typing
 - [ ] Insert link to report and project within WandB
 - [ ] Use pt or cuda images to reduce loading time size, e.g.
@@ -145,9 +145,9 @@ Adjust settings in `app/config.py` for model, dataset, and evaluation parameters
 ### DONE
 
 - mkdocs
-	- [x] Add .md to LICENSE/LICENSES to avoid download instead of open
-	- [x] Remove/Change #href ↑(#toc) to avoid conflict with gh-pages
-	- [x] Remove/Change #href for light/dark png to avoid conflict with gh-pages
+  - [x] Add .md to LICENSE/LICENSES to avoid download instead of open
+  - [x] Remove/Change #href ↑(#toc) to avoid conflict with gh-pages
+  - [x] Remove/Change #href for light/dark png to avoid conflict with gh-pages
 
 [↑](#toc)
 
@@ -157,4 +157,3 @@ This project is licensed under the BSD 3-Clause License. See the [LICENSE](LICEN
 For third-party licenses, see the [LICENSES](LICENSES.md) file.
 
 [↑](#toc)
-
