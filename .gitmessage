@@ -15,6 +15,7 @@
 #
 # <feat|fix|build|chore|ci|docs|style|refactor|perf|test>[(Scope)][!]: \
 #	<description>
+# short description: <type>[(<scope>)]: <subject>
 #
 # ! after scope in header indicates breaking change
 #
@@ -28,6 +29,10 @@
 #
 #<--- usage ----------------------------------------------------------->
 #
+# Set locally (in the repository)
 # `git config commit.template .gitmessage`
+#
+# Set globally
+# `git config --global commit.template .gitmessage`
 #
 #<--- 72 characters --------------------------------------------------->

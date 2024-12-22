@@ -20,13 +20,13 @@ Environment variables:
 """
 
 from .config import (
-    wandb_tag_mode, wandb_tag_runmode, metric_name,
+    wandb_tag_mode, metric_name, model_name,
     dataset_name, ds_num_shards, ds_shards_mod,
-    model_name_short, model_name,
     model_save_path, tokenizer_save_path, dataset_save_path, 
     device, compute_dtype
+     # wandb_tag_runmode, model_name_short, 
 )
-from .utils.data_processing import load_dataset_custom, get_processed_inputs
+from .utils.data_processing import load_dataset_custom # , get_processed_inputs
 from .utils.model_loader import load_base_model, load_image_processor
 from .utils.quantization import quantize_models
 from .utils.evaluator import evaluate_model
@@ -55,27 +55,27 @@ def main():
     
     # Evaluation loop
     ds_subset = 'validation'
-    for model_name, model in models.items():
-        model.eval()
+    for model_name_i, model_i in models.items():
+        model_i.eval()
         for k in range(0, ds_num_shards):
             if k == 0 or k % ds_shards_mod == 0:
-                print(f"Evaluating {model_name}, shard {k}/{ds_num_shards}")
+                print(f"Evaluating {model_name_i}, shard {k}/{ds_num_shards}")
             wandb_run = create_wandb_run(
                 environ['WANDB_PROJECT'], environ['WANDB_ENTITY'],
-                model_name, dataset_name
+                model_name_i, dataset_name
             )
             create_wandb_run_meta(
-                wandb_run, model_name, dataset_name, device, wandb_tag_mode,
-                model_name, model, ds_num_shards, ds_shards_mod
+                wandb_run, model_name_i, dataset_name, device, wandb_tag_mode,
+                model_name_i, model_i, ds_num_shards, ds_shards_mod
             )
             dataset_shard = dataset[ds_subset].shard(
                 num_shards=ds_num_shards, index=k
             )
             results = evaluate_model(
-                model, dataset_shard, image_processor, device,
-                metric_name, model.config.id2label
+                model_i, dataset_shard, image_processor, device,
+                metric_name, model_i.config.id2label
             )
-            log_wandb_results(results, model)
+            log_wandb_results(results, model_i)
             wandb.finish()
 
 if __name__ == "__main__":

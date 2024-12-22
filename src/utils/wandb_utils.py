@@ -86,4 +86,3 @@ def log_wandb_results(results, model):
         'overall_accuracy': results['overall_accuracy'],
         'memory_footprint_MB': float(f"{model.get_memory_footprint()*1.0e-6:.2f}")
     })
-

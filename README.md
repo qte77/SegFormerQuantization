@@ -2,7 +2,7 @@
 
 An end-to-end evaluation pipeline for SegFormer models on semantic segmentation tasks, with support for various quantization methods.
 
-![version](https://img.shields.io/badge/version-0.5.7-8A2BE2)
+![version](https://img.shields.io/badge/version-0.5.8-8A2BE2)
 [![CodeFactor](https://www.codefactor.io/repository/github/qte77/SegFormerQuantization/badge)](https://www.codefactor.io/repository/github/qte77/SegFormerQuantization)
 [![Ruff](https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yml)
 [![Links (Fail Fast)](https://github.com/qte77/SegFormerQuantization/actions/workflows/links-fail-fast.yml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/links-fail-fast.yml)
@@ -18,20 +18,21 @@ For version history have a look at the [CHANGELOG](CHANGELOG.md).
 ## TOC
 
 - [SegFormer Quantization Pipeline](#segformer-quantization-pipeline)
-	- [Status](#status)
-	- [TOC](#toc)
-	- [Features](#features)
-	- [Setup](#setup)
-	- [Usage](#usage)
-		- [Python](#python)
-		- [Docker](#docker)
-		- [Test](#test)
-	- [Configuration](#configuration)
-	- [Documentation](#documentation)
-	- [Project Structure](#project-structure)
-	- [UML](#uml)
-	- [TODO](#todo)
-	- [License](#license)
+  - [Status](#status)
+  - [TOC](#toc)
+  - [Features](#features)
+  - [Setup](#setup)
+  - [Usage](#usage)
+    - [Python](#python)
+    - [Docker](#docker)
+    - [Test](#test)
+  - [Configuration](#configuration)
+  - [Documentation](#documentation)
+  - [Project Structure](#project-structure)
+  - [UML](#uml)
+  - [TODO](#todo)
+    - [DONE](#done)
+  - [License](#license)
 
 ## Features
 
@@ -41,11 +42,12 @@ For version history have a look at the [CHANGELOG](CHANGELOG.md).
 - Integration with Weights & Biases for experiment tracking
 
 [↑](#toc)
-	
+
 ## Setup
 
-1. Install dependencies: `pip install poetry==1.8.4 && poetry install`.
-2. Set up Weights & Biases API key in environment variables
+1. Install uv: `pip install "uv>=0.5.0"`.
+2. Install dependencies: `uv lock`
+3. Set up Weights & Biases API key in environment variables
 
 [↑](#toc)
 
@@ -53,17 +55,9 @@ For version history have a look at the [CHANGELOG](CHANGELOG.md).
 
 ### Python
 
-If inside `poetry` venv
-
 ```sh
-# poetry shell
-python -m app
-```
-
-or if outside
-
-```sh
-poetry run python -m app
+uv sync
+uv run src
 ```
 
 ### Docker
@@ -73,18 +67,27 @@ docker build -t segformer-quant-eval .
 docker run segformer-quant-eval
 ```
 
+To build with different versions
+
+```sh
+docker build --build-arg \
+  UV_VERSION=<uv_version> \
+  PYTHON_VERSION=<py_version> \
+  .
+```
+
 ### Test
 
 ```sh
-poetry install --with dev
-poetry run pytest [tests/]
+uv sync --only-group docs
+uv run pytest [tests/]
 ```
 
 [↑](#toc)
 
 ## Configuration
 
-Adjust settings in `app/config.py` for model, dataset, and evaluation parameters.
+Adjust settings in `src/config.py` for model, dataset, and evaluation parameters.
 
 ## Documentation
 
@@ -94,18 +97,18 @@ Adjust settings in `app/config.py` for model, dataset, and evaluation parameters
 
 ## Project Structure
 
-```
+```sh
 /
-├── app/
+├── src/
+│ ├─ utils/
+│ │ ├── data_processing.py
+│ │ ├── evaluator.py
+│ │ ├── general_utils.py
+│ │ ├── model_loader.py
+│ │ ├── quantization.py
+│ │ └── wandb_utils.py
 │ ├── app.py
-│ ├── config.py
-│ └── utils/
-│   ├── data_processing.py
-│   ├── evaluator.py
-│   ├── general_utils.py
-│   ├── model_loader.py
-│   ├── quantization.py
-│   └── wandb_utils.py
+│ └── config.py
 └── pyproject.toml
 ```
 
@@ -120,26 +123,38 @@ Adjust settings in `app/config.py` for model, dataset, and evaluation parameters
 
 ## TODO
 
-- [ ] Implement tests before concrete function (TDD)
-	- test_model_loading, test_image_preprocessing
-	- test_quantization, test_predict, test_end_to_end
+- [ ] Implement tests before implementing concrete function (TDD)
+  - test_model_loading, test_image_preprocessing
+  - test_quantization, test_predict, test_end_to_end
 - [ ] Include option to call HF API instead of saving model locally
 - [ ] Use pydantic and python typing
 - [ ] Insert link to report and project within WandB
-- [ ] Use pt or cuda images to reduce loading time size, e.g.
+- [ ] Fix mkdocs not indenting checkbox ul
+- [ ] Auto-generate `CHANGELOG.md`
+  - Conventional Commits `.gitmessage`
+  - Tools like `git-changelog`
+- [ ] Evaluate Docker `buildx` instead of `build`
+- [ ] Push to main with PR only branch protection rules
+  - [ ] Use dedicated branch `dev-auto-push-to-main`
+  - [ ] Incorporate branch to workflow `bump-my-version.yml`
+  - [ ] Create workflow `update_changelog.yml`
+- [ ] Optional: Include option to call HF API instead of saving model locally
+  - Might be useful for evaluation purposes
+
+### DONE
+
+- [x] Use pt or cuda images to reduce loading time size, e.g.
   - `pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime`
   - `nvidia/12.6.3-base-ubuntu24.04`
 - mkdocs
-	- [x] Add .md to LICENSE/LICENSES to avoid download instead of open
-	- [x] Remove/Change #href ↑(#toc) to avoid conflict with gh-pages
-	- [x] Remove/Change #href for light/dark png to avoid conflict with gh-pages
+  - [x] Add .md to LICENSE/LICENSES to avoid download instead of open
+  - [x] Remove/Change #href ↑(#toc) to avoid conflict with gh-pages
+  - [x] Remove/Change #href for light/dark png to avoid conflict with gh-pages
 
 [↑](#toc)
 
 ## License
 
-This project is licensed under the BSD 3-Clause License. See the [LICENSE](LICENSE.md) file for details.
-For third-party licenses, see the [LICENSES](LICENSES.md) file.
+This project is licensed under the BSD 3-Clause License. See the [LICENSE](LICENSE.md) file for details Third-party licenses might also apply.
 
 [↑](#toc)
-

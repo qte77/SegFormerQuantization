@@ -1,60 +1,68 @@
-[tool.poetry]
+[project]
 version = "0.5.8"
 name = "segformer-quantization-pipeline"
 description = "An end-to-end quantization evaluation pipeline for SegFormer models on semantic segmentation tasks"
-authors = ["qte77 <qte@77.gh>"]
+authors = [
+    {name = "qte77", email = "qte@77.gh"}
+]
 readme = "README.md"
-packages = [{include = "segformer_quantization_pipeline"}]
+requires-python = ">=3.11"
+dependencies = [
+    "torch>=2.2.0",
+    "transformers==4.44.0",
+    "evaluate==0.4.2",
+    "quanto>=0.2.0",
+    "optimum-quanto>=0.2.0",
+    "wandb==0.17.8",
+    "pillow>=11.0.0",
+    "datasets>=2.0.0",
+    "accelerate==0.33.0",
+]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-torch = "^2.2.0"
-transformers = "4.44.0"
-evaluate = "0.4.2"
-quanto = "^0.2.0"
-optimum-quanto = "^0.2.0"
-wandb = "0.17.8"
-pillow = "^11.0.0"
-datasets = "^2.0.0"
-accelerate = "0.33.0"
+# https://docs.astral.sh/uv/concepts/projects/dependencies/#optional-dependencies
+# [project.optional-dependencies]
 
-[tool.poetry.group.dev]
-optional = true
+# Dependency groups
+# https://docs.astral.sh/uv/concepts/projects/dependencies/#development-dependencies
+# By default, uv includes the dev dependency group in the environment
+# https://docs.astral.sh/uv/concepts/projects/dependencies/#default-groups
+[dependency-groups]
+dev = [
+    "pytest>=7.0.0",
+    "ruff>=0.8.0",
+    "git-changelog>=2.5.2"
+]
+docs = [
+    "griffe>=1.5.1",
+    "mkdocs>=1.6.1",
+    "mkdocs-awesome-pages-plugin>=2.9.3",
+    "mkdocs-gen-files>=0.5.0",
+    "mkdocs-literate-nav>=0.6.1",
+    "mkdocs-material>=9.5.44",
+    "mkdocs-section-index>=0.3.8",
+    "mkdocstrings>=0.27.0",
+    "mkdocstrings[python]"
+]
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.0.0"
-black = "^22.0.0"
-isort = "^5.0.0"
-flake8 = "^4.0.0"
+[tool.uv]
+package = false
+exclude-newer = "2024-12-21T00:00:00Z"
 
-[tool.poetry.group.docs]
-optional = true
+# https://docs.astral.sh/ruff/configuration/
+[tool.ruff]
+target-version = "py311"
+src = ["scripts", "src", "tests"]
+extend-exclude = ["*.ipynb"]
 
-[tool.poetry.group.docs.dependencies]
-griffe = "^1.5.1"
-mkdocs = "^1.6.1"
-mkdocs-awesome-pages-plugin = "^2.9.3"
-mkdocs-gen-files = "^0.5.0"
-mkdocs-literate-nav = "^0.6.1"
-mkdocs-material = "^9.5.44"
-mkdocs-section-index = "^0.3.8"
-mkdocstrings = {version = "^0.27.0", extras = ["python"]}
+[tool.ruff.format]
+docstring-code-format = true
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.black]
-line-length = 100
-target-version = ['py311']
-
-[tool.isort]
-profile = "black"
-line_length = 100
-
-[tool.flake8]
-max-line-length = 100
-extend-ignore = "E203, W503"
+[tool.ruff.lint]
+ignore = [
+    "E203",  # Whitespace before ':'
+#    "W503",  # unknown to ruff? Line break before binary operator
+]
+unfixable = ["B"]
 
 [tool.bumpversion]
 current_version = "0.5.8"
@@ -76,13 +84,12 @@ search = 'version = "{current_version}"'
 replace = 'version = "{new_version}"'
 
 [[tool.bumpversion.files]]
-filename = "app/__version__.py"
+filename = "src/__version__.py"
 search = '__version__: str = "{current_version}"'
 replace = '__version__: str = "{new_version}"'
 
 [[tool.bumpversion.files]]
 filename = "README.md"
-
 search = "![version](https://img.shields.io/badge/version-{current_version}-8A2BE2)"
 replace = "![version](https://img.shields.io/badge/version-{new_version}-8A2BE2)"
 
@@ -99,4 +106,3 @@ replace = """
 [{new_version}] - {now:%Y-%m-%d}
 ---
 """
-

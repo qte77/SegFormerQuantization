@@ -31,7 +31,7 @@ def load_dataset_custom(dataset_save_path, dataset_name):
     
     try:
         return load_from_disk(dataset_save_path)
-    except Exception as e:
+    except Exception:
         dataset = load_dataset(dataset_name, trust_remote_code=True)
         dataset.save_to_disk(dataset_save_path)
         return dataset

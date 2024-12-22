@@ -39,18 +39,15 @@ from torch.utils.data import DataLoader
 # TODO implement !pip install for notebooks
 # Using pip from your program
 # https://pip.pypa.io/en/latest/user_guide/#using-pip-from-your-program
-import pip
-'''
-def import_or_install(package):
-    try:
-        __import__(package)
-    except ImportError:
-        pip.main(['install', '-qq', package])
-'''
-for package in ['transformers', 'datasets', 'evaluate']:
-    # import_or_install(package)
-    # check_call([executable, '-m', 'pip', 'install', '-qq', module])
-    pip.main(['install', '-qq', package])
+# def import_or_install(package):
+#    try:
+#        __import__(package)
+#    except ImportError:
+#        pip.main(['install', '-qq', package])
+# for package in ['transformers', 'datasets', 'evaluate']:
+#    # import_or_install(package)
+#    # check_call([executable, '-m', 'pip', 'install', '-qq', module])
+#    pip.main(['install', '-qq', package])
 import evaluate
 from datasets import load_dataset
 from huggingface_hub import hf_hub_download

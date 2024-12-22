@@ -1,7 +1,7 @@
 ---
 # https://github.com/james-willett/mkdocs-material-youtube-tutorial
-site_name: ${{ steps.repo_info.outputs.repo_name }}
-site_description: ${{ steps.repo_info.outputs.repo_description }}
+site_name: '<gha_sed_site_name_here>'
+site_description: '<gha_sed_description_here>'
 theme:
   name: material
   features:
@@ -31,14 +31,14 @@ theme:
 nav:
   - Home: index.md
   - PRD: PRD.md
-  - FRD: FRD.md
-  - DRD: DRD.md
+#  - FRD: FRD.md
+#  - DRD: DRD.md
   - Code: docstrings.md
 #  - Code: Code.md
 #  - Configuration: pyproject.md
   - Change Log: CHANGELOG.md
   - License: LICENSE.md
-  - Third-Party Licenses: LICENSES.md
+#  - Third-Party Licenses: LICENSES.md
 plugins:
 #  - gen-files:
 #      scripts: [scripts/gen_mkdocs_docstring_pages.py]
