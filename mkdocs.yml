@@ -1,7 +1,7 @@
 ---
 # https://github.com/james-willett/mkdocs-material-youtube-tutorial
-site_name: '<site_name_here>'
-site_description: '<description_here>'
+site_name: '<gha_sed_site_name_here>'
+site_description: '<gha_sed_description_here>'
 theme:
   name: material
   features:
