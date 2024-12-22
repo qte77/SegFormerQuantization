@@ -4,9 +4,6 @@ name: Generate and deploy MkDocs to GitHub Pages
 on:
   push:
   workflow_dispatch:
-  
-env:
-  UV_VER: '0.5.11'
 
 jobs:
   build-and-deploy:
@@ -30,7 +27,6 @@ jobs:
     - name: Install uv with cache dependency glob
       uses: astral-sh/setup-uv@v4
       with:
-        version: ${{ env.UV_VER }}
         enable-cache: true
         cache-dependency-glob: "uv.lock"
 
@@ -65,7 +61,12 @@ jobs:
         cat << EOF > docs/docstrings.md
         # Code Documentation
         
-        ::: src
+        ::: src.app.py
+
+        ::: src.config.py
+
+        ::: src.utils
+
         EOF
 
     - name: Build documentation

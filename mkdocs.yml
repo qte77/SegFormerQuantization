@@ -49,8 +49,9 @@ plugins:
   - mkdocstrings:
       handlers:
         python:
-          paths: [src/]
+          paths: [src]
           show_source: false
+          heading_level: 2
 markdown_extensions:
   - attr_list
   - pymdownx.highlight:
