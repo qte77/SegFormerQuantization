@@ -60,6 +60,7 @@ docstring-code-format = true
 [tool.ruff.lint]
 ignore = [
     "E203",  # Whitespace before ':'
+#    "MD024", # no-duplicate-heading
 #    "W503",  # unknown to ruff? Line break before binary operator
 ]
 unfixable = ["B"]
@@ -96,13 +97,14 @@ replace = "![version](https://img.shields.io/badge/version-{new_version}-8A2BE2)
 [[tool.bumpversion.files]]
 filename = "CHANGELOG.md"
 search = """
-[Unreleased]
+## [Unreleased]
+
 ---
 """
 replace = """
-[Unreleased]
+## [Unreleased]
+
 ---
 
-[{new_version}] - {now:%Y-%m-%d}
----
+## [{new_version}] - {now:%Y-%m-%d}
 """
