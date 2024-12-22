@@ -58,7 +58,7 @@ jobs:
       run: |
         mkdir -p docs
         cp README.md docs/index.md
-        cp docs/PRD.md docs/
+        # cp docs/PRD.md docs/
         cp {CHANGELOG,LICENSE}.md docs/
         cp pyproject.toml docs/pyproject.md
 
