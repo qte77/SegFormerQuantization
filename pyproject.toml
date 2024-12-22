@@ -48,13 +48,20 @@ docs = [
 package = false
 exclude-newer = "2024-12-21T00:00:00Z"
 
+# https://docs.astral.sh/ruff/configuration/
 [tool.ruff]
-line-length = 100
 target-version = "py311"
+extend-exclude = ["*.ipynb"]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint]
 ignore = [
     "E203",  # Whitespace before ':'
 #    "W503",  # unknown to ruff? Line break before binary operator
 ]
+unfixable = ["B"]
 
 [tool.bumpversion]
 current_version = "0.5.8"
