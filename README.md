@@ -123,14 +123,13 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
 
 ## TODO
 
-- [ ] Implement tests before concrete function (TDD)
+- [ ] Implement tests before implementing concrete function (TDD)
   - test_model_loading, test_image_preprocessing
   - test_quantization, test_predict, test_end_to_end
+- [ ] Include option to call HF API instead of saving model locally
 - [ ] Use pydantic and python typing
 - [ ] Insert link to report and project within WandB
-- [ ] Use pt or cuda images to reduce loading time size, e.g.
-  - `pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime`
-  - `nvidia/12.6.3-base-ubuntu24.04`
+- [ ] Fix mkdocs not indenting checkbox ul
 - [ ] Auto-generate `CHANGELOG.md`
   - Conventional Commits `.gitmessage`
   - Tools like `git-changelog`
@@ -144,6 +143,9 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
 
 ### DONE
 
+- [x] Use pt or cuda images to reduce loading time size, e.g.
+  - `pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime`
+  - `nvidia/12.6.3-base-ubuntu24.04`
 - mkdocs
   - [x] Add .md to LICENSE/LICENSES to avoid download instead of open
   - [x] Remove/Change #href ↑(#toc) to avoid conflict with gh-pages
