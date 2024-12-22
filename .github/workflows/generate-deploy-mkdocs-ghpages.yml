@@ -56,7 +56,6 @@ jobs:
 
     - name: Copy repo files
       run: |
-        mkdir -p docs
         cp README.md docs/index.md
         cp {CHANGELOG,LICENSE}.md docs/
         cp pyproject.toml docs/pyproject.md
@@ -66,7 +65,7 @@ jobs:
         cat << EOF > docs/docstrings.md
         # Code Documentation
         
-        ::: app
+        ::: src
         EOF
 
     - name: Build documentation

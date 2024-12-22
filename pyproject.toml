@@ -29,9 +29,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pytest>=7.0.0",
-    "black>=22.0.0",
-    "isort>=5.0.0",
-    "flake8>=4.0.0",
+    "ruff>=0.8.0",
     "git-changelog>=2.5.2"
 ]
 docs = [
@@ -78,7 +76,7 @@ search = 'version = "{current_version}"'
 replace = 'version = "{new_version}"'
 
 [[tool.bumpversion.files]]
-filename = "app/__version__.py"
+filename = "src/__version__.py"
 search = '__version__: str = "{current_version}"'
 replace = '__version__: str = "{new_version}"'
 

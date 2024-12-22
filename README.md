@@ -57,7 +57,7 @@ For version history have a look at the [CHANGELOG](CHANGELOG.md).
 
 ```sh
 uv sync
-uv run app
+uv run src
 ```
 
 ### Docker
@@ -87,7 +87,7 @@ uv run pytest [tests/]
 
 ## Configuration
 
-Adjust settings in `app/config.py` for model, dataset, and evaluation parameters.
+Adjust settings in `src/config.py` for model, dataset, and evaluation parameters.
 
 ## Documentation
 
@@ -99,16 +99,16 @@ Adjust settings in `app/config.py` for model, dataset, and evaluation parameters
 
 ```sh
 /
-├── app/
+├── src/
+│ ├─ utils/
+│ │ ├── data_processing.py
+│ │ ├── evaluator.py
+│ │ ├── general_utils.py
+│ │ ├── model_loader.py
+│ │ ├── quantization.py
+│ │ └── wandb_utils.py
 │ ├── app.py
-│ ├── config.py
-│ └── utils/
-│   ├── data_processing.py
-│   ├── evaluator.py
-│   ├── general_utils.py
-│   ├── model_loader.py
-│   ├── quantization.py
-│   └── wandb_utils.py
+│ └── config.py
 └── pyproject.toml
 ```
 
