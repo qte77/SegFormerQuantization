@@ -1,7 +1,7 @@
 ---
 # https://github.com/james-willett/mkdocs-material-youtube-tutorial
-site_name: ${{ steps.repo_info.outputs.repo_name }}
-site_description: ${{ steps.repo_info.outputs.repo_description }}
+site_name: '<site_name_here>'
+site_description: '<description_here>'
 theme:
   name: material
   features:
