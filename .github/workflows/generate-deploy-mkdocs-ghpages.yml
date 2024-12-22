@@ -58,10 +58,10 @@ jobs:
       run: |
         mkdir -p docs
         cp README.md docs/index.md
-        cp doc/PRD.md docs/
+        cp docs/PRD.md docs/
         cp {CHANGELOG,LICENSE}.md docs/
         cp pyproject.toml docs/pyproject.md
-        
+
     - name: Create docstrings file
       run: |
         cat << EOF > docs/docstrings.md
