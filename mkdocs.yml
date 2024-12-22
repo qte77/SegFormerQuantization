@@ -49,7 +49,7 @@ plugins:
   - mkdocstrings:
       handlers:
         python:
-          paths: [app]
+          paths: [src/]
           show_source: false
 markdown_extensions:
   - attr_list
