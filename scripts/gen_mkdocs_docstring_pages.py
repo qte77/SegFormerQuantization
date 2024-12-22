@@ -1,10 +1,12 @@
 from pathlib import Path
 from os import environ
-import mkdocs_gen_files
+# import mkdocs_gen_files
+
+mkdocs_gen_files = None
 
 #TODO get APP_FOLDER and CODE_INDEX if not present in GHA workflow
-#src_dir = Path(environ["APP_FOLDER"])
-#code_index_file = environ["CODE_INDEX"]
+src_dir = Path(environ["APP_FOLDER"])
+code_index_file = environ["CODE_INDEX"]
 path_prefix = "docstrings"
 path_suffix = ".md"
 
@@ -32,4 +34,3 @@ with mkdocs_gen_files.open(code_index_file, "a") as nav_file:
             module_path = ".".join(path.with_suffix("").parts)
             doc_path = Path(path_prefix, path.relative_to(src_dir)).with_suffix(path_suffix)
             print(f"* [{module_path}]({doc_path})", file=nav_file)
-
