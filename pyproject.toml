@@ -51,6 +51,7 @@ exclude-newer = "2024-12-21T00:00:00Z"
 # https://docs.astral.sh/ruff/configuration/
 [tool.ruff]
 target-version = "py311"
+src = ["scripts", "src", "tests"]
 extend-exclude = ["*.ipynb"]
 
 [tool.ruff.format]
