@@ -153,7 +153,6 @@ Adjust settings in `app/config.py` for model, dataset, and evaluation parameters
 
 ## License
 
-This project is licensed under the BSD 3-Clause License. See the [LICENSE](LICENSE.md) file for details.
-For third-party licenses, see the [LICENSES](LICENSES.md) file.
+This project is licensed under the BSD 3-Clause License. See the [LICENSE](LICENSE.md) file for details Third-party licenses might also apply.
 
 [↑](#toc)
