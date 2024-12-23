@@ -118,8 +118,13 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
 
 ### System
 
-<img src="assets/SegFormerQuantization.C4.System.dark.png#gh-dark-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" /> <!-- mkdocs exclude { data-search-exclude } -->
+<!--
+<img src="assets/SegFormerQuantization.C4.System.dark.png#gh-dark-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" /> <!-- mkdocs exclude { data-search-exclude } ->
 <img src="assets/SegFormerQuantization.C4.System.light.png#gh-light-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" />
+-->
+
+![SegFormerQuantization System](assets/SegFormerQuantization.C4.System.dark.png#gh-dark-mode-only)
+![SegFormerQuantization Code](assets/SegFormerQuantization.C4.System.light.png#gh-light-mode-only)
 
 ### Code
 
@@ -136,7 +141,9 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
 - [ ] Include option to call HF API instead of saving model locally
 - [ ] Use pydantic and python typing
 - [ ] Insert link to report and project within WandB
-- [ ] Fix mkdocs not indenting checkbox ul
+- [ ] mkdocs
+  - Fix mkdocs not indenting checkbox ul
+  - Fix mkdocs not including png with plain in-line html
 - [ ] Auto-generate `CHANGELOG.md`
   - Conventional Commits `.gitmessage`
   - Tools like `git-changelog`
