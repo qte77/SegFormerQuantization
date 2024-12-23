@@ -32,22 +32,23 @@ theme:
 nav:
   - Home: index.md
   - PRD: PRD.md
-  - Code: reference/
+#  - Code: Code.md
+  - Code: docstrings.md
   - Configuration: pyproject.md
   - Change Log: CHANGELOG.md
   - License: LICENSE.md
 plugins:
   - search:
       lang: en
-  - gen-files:
-      scripts:
-      - "scripts/gen_mkdocs_docstring_pages.py"
-  - literate-nav:
-      nav_file: Code.md
+#  - gen-files:
+#      scripts:
+#      - "scripts/gen_mkdocs_docstring_pages.py"
+#  - literate-nav:
+#      nav_file: Code.md
   - mkdocstrings:
       handlers:
         python:
-          # paths: [src]
+          paths: [src]
           show_source: false
           heading_level: 2
 markdown_extensions:

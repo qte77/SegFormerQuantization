@@ -56,19 +56,22 @@ jobs:
         cp {CHANGELOG,LICENSE}.md docs/
         cp pyproject.toml docs/pyproject.md
 
-    - name: Create docstrings file
+    - name: Generate Code.md
       run: |
         cat << EOF > docs/docstrings.md
         # Code Documentation
         
-        ::: src
-        
-        ::: src.app.py
+        ::: app
 
-        ::: src.config.py
+        ::: config
 
-        ::: src.utils
+        ::: utils.evaluator
         EOF
+
+#    - name: Generate Code.md
+#      run: |
+#        uv run --locked --only-group docs \
+#          python gen_mkdocs_docstring_pages.py        
 
     - name: Build documentation
       run: uv run --locked --only-group docs mkdocs build

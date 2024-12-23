@@ -36,7 +36,8 @@ USER ${USER}
 WORKDIR ${APP_ROOT}
 ENV PATH="${APP_ROOT}:${PATH}"
 
-# TODO where are site-packages located? uv.venv, home, usr/local
+# TODO where are site-packages located?
+# .venv/bin, .venv/lib, turn off uv venv?
 COPY --from=builder /usr/local/lib/python${PYTHON_VERSION}/site-packages \
     /usr/local/lib/python${PYTHON_VERSION}/site-packages
 
