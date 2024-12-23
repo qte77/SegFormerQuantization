@@ -36,8 +36,8 @@ jobs:
     - name: "Set up Python"
       run: uv python install
 
-#    - name: Install only doc deps
-#      run: uv sync --only-group docs
+    - name: Install only doc deps
+      run: uv sync --frozen --only-group docs
 
     - name: Get repo info and stream into mkdocs.yml
       id: repo_info
@@ -61,16 +61,17 @@ jobs:
         cat << EOF > docs/docstrings.md
         # Code Documentation
         
+        ::: src
+        
         ::: src.app.py
 
         ::: src.config.py
 
         ::: src.utils
-
         EOF
 
     - name: Build documentation
-      run: uv run --only-group docs mkdocs build
+      run: uv run --locked --only-group docs mkdocs build
 
 #    - name: Push to gh-pages
 #      run: uv run mkdocs gh-deploy --force

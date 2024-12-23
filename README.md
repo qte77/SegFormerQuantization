@@ -47,8 +47,8 @@ For version history have a look at the [CHANGELOG](CHANGELOG.md).
 
 ## Setup
 
-1. Install uv: `pip install "uv>=0.5.0"`.
-2. Install dependencies: `uv lock`
+1. Install uv: `pip install uv`.
+2. Install dependencies: `uv sync [--frozen]`
 3. Set up Weights & Biases API key in environment variables
 
 [↑](#toc)
@@ -58,8 +58,7 @@ For version history have a look at the [CHANGELOG](CHANGELOG.md).
 ### Python
 
 ```sh
-uv sync
-uv run src
+uv run [--locked] python -m src 
 ```
 
 ### Docker
@@ -69,11 +68,10 @@ docker build -t segformer-quant-eval .
 docker run segformer-quant-eval
 ```
 
-To build with different versions
+To build with different python version
 
 ```sh
-docker build --build-arg \
-  UV_VERSION=<uv_version> \
+docker build --build-arg
   PYTHON_VERSION=<py_version> \
   .
 ```
@@ -81,8 +79,8 @@ docker build --build-arg \
 ### Test
 
 ```sh
-uv sync --only-group docs
-uv run pytest [tests/]
+uv sync --only-group dev
+uv run pytest tests/
 ```
 
 [↑](#toc)
