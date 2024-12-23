@@ -118,18 +118,13 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
 
 ### System
 
-<!--
-<img src="assets/SegFormerQuantization.C4.System.dark.png#gh-dark-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" /> <!-- mkdocs exclude { data-search-exclude } ->
+<img src="assets/images/SegFormerQuantization.C4.System.dark.png#gh-dark-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" /> <!-- mkdocs exclude { data-search-exclude } -->
 <img src="assets/SegFormerQuantization.C4.System.light.png#gh-light-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" />
--->
-
-![SegFormerQuantization System](assets/SegFormerQuantization.C4.System.dark.png#gh-dark-mode-only)
-![SegFormerQuantization Code](assets/SegFormerQuantization.C4.System.light.png#gh-light-mode-only)
 
 ### Code
 
-<img src="assets/SegFormerQuantization.C4.Code.dark.png#gh-dark-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" /> <!-- mkdocs exclude { data-search-exclude } -->
-<img src="assets/SegFormerQuantization.C4.Code.light.png#gh-light-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" />
+<img src="assets/images/SegFormerQuantization.C4.Code.dark.png#gh-dark-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" /> <!-- mkdocs exclude { data-search-exclude } -->
+<img src="assets/images/SegFormerQuantization.C4.Code.light.png#gh-light-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" />
 
 [↑](#toc)
 
