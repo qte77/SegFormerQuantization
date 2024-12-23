@@ -9,7 +9,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "torch>=2.2.0",
-    "transformers==4.44.0",
+    "transformers==4.47.1",
     "evaluate==0.4.2",
     "quanto>=0.2.0",
     "optimum-quanto>=0.2.0",
