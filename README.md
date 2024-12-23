@@ -47,7 +47,7 @@ For version history have a look at the [CHANGELOG](CHANGELOG.md).
 
 ## Setup
 
-1. Install uv: `pip install uv`.
+1. Install uv: `pip install uv`
 2. Install dependencies: `uv sync [--frozen]`
 3. Set up Weights & Biases API key in environment variables
 

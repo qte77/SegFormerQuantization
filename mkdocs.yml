@@ -1,5 +1,6 @@
 ---
 # https://github.com/james-willett/mkdocs-material-youtube-tutorial
+# https://mkdocstrings.github.io/recipes/
 site_name: '<gha_sed_site_name_here>'
 site_description: '<gha_sed_description_here>'
 theme:
@@ -31,25 +32,22 @@ theme:
 nav:
   - Home: index.md
   - PRD: PRD.md
-#  - FRD: FRD.md
-#  - DRD: DRD.md
-  - Code: docstrings.md
-#  - Code: Code.md
-#  - Configuration: pyproject.md
+  - Code: reference/
+  - Configuration: pyproject.md
   - Change Log: CHANGELOG.md
   - License: LICENSE.md
-#  - Third-Party Licenses: LICENSES.md
 plugins:
-#  - gen-files:
-#      scripts: [scripts/gen_mkdocs_docstring_pages.py]
-#  - literate-nav:
-#      nav_file: Code.md
   - search:
       lang: en
+  - gen-files:
+      scripts:
+      - "scripts/gen_mkdocs_docstring_pages.py"
+  - literate-nav:
+      nav_file: Code.md
   - mkdocstrings:
       handlers:
         python:
-          paths: [src]
+          # paths: [src]
           show_source: false
           heading_level: 2
 markdown_extensions:

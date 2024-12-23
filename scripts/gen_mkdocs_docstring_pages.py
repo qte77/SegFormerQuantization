@@ -1,36 +1,43 @@
+"""
+mkdocstrings: Generate the code reference pages.
+See Automatic code reference pages,
+https://mkdocstrings.github.io/recipes/
+"""
 from pathlib import Path
-from os import environ
-# import mkdocs_gen_files
+import mkdocs_gen_files
 
-mkdocs_gen_files = None
+def process_directory(directory, nav, src, root):
+    for path in sorted(directory.iterdir()):
+        if path.is_file() and path.suffix == ".py":
+            module_path = path.relative_to(src).with_suffix("")
+            doc_path = path.relative_to(src).with_suffix(".md")
+            full_doc_path = Path("reference", doc_path)
 
-#TODO get APP_FOLDER and CODE_INDEX if not present in GHA workflow
-src_dir = Path(environ["APP_FOLDER"])
-code_index_file = environ["CODE_INDEX"]
-path_prefix = "docstrings"
-path_suffix = ".md"
+            parts = tuple(module_path.parts)
 
-files_found = sorted(src_dir.glob("**/*.py"))
+            if parts[-1] == "__init__":
+                parts = parts[:-1]
+            elif parts[-1] == "__main__":
+                continue
 
-# create docstrings md
-for path in files_found:
-    if path.name != "__init__.py":
-        doc_path = Path(path_prefix, path.relative_to(src_dir)).with_suffix(path_suffix)
-        with mkdocs_gen_files.open(doc_path, "w") as f:
-            module_path = ".".join(path.with_suffix("").parts)
-            #if path.name == "__init__.py":
-            #    print(f"# {path.parent.name}", file=f)
-            #    print(f"::: {path.parent.name}", file=f)
-            #else:
-            print(f"# {module_path}", file=f)
-            print(f"::: {module_path}", file=f)
-        mkdocs_gen_files.set_edit_path(doc_path, path)
+            nav[parts] = doc_path.as_posix()
 
-# append docstrings to navigation file
-with mkdocs_gen_files.open(code_index_file, "a") as nav_file:
-    nav_file.write("# App Reference\n\n")
-    for path in files_found:
-        if path.name != "__init__.py":
-            module_path = ".".join(path.with_suffix("").parts)
-            doc_path = Path(path_prefix, path.relative_to(src_dir)).with_suffix(path_suffix)
-            print(f"* [{module_path}]({doc_path})", file=nav_file)
+            with mkdocs_gen_files.open(full_doc_path, "w") as fd:
+                ident = ".".join(parts)
+                fd.write(f"::: {ident}")
+
+            mkdocs_gen_files.set_edit_path(
+                full_doc_path, path.relative_to(root)
+            )
+        elif path.is_dir():
+            process_directory(path, nav, src, root)
+
+nav = mkdocs_gen_files.Nav()
+root = Path(__file__).parent.parent
+src = root / "src"
+print(f"mkdocs: {src}")
+
+process_directory(src, nav, src, root)
+
+with mkdocs_gen_files.open("reference/Code.md", "w") as nav_file:
+    nav_file.writelines(nav.build_literate_nav())

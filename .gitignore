@@ -37,6 +37,10 @@ datasets/
 # Weights & Biases
 wandb/
 
+# mkdocs
+reference/
+site/
+
 # Large model files
 *.bin
 *.pt

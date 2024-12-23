@@ -40,8 +40,7 @@ docs = [
     "mkdocs-literate-nav>=0.6.1",
     "mkdocs-material>=9.5.44",
     "mkdocs-section-index>=0.3.8",
-    "mkdocstrings>=0.27.0",
-    "mkdocstrings[python]"
+    "mkdocstrings[python]>=0.27.0"
 ]
 
 [tool.uv]
