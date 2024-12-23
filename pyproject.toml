@@ -16,7 +16,7 @@ dependencies = [
     "wandb==0.17.8",
     "pillow>=11.0.0",
     "datasets>=2.0.0",
-    "accelerate==0.33.0",
+    "accelerate==1.2.1",
 ]
 
 # https://docs.astral.sh/uv/concepts/projects/dependencies/#optional-dependencies
