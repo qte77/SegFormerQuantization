@@ -12,10 +12,18 @@ Functions:
 Note: Requires WANDB_API_KEY, WANDB_PROJECT, and WANDB_ENTITY environment variables.
 """
 
-import wandb
+from wandb import Run, run, log, init
+from transformers import SegformerForSemanticSegmentation
+from torch import device
+from typig import Dict
 from datetime import datetime
 
-def create_wandb_run(project, entity, name, group):
+def create_wandb_run(
+    project: str,
+    entity: str,
+    name: str,
+    group: str
+) -> Run:
     """
     Initialize and create a new Weights & Biases run.
     
@@ -29,19 +37,26 @@ def create_wandb_run(project, entity, name, group):
         wandb.Run: The created W&B run object.
     """
 
-    wandb_run = wandb.init(
+    wandb_run = init(
         project=project,
         entity=entity,
         name=name,
         group=group
     )
-    assert wandb_run is wandb.run
+    assert wandb_run is run
     return wandb_run
 
 def create_wandb_run_meta(
-    wandb_run, model_name, dataset_name, device, wandb_tag_mode,
-    quant_used, model_used, ds_num_shards, ds_shards_mod
-):
+    wandb_run: Run,
+    model_name: str,
+    dataset_name: str,
+    torch_device: device,
+    wandb_tag_mode: str,
+    quant_used: str,
+    model_used: SegformerForSemanticSegmentation,
+    ds_num_shards: int,
+    ds_shards_mod: float
+) -> Run:
     """
     Set metadata for the Weights & Biases run.
     
@@ -49,7 +64,7 @@ def create_wandb_run_meta(
         wandb_run (wandb.Run): The W&B run object.
         model_name (str): Name of the model.
         dataset_name (str): Name of the dataset.
-        device (torch.device): Device used for computation.
+        torch_device (torch.device): Device used for computation.
         wandb_tag_mode (str): Tag for the run mode.
         quant_used (str): Quantization method used, if any.
         model_used (SegformerForSemanticSegmentation): The model being evaluated.
@@ -60,7 +75,7 @@ def create_wandb_run_meta(
         wandb.Run: The updated W&B run object.
     """
 
-    wandb_tags = [model_name, dataset_name, device.type, wandb_tag_mode]
+    wandb_tags = [model_name, dataset_name, torch_device.type, wandb_tag_mode]
     if quant_used:
         wandb_tags += [quant_used]
     else:
@@ -71,16 +86,22 @@ def create_wandb_run_meta(
         f"{ds_num_shards=}, {ds_shards_mod=}"
     return wandb_run
 
-def log_wandb_results(results, model):
+def log_wandb_results(
+    results: Dict,
+    model: SegformerForSemanticSegmentation
+) -> None:
     """
     Log evaluation results to Weights & Biases.
     
     Args:
         results (dict): Evaluation results to log.
         model (SegformerForSemanticSegmentation): The model being evaluated.
+    
+    Returns:
+        None
     """
 
-    wandb.log({
+    log({
         'mean_iou': results['mean_iou'],
         'mean_accuracy': results['mean_accuracy'],
         'overall_accuracy': results['overall_accuracy'],

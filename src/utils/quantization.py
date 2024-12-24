@@ -11,9 +11,16 @@ The module uses Quanto for quantization and supports float8, int8, int4, and int
 """
 
 from transformers import QuantoConfig, SegformerForSemanticSegmentation
+from torch import device
+from typing import Dict
 import quanto
 
-def quantize_models(base_model, model_name, model_save_path, device):
+def quantize_models(
+    base_model: SegformerForSemanticSegmentation,
+    model_name: str,
+    model_save_path: str,
+    torch_device: device
+) -> Dict[str, SegformerForSemanticSegmentation]:
     """
     Quantize the base model using various quantization methods.
     
@@ -21,10 +28,10 @@ def quantize_models(base_model, model_name, model_save_path, device):
         base_model (SegformerForSemanticSegmentation): The base model to quantize.
         model_name (str): Name of the model.
         model_save_path (str): Path to save quantized models.
-        device (torch.device): Device to load models to.
+        torch_device (torch.device): Device to load models to.
     
     Returns:
-        dict: Dictionary of quantized models.
+        Dict[str, SegformerForSemanticSegmentation]: Dictionary of quantized models.
     """
 
     models = {}
@@ -56,6 +63,6 @@ def quantize_models(base_model, model_name, model_save_path, device):
                     quantization_config=config_quanto[nbits],
                 )
         quanto.freeze(models[model_htype])
-        models[model_htype] = models[model_htype].to(device)
+        models[model_htype] = models[model_htype].to(torch_device)
     return models
 

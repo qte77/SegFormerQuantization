@@ -13,11 +13,16 @@ The module uses the Hugging Face datasets library and image processing
 tools to prepare data for SegFormer model evaluation.
 """
 
-from datasets import load_dataset, load_from_disk
+from datasets import load_dataset, load_from_disk, Dataset
+from transformers import SegformerImageProcessor
 from datasets.utils.logging import set_verbosity_error
-import torch
+from typing import List, Dict, Tuple
+from torch import dtype, device, Tensor, half, float16
 
-def load_dataset_custom(dataset_save_path, dataset_name):
+def load_dataset_custom(
+    dataset_save_path: str,
+    dataset_name: str
+):
     """
     Load or download and save the dataset.
     
@@ -36,18 +41,23 @@ def load_dataset_custom(dataset_save_path, dataset_name):
         dataset.save_to_disk(dataset_save_path)
         return dataset
 
-def get_processed_inputs(dataset, image_processor, device, bias_dtype=None):
+def get_processed_inputs(
+    dataset: Dataset,
+    image_processor: SegformerImageProcessor,
+    device: device,
+    bias_dtype: dtype = None
+) -> Tuple[Tensor, Tensor]:
     """
     Process and prepare inputs for model inference.
     
     Args:
         dataset (Dataset): The dataset to process.
-        image_processor (ImageProcessor): The image processor to use.
+        image_processor (SegformerImageProcessor): The image processor to use.
         device (torch.device): The device to load tensors to.
         bias_dtype (torch.dtype, optional): Dtype for bias, if any.
     
     Returns:
-        tuple: Processed pixel values and labels.
+        Tuple[torch.Tensor, torch.Tensor]: Processed pixel values and labels.
     """
     
     set_verbosity_error()
@@ -59,22 +69,23 @@ def get_processed_inputs(dataset, image_processor, device, bias_dtype=None):
     )
     pixel_values = dataset['pixel_values'].to(device)
     labels = dataset['labels'].to(device)
-    if bias_dtype in [torch.half, torch.float16]:
+    if bias_dtype in [half, float16]:
         pixel_values = pixel_values.half()
     return pixel_values, labels
 
-def convert_to_RGB(dataset):
+def convert_to_RGB(
+    dataset: Dict[List, List]
+) -> Dict[List, List]:
     """
     Convert dataset images and annotations to RGB and grayscale respectively.
     
     Args:
-        dataset (dict): Dataset containing 'image' and 'annotation' keys.
+        dataset (Dict): Dataset containing 'image' and 'annotation' keys.
     
     Returns:
-        dict: Processed dataset with converted images and annotations.
+        Dict[List, List]: Processed dataset with converted images and annotations.
     """
 
     images = [img.convert("RGB") for img in dataset['image']]
     annotations = [img.convert("L") for img in dataset['annotation']]
     return {'image': images, 'annotation': annotations}
-

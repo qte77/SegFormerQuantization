@@ -12,10 +12,16 @@ The module uses the transformers library for model and processor management.
 """
 
 from transformers import SegformerForSemanticSegmentation, SegformerImageProcessor
+from torch import dtype, device
 from os.path import exists
 from os import makedirs
 
-def load_base_model(model_name, model_save_path, compute_dtype, device):
+def load_base_model(
+    model_name: str,
+    model_save_path: str,
+    compute_dtype: dtype, 
+    device: device
+) -> SegformerForSemanticSegmentation:
     """
     Load or download and save the base SegFormer model.
     
@@ -46,7 +52,10 @@ def load_base_model(model_name, model_save_path, compute_dtype, device):
         model.save_pretrained(model_save_path)
     return model.to(device)
 
-def load_image_processor(model_name, tokenizer_save_path):
+def load_image_processor(
+    model_name: str,
+    tokenizer_save_path: str
+) -> SegformerImageProcessor:
     """
     Load or download and save the image processor.
     
@@ -68,4 +77,3 @@ def load_image_processor(model_name, tokenizer_save_path):
         image_processor = SegformerImageProcessor.from_pretrained(model_name)
         image_processor.save_pretrained(tokenizer_save_path)
         return image_processor
-
