@@ -1,6 +1,6 @@
 ---
 # https://github.com/callowayproject/bump-my-version?tab=readme-ov-file#github-actions
-name: Bump Version with bump-my-version
+name: bump-my-version
 
 on:
 #  pull_request:
@@ -20,6 +20,9 @@ on:
         - 'major'
         - 'minor'
         - 'patch'
+
+env:
+  BRANCH_NAME: "bump-${{ github.ref_name }}"
 
 jobs:
   build:
@@ -43,8 +46,17 @@ jobs:
             echo "bump_type=${{ github.event.inputs.bump_type }}" >> $GITHUB_OUTPUT
           fi
 
+      - name: Create new branch
+        id: branch
+        run: |
+          git checkout -b ${{ env.BRANCH_NAME }}
+          git push origin ${{ env.BRANCH_NAME }}
+          echo "branched='true'" >> $GITHUB_OUTPUT
+          continue-on-error: true
+
       - name: Bump version
         id: bump
+        if: success() || steps.branch.outputs.branched == 'true'
         uses: callowayproject/bump-my-version@0.28.0
         env:
           BUMPVERSION_TAG: "true"
@@ -52,20 +64,42 @@ jobs:
           args: ${{ steps.determine_bump_type.outputs.bump_type }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Check
-        if: steps.bump.outputs.bumped == 'true'
+      - name: Delete new branch if bump failed
+        if: failure() ||
+          steps.branch.outputs.branched != 'true' ||
+          steps.bump.outputs.bumped != 'true'
+        run: |
+          git push origin --delete $BRANCH_NAME
+
+      - name: Check and echo
+        if: steps.branch.outputs.branched == 'true' &&
+          steps.bump.outputs.bumped == 'true'
         run: |
           previous=${{ steps.bump.outputs.previous-version }}
           current=${{ steps.bump.outputs.current-version }}
-          echo "Version was bumped from ${previous} to ${current}!"
+          echo "Bumped ${previous} → ${current}!"
+          echo "VER_PREVIOUS=${previous}" >> $GITHUB_ENV
+          echo "VER_CURRENT=${current}" >> $GITHUB_ENV
 
-#      - name: Push changes
-#        if: steps.bump.outputs.bumped == 'true'
-#        run: |
-#          git config user.name bump-version-gha
-#          git config user.email github-actions@github.com
-#          git push origin HEAD:${{ github.ref }}
-#          git push --tags
+      - name: Create Pull Request
+        if: steps.branch.outputs.branched == 'true' &&
+          steps.bump.outputs.bumped == 'true'
+        uses: peter-evans/create-pull-request@v5
+        env:
+          COMMIT_MSG: 
+            "Bump version: ${{ env.VER_PREVIOUS }} → ${{ env.VER_CURRENT }}"
+          COMMIT_TITLE:
+            "New Branch PR from ${{ github.ref_name }}"
+          COMMIT_BODY:
+            "This PR was automatically created from the current branch"
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: ${{ env.COMMIT_MSG }}
+          title: ${{ env.COMMIT_TITLE }}
+          body: ${{ env.COMMIT_BODY }}
+          branch: ${{ env.BRANCH_NAME }}
+          base: ${{ github.ref_name }}
+          delete-branch: true
 
 #      - name: Create Release
 #        uses: actions/create-release@v1

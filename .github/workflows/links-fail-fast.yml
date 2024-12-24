@@ -1,14 +1,20 @@
 ---
 # https://github.com/lycheeverse/lychee-action
 # https://github.com/marketplace/actions/lychee-broken-link-checker
-name: "lychee Link Checker"
+name: "Link Checker"
 
 on:
-  repository_dispatch:
   workflow_dispatch:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+    types: [closed]
+    branches:
+      - main
   schedule:
     - cron: "00 00 * * 0"
-    
+
 jobs:
   linkChecker:
     runs-on: ubuntu-latest

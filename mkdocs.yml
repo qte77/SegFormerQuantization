@@ -10,10 +10,10 @@ theme:
   name: material
   language: en
   features:
-    - content.action.edit # edit on github
-    - content.code.annotation # inline markers, e.g. numbers
+    - content.code.annotation
     - content.code.copy
     - content.tabs.link
+    - navigation.footer
     - navigation.sections
     - navigation.tabs
     - navigation.top

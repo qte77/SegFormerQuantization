@@ -1,7 +1,7 @@
 ---
 # https://github.com/chartboost/ruff-action
 # https://github.com/astral-sh/ruff
-name: Ruff
+name: ruff
 on: 
   # [push, pull_request]
   schedule:

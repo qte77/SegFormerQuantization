@@ -1,8 +1,11 @@
 ---
-name: Generate and deploy MkDocs to GitHub Pages
+name: Deploy Docs
 
 on:
-  push:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
   workflow_dispatch:
 
 env:
@@ -42,7 +45,7 @@ jobs:
       run: uv python install
 
     - name: Install only doc deps
-      run: uv sync --frozen --only-group docs
+      run: uv sync --only-group docs # --frozen
 
     - name: Get repo info and stream into mkdocs.yml
       id: repo_info
@@ -63,7 +66,7 @@ jobs:
         # TODO copy only files in nav of mkdocs.yml
         cp README.md ${DOC_DIR}/index.md
         cp {CHANGELOG,LICENSE}.md ${DOC_DIR}
-        # copy images, mkdocstrings does not by defaul
+        # copy images, mkdocstrings does not by default
 
     - name: Generate code docstrings concat file
       run: |
