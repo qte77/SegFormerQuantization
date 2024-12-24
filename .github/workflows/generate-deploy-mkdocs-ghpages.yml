@@ -5,6 +5,11 @@ on:
   push:
   workflow_dispatch:
 
+env:
+  DOCSTRINGS_FILE: "docstrings.md"
+  DOC_DIR: "docs"
+  SRC_DIR: "src"
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -52,26 +57,20 @@ jobs:
 
     - name: Copy repo files
       run: |
-        cp README.md docs/index.md
-        cp {CHANGELOG,LICENSE}.md docs/
-        cp pyproject.toml docs/pyproject.md
+        # TODO copy only files in nav of mkdocs.yml
+        cp README.md ${DOC_DIR}/index.md
+        cp {CHANGELOG,LICENSE}.md ${DOC_DIR}
+        cp pyproject.toml ${DOC_DIR}/pyproject.md
 
-    - name: Generate Code.md
+    - name: Generate docstrings concat file
       run: |
-        cat << EOF > docs/docstrings.md
-        # Code Documentation
-        
-        ::: app
-
-        ::: config
-
-        ::: utils.evaluator
-        EOF
-
-#    - name: Generate Code.md
-#      run: |
-#        uv run --locked --only-group docs \
-#          python gen_mkdocs_docstring_pages.py        
+        DELIM="::: "
+        find "${SRC_DIR}" -type f -name "*.py" \
+          -type f -not -name "__*__*" \
+          -printf "%P\n" | \
+          sed 's/\//./g'| sed 's/\.py$//' | \
+          sed "s/^/${DELIM}/" | sort > \
+          "${DOC_DIR}/${DOCSTRINGS_FILE}"
 
     - name: Build documentation
       run: uv run --locked --only-group docs mkdocs build

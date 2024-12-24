@@ -139,6 +139,7 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
 - [ ] mkdocs
   - Fix mkdocs not indenting checkbox ul
   - Fix mkdocs not including png with plain in-line html
+  - Extend workflow to copy only files in nav of mkdocs.yml
 - [ ] Auto-generate `CHANGELOG.md`
   - Conventional Commits `.gitmessage`
   - Tools like `git-changelog`
