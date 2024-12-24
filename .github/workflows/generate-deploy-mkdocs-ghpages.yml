@@ -24,8 +24,15 @@ jobs:
       name: github-pages
     steps:
 
-    - uses: actions/checkout@v4
+    - name: Checkout the repository
+      uses: actions/checkout@v4
       with:
+        ref:
+          ${{
+            github.event.pull_request.merged == 'true' &&
+            'main' ||
+            github.ref_name
+          }}
         fetch-depth: 0
 
     - uses: actions/configure-pages@v3
