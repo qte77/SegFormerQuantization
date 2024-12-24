@@ -64,7 +64,7 @@ jobs:
         cp README.md ${DOC_DIR}/index.md
         cp {CHANGELOG,LICENSE}.md ${DOC_DIR}
         # copy images, mkdocstrings does not by default
-        mkdir -p site/images
+        mkdir -p site/assets/images
         cp assets/images/* site/assets/images
 
     - name: Generate code docstrings concat file
