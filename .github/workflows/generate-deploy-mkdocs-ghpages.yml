@@ -58,14 +58,12 @@ jobs:
         sed -i "s/<gha_sed_site_name_here>/${SITE_NAME}/g" mkdocs.yml
         sed -i "s/<gha_sed_site_description_here>/${SITE_DESC}/g" mkdocs.yml
 
-    - name: Copy repo files
+    - name: Copy text files to be included
       run: |
         # TODO copy only files in nav of mkdocs.yml
         cp README.md ${DOC_DIR}/index.md
         cp {CHANGELOG,LICENSE}.md ${DOC_DIR}
-        # copy images, mkdocstrings does not by default
-        mkdir -p site/assets/images
-        cp assets/images/* site/assets/images
+        # copy images, mkdocstrings does not by defaul
 
     - name: Generate code docstrings concat file
       run: |
@@ -78,6 +76,13 @@ jobs:
 
     - name: Build documentation
       run: uv run --locked --only-group docs mkdocs build
+
+    - name: Copy image files to be included
+      run: |
+        # copy images, mkdocs does not by default
+        # mkdocs also overwrites pre-made directories
+        mkdir -p site/assets/images
+        cp assets/images/* site/assets/images
 
 #    - name: Push to gh-pages
 #      run: uv run mkdocs gh-deploy --force

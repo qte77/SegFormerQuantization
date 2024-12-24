@@ -11,7 +11,7 @@ theme:
   language: en
   features:
     - content.action.edit # edit on github
-#    - content.code.annotation # inline markers, e.g. numbers
+    - content.code.annotation # inline markers, e.g. numbers
     - content.code.copy
     - content.tabs.link
     - navigation.sections
