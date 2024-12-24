@@ -24,15 +24,16 @@ jobs:
       name: github-pages
     steps:
 
-    - name: Set target branch and checkout
-      id: branch
-      run: |
-        branch=${{ github.event.pull_request.merged == 'true' && 'main' || github.ref_name }}
-        echo "BRANCH=${branch}" >> $GITHUB_ENV
-        git fetch --depth=0 origin $branch
-        git checkout $branch
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Checkout the repository
+      uses: actions/checkout@v4
+      with:
+        ref:
+          ${{
+            github.event.pull_request.merged == 'true' &&
+            'main' ||
+            github.ref_name
+          }}
+        fetch-depth: 0
 
     - uses: actions/configure-pages@v3
 
