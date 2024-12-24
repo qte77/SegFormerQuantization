@@ -31,7 +31,7 @@ def load_dataset_custom(
         dataset_name (str): Name of the dataset to load.
     
     Returns:
-        datasets.Dataset: The loaded dataset.
+        Dataset: The loaded dataset.
     """
     
     try:
