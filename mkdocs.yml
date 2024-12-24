@@ -3,25 +3,34 @@
 # https://mkdocstrings.github.io/recipes/
 # site info set in workflow
 site_name: '<gha_sed_site_name_here>'
-site_description: '<gha_sed_description_here>'
+site_description: '<gha_sed_site_description_here>'
+repo_url: '<gha_sed_repo_url_here>'
+edit_uri: edit/main
 theme:
   name: material
   language: en
   features:
-    - content.code.annotation
+    - content.action.edit # edit on github
+#    - content.code.annotation # inline markers, e.g. numbers
     - content.code.copy
-    - content.code.tabbed
     - content.tabs.link
-    - github.edit_on_github
     - navigation.sections
     - navigation.tabs
     - navigation.top
-    - user_color_mode_toggle
-    - user_font_size_toggle
-    - user_theme_toggle
     - toc.integrate
     - search.suggest
     - search.highlight
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: "Dark Mode"
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: "Light Mode"
 nav:
   - Home: index.md
   - PRD: PRD.md
@@ -37,11 +46,12 @@ plugins:
         python:
           paths: [src]
           options:
-            heading_level: 1
-            show_source: true
             show_root_heading: true
-            show_root_full_path: false
-            docstring_section_style: "table"
+            show_root_full_path: true
+            show_object_full_path: false
+            show_root_members_full_path: false
+            show_category_heading: true
+            show_submodules: true
 markdown_extensions:
   - attr_list
   - pymdownx.magiclink
