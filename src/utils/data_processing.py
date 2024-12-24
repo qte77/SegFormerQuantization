@@ -14,8 +14,8 @@ tools to prepare data for SegFormer model evaluation.
 """
 
 from datasets import load_dataset, load_from_disk, Dataset
-from transformers import SegformerImageProcessor
 from datasets.utils.logging import set_verbosity_error
+from transformers import SegformerImageProcessor
 from typing import List, Dict, Tuple
 from torch import dtype, device, Tensor, half, float16
 
@@ -31,7 +31,7 @@ def load_dataset_custom(
         dataset_name (str): Name of the dataset to load.
     
     Returns:
-        Dataset: The loaded dataset.
+        datasets.Dataset: The loaded dataset.
     """
     
     try:

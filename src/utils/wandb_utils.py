@@ -15,7 +15,7 @@ Note: Requires WANDB_API_KEY, WANDB_PROJECT, and WANDB_ENTITY environment variab
 from wandb import Run, run, log, init
 from transformers import SegformerForSemanticSegmentation
 from torch import device
-from typig import Dict
+from typing import Dict
 from datetime import datetime
 
 def create_wandb_run(

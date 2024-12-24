@@ -10,7 +10,10 @@ Functions:
 The module uses Quanto for quantization and supports float8, int8, int4, and int2 quantization.
 """
 
-from transformers import QuantoConfig, SegformerForSemanticSegmentation
+from transformers import (
+    QuantoConfig,
+    SegformerForSemanticSegmentation
+)
 from torch import device
 from typing import Dict
 import quanto

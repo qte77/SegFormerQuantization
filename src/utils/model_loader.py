@@ -11,7 +11,10 @@ Functions:
 The module uses the transformers library for model and processor management.
 """
 
-from transformers import SegformerForSemanticSegmentation, SegformerImageProcessor
+from transformers import (
+    SegformerForSemanticSegmentation,
+    SegformerImageProcessor
+)
 from torch import dtype, device
 from os.path import exists
 from os import makedirs
