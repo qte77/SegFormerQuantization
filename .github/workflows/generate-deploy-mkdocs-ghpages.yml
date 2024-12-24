@@ -1,5 +1,5 @@
 ---
-name: Generate and deploy MkDocs to GitHub Pages
+name: Deploy Docs
 
 on:
   push:

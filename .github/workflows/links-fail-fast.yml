@@ -1,7 +1,7 @@
 ---
 # https://github.com/lycheeverse/lychee-action
 # https://github.com/marketplace/actions/lychee-broken-link-checker
-name: "lychee Link Checker"
+name: "Link Checker"
 
 on:
   repository_dispatch:

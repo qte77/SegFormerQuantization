@@ -30,7 +30,7 @@ dependencies = [
 dev = [
     "pytest>=7.0.0",
     "ruff>=0.8.0",
-    "git-changelog>=2.5.2"
+    # "git-changelog>=2.5.2"
 ]
 docs = [
     "griffe>=1.5.1",
@@ -82,11 +82,6 @@ commit_args = ""
 filename = "pyproject.toml"
 search = 'version = "{current_version}"'
 replace = 'version = "{new_version}"'
-
-[[tool.bumpversion.files]]
-filename = "src/__version__.py"
-search = '__version__: str = "{current_version}"'
-replace = '__version__: str = "{new_version}"'
 
 [[tool.bumpversion.files]]
 filename = "README.md"
