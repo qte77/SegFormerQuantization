@@ -16,6 +16,22 @@ Types of changes:
 
 ## [Unreleased]
 
+### Added
+
+- gh-pages deploy workflow: Conditional checkout action
+- Bump workflow: Create branch and PR to comply with branch protection rules in main
+- Type hints (typing) in code and docstrings
+- vscode settings and extension recommendations
+
+### Changed
+
+- Switched to C4 instead of UML for arch
+- Replaced poetry with uv
+
+### Fixed
+
+- mkdocs: dark mode toggle, code toc, included images
+
 ---
 
 ## [0.5.8] - 2024-12-09
