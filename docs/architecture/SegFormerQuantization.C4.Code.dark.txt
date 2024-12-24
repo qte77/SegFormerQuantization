@@ -1,0 +1,34 @@
+@startuml
+!theme amiga
+'https://www.plantuml.com
+!define RECTANGLE class
+
+skinparam monochrome true
+skinparam handwritten true
+
+title SegFormerQuantization Application - Code
+
+rectangle " " {
+    [__main__.py] as main
+    [app.py] as app
+    [config.py] as config
+    [utils/__init__.py] as utilsInit
+    [utils/data_processing.py] as dataProcessing
+    [utils/evaluator.py] as evaluatorCode
+    [utils/general_utils.py] as generalUtilsCode
+    [utils/model_loader.py] as modelLoaderCode
+    [utils/quantization.py] as quantizationCode
+    [utils/wandb_utils.py] as wandbUtilsCode
+
+    main --> app : Runs
+    app --> config : Configures
+    app --> utilsInit : Imports
+    utilsInit --> dataProcessing : Includes
+    utilsInit --> evaluatorCode : Includes
+    utilsInit --> generalUtilsCode : Includes
+    utilsInit --> modelLoaderCode : Includes
+    utilsInit --> quantizationCode : Includes
+    utilsInit --> wandbUtilsCode : Includes
+}
+
+@enduml

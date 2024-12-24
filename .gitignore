@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 
 # Virtual environment
-venv/
+.venv/
 .env
 
 # Distribution / packaging
@@ -26,16 +26,18 @@ dist/
 Thumbs.db
 
 # IDE specific files (adjust as needed)
-.vscode/
-.idea/
+# .vscode/
+# .idea/
 
 # Project specific
 models/
 tokenizers/
 datasets/
-
-# Weights & Biases
 wandb/
+
+# mkdocs
+reference/
+site/
 
 # Large model files
 *.bin
@@ -47,3 +49,5 @@ wandb/
 *.hdf5
 *.npz
 
+# linting
+.ruff_cache

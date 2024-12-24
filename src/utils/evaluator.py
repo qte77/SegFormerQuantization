@@ -15,8 +15,13 @@ for computing semantic segmentation metrics.
 from evaluate import load
 from .data_processing import get_processed_inputs
 import torch
+from typing import Tuple, Dict
 
-def infer_model(model, pixel_values, labels):  
+def infer_model(
+    model, # : 'SegformerForSemanticSegmentation',
+    pixel_values: torch.Tensor,
+    labels: torch.Tensor
+) -> Tuple[float, torch.Tensor]:
     """
     Perform model inference and return loss and logits.
     
@@ -26,14 +31,21 @@ def infer_model(model, pixel_values, labels):
         labels (torch.Tensor): Ground truth labels.
     
     Returns:
-        tuple: Model loss and logits.
+        Tuple[float, torch.Tensor]: A tuple containing the model loss as a float and the logits as a torch.Tensor.
     """
   
     with torch.no_grad():
         outputs = model(pixel_values=pixel_values, labels=labels)
     return outputs.loss, outputs.logits
 
-def evaluate_model(model, dataset_shard, image_processor, device, metric_name, id2label):
+def evaluate_model(
+    model, # : 'SegformerForSemanticSegmentation',
+    dataset_shard, # : 'Dataset',
+    image_processor, # : 'SegformerImageProcessor',
+    device: torch.device,
+    metric_name: str,
+    id2label: Dict[int, str]
+) -> Dict[str, float]:
     """
     Evaluate the model on a dataset shard and compute metrics.
     
@@ -46,7 +58,7 @@ def evaluate_model(model, dataset_shard, image_processor, device, metric_name, i
         id2label (dict): Mapping of label IDs to label names.
     
     Returns:
-        dict: Computed evaluation metrics.
+        Dict[str, float]: Computed evaluation metrics where keys are metric names and values are the corresponding scores.
     """
 
     pixel_values, labels = get_processed_inputs(dataset_shard, image_processor, device, model.config.torch_dtype)
@@ -64,4 +76,3 @@ def evaluate_model(model, dataset_shard, image_processor, device, metric_name, i
         ignore_index=model.config.semantic_loss_ignore_index
     )
     return results
-

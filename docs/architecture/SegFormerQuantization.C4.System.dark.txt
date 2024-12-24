@@ -1,0 +1,27 @@
+@startuml
+!theme amiga
+'https://www.plantuml.com
+!define RECTANGLE class
+
+skinparam monochrome true
+skinparam handwritten true
+
+title SegFormerQuantization Application - System Context
+
+rectangle " " {
+    [User] as user
+    [SegFormerQuantization] as system
+    [GitHub Actions] as githubActions
+    [Hugging Face Hub] as huggingFaceHub
+    [PyTorch] as pytorch
+    [Docker] as docker
+    [MkDocs] as mkdocs
+
+    user --> system : Uses
+    system --> githubActions : Triggers
+    system --> huggingFaceHub : Fetches models
+    system --> pytorch : Uses for computation
+    system --> docker : Builds container
+    system --> mkdocs : Generates documentation
+}
+@enduml

@@ -1,5 +1,4 @@
-Changelog
-===
+# Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -15,11 +14,11 @@ Types of changes:
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities.
 
-[Unreleased]
+## [Unreleased]
+
 ---
 
-[0.5.8] - 2024-12-09
----
+## [0.5.8] - 2024-12-09
 
 ### Added
 
@@ -30,7 +29,7 @@ Types of changes:
 - ghpages action back to simple version
 - Import of config.py to relative
 - bump-my-version targets in files
-- README.md usage infos to contain venv and test, TODO to use pytorch or cuda images 
+- README.md usage infos to contain venv and test, TODO to use pytorch or cuda images
 - Renamed workflow bump2version to bump-my-version
 
 ### Fixed
@@ -41,36 +40,29 @@ Types of changes:
 
 ---
 
-[0.5.6] - 2024-11-20
----
+## [0.5.6] - 2024-11-20
 
-[0.5.5] - 2024-11-20
----
+## [0.5.5] - 2024-11-20
 
 ### Fixed
 
 - ghpages script indent
 
-[0.5.4] - 2024-11-20
----
+## [0.5.4] - 2024-11-20
 
 ### Fixed
 
 - ghpages docstring nav file
 
-[0.5.3] - 2024-11-20
----
+## [0.5.3] - 2024-11-20
 
 ### Fixed
 
 - Script gen docstring to eclude __init__.py
 
-[0.5.2] - 2024-11-20
----
+### [0.5.2] - 2024-11-20
 
-[0.5.1] - 2024-11-20
----
-=======
+### [0.5.1] - 2024-11-20
 
 ### Fixed
 
@@ -80,16 +72,13 @@ Types of changes:
 
 - Separated patch and PR bump type
 
-[0.5.0] - 2024-11-20
----
-=======
+## [0.5.0] - 2024-11-20
 
 ### Fixed
 
 - Indenting in ghpages workflow
 
-[0.4.0] - 2024-11-20
----
+## [0.4.0] - 2024-11-20
 
 ### Added
 
@@ -104,14 +93,11 @@ Types of changes:
 - Image size in README
 - Check `bump_type` instead of `input` in push and PR
 
-[0.3.0] - 2024-11-20
----
+## [0.3.0] - 2024-11-20
 
-[0.2.2] - 2024-11-20
----
+## [0.2.2] - 2024-11-20
 
-[0.2.1] - 2024-11-17
----
+## [0.2.1] - 2024-11-17
 
 ### Added
 
@@ -122,14 +108,13 @@ Types of changes:
 
 - Extension .md for LICENSE(S) for mkdocs output
 
-[0.2.0] - 2024-11-17
----
+## [0.2.0] - 2024-11-17
 
 ### Added
 
 - Management: `pyproject.toml`
 - Documentation: `PRD.md`, `FRD.md`, `DRD.md`
-- Documentation gh-pages: `generate-deploy-mkdocs-ghpages.yml` 
+- Documentation gh-pages: `generate-deploy-mkdocs-ghpages.yml`
 - Versioning: `CHANGELOG.md`, GHA Bump2version
 - Standarization: `.gitmessage`
 - Third-party `LICENSES`
@@ -146,4 +131,3 @@ Types of changes:
 
 - `.bumpversion.cfg`
 - `requirements.txt`
-

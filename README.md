@@ -29,7 +29,9 @@ For version history have a look at the [CHANGELOG](CHANGELOG.md).
   - [Configuration](#configuration)
   - [Documentation](#documentation)
   - [Project Structure](#project-structure)
-  - [UML](#uml)
+  - [Architecture](#architecture)
+    - [System](#system)
+    - [Code](#code)
   - [TODO](#todo)
     - [DONE](#done)
   - [License](#license)
@@ -45,8 +47,8 @@ For version history have a look at the [CHANGELOG](CHANGELOG.md).
 
 ## Setup
 
-1. Install uv: `pip install "uv>=0.5.0"`.
-2. Install dependencies: `uv lock`
+1. Install uv: `pip install uv`
+2. Install dependencies: `uv sync [--frozen]`
 3. Set up Weights & Biases API key in environment variables
 
 [↑](#toc)
@@ -56,8 +58,7 @@ For version history have a look at the [CHANGELOG](CHANGELOG.md).
 ### Python
 
 ```sh
-uv sync
-uv run src
+uv run [--locked] python -m src 
 ```
 
 ### Docker
@@ -67,11 +68,10 @@ docker build -t segformer-quant-eval .
 docker run segformer-quant-eval
 ```
 
-To build with different versions
+To build with different python version
 
 ```sh
-docker build --build-arg \
-  UV_VERSION=<uv_version> \
+docker build --build-arg
   PYTHON_VERSION=<py_version> \
   .
 ```
@@ -79,8 +79,8 @@ docker build --build-arg \
 ### Test
 
 ```sh
-uv sync --only-group docs
-uv run pytest [tests/]
+uv sync --only-group dev
+uv run pytest tests/
 ```
 
 [↑](#toc)
@@ -114,10 +114,17 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
 
 [↑](#toc)
 
-## UML
+## Architecture
 
-<img src="assets/SegFormerQuantization.UML.dark.png#gh-dark-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" /> <!-- mkdocs exclude { data-search-exclude } -->
-<img src="assets/SegFormerQuantization.UML.light.png#gh-light-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" />
+### System
+
+<img src="assets/images/SegFormerQuantization.C4.System.dark.png#gh-dark-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" />
+<img src="assets/images/SegFormerQuantization.C4.System.light.png#gh-light-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" />
+
+### Code
+
+<img src="assets/images/SegFormerQuantization.C4.Code.dark.png#gh-dark-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" />
+<img src="assets/images/SegFormerQuantization.C4.Code.light.png#gh-light-mode-only" alt="SegFormerQuantization" title="SegFormerQuantization" width="60%" />
 
 [↑](#toc)
 
@@ -129,11 +136,16 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
 - [ ] Include option to call HF API instead of saving model locally
 - [ ] Use pydantic and python typing
 - [ ] Insert link to report and project within WandB
-- [ ] Fix mkdocs not indenting checkbox ul
+- [ ] mkdocs
+  - Fix mkdocs not indenting checkbox ul
+  - Fix mkdocs not including png with plain in-line html, assets/ not copied by mkdocs
+  - Extend workflow to copy only files in nav of mkdocs.yml
 - [ ] Auto-generate `CHANGELOG.md`
   - Conventional Commits `.gitmessage`
   - Tools like `git-changelog`
-- [ ] Evaluate Docker `buildx` instead of `build`
+- [ ] Docker
+  - Where are site-packages in Dockerfile for copy to runtime located?
+  - Evaluate `callisto` for fast cloud-native builds
 - [ ] Push to main with PR only branch protection rules
   - [ ] Use dedicated branch `dev-auto-push-to-main`
   - [ ] Incorporate branch to workflow `bump-my-version.yml`

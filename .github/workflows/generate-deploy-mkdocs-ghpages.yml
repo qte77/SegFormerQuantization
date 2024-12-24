@@ -4,9 +4,11 @@ name: Generate and deploy MkDocs to GitHub Pages
 on:
   push:
   workflow_dispatch:
-  
+
 env:
-  UV_VER: '0.5.11'
+  DOCSTRINGS_FILE: "docstrings.md"
+  DOC_DIR: "docs"
+  SRC_DIR: "src"
 
 jobs:
   build-and-deploy:
@@ -30,7 +32,6 @@ jobs:
     - name: Install uv with cache dependency glob
       uses: astral-sh/setup-uv@v4
       with:
-        version: ${{ env.UV_VER }}
         enable-cache: true
         cache-dependency-glob: "uv.lock"
 
@@ -40,8 +41,8 @@ jobs:
     - name: "Set up Python"
       run: uv python install
 
-#    - name: Install only doc deps
-#      run: uv sync --only-group docs
+    - name: Install only doc deps
+      run: uv sync --frozen --only-group docs
 
     - name: Get repo info and stream into mkdocs.yml
       id: repo_info
@@ -49,27 +50,39 @@ jobs:
         REPO_INFO=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
           -H "Accept: application/vnd.github.v3+json" \
           https://api.github.com/repos/${{ github.repository }})
+        REPO_URL="${{ github.server_url }}/${{ github.repository }}"
+        REPO_URL=$(echo ${REPO_URL} | sed 's|/|\\/|g')
         SITE_NAME=$(sed '1!d' README.md | sed '0,/# /{s/# //}')
         SITE_DESC=$(echo $REPO_INFO | jq -r .description)
+        sed -i "s/<gha_sed_repo_url_here>/${REPO_URL}/g" mkdocs.yml
         sed -i "s/<gha_sed_site_name_here>/${SITE_NAME}/g" mkdocs.yml
-        sed -i "s/<gha_sed_description_here>/${SITE_DESC}/g" mkdocs.yml
+        sed -i "s/<gha_sed_site_description_here>/${SITE_DESC}/g" mkdocs.yml
 
-    - name: Copy repo files
+    - name: Copy text files to be included
       run: |
-        cp README.md docs/index.md
-        cp {CHANGELOG,LICENSE}.md docs/
-        cp pyproject.toml docs/pyproject.md
+        # TODO copy only files in nav of mkdocs.yml
+        cp README.md ${DOC_DIR}/index.md
+        cp {CHANGELOG,LICENSE}.md ${DOC_DIR}
+        # copy images, mkdocstrings does not by defaul
 
-    - name: Create docstrings file
+    - name: Generate code docstrings concat file
       run: |
-        cat << EOF > docs/docstrings.md
-        # Code Documentation
-        
-        ::: src
-        EOF
+        PREFIX="::: "
+        find "${SRC_DIR}" -type f -name "*.py" \
+          -type f -not -name "__*__*" -printf "%P\n" | \
+          sed 's/\//./g'| sed 's/\.py$//' | \
+          sed "s/^/${PREFIX}/" | sort > \
+          "${DOC_DIR}/${DOCSTRINGS_FILE}"
 
     - name: Build documentation
-      run: uv run --only-group docs mkdocs build
+      run: uv run --locked --only-group docs mkdocs build
+
+    - name: Copy image files to be included
+      run: |
+        # copy images, mkdocs does not by default
+        # mkdocs also overwrites pre-made directories
+        mkdir -p site/assets/images
+        cp assets/images/* site/assets/images
 
 #    - name: Push to gh-pages
 #      run: uv run mkdocs gh-deploy --force
