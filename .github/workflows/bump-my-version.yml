@@ -1,6 +1,6 @@
 ---
 # https://github.com/callowayproject/bump-my-version?tab=readme-ov-file#github-actions
-name: Bump Version with bump-my-version
+name: bump-my-version
 
 on:
 #  pull_request:
