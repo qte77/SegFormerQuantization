@@ -138,7 +138,7 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
 - [ ] Insert link to report and project within WandB
 - [ ] mkdocs
   - Fix mkdocs not indenting checkbox ul
-  - Fix mkdocs not including png with plain in-line html
+  - Fix mkdocs not including png with plain in-line html, assets/ not copied by mkdocs
   - Extend workflow to copy only files in nav of mkdocs.yml
 - [ ] Auto-generate `CHANGELOG.md`
   - Conventional Commits `.gitmessage`

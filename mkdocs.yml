@@ -6,40 +6,45 @@ site_name: '<gha_sed_site_name_here>'
 site_description: '<gha_sed_description_here>'
 theme:
   name: material
+  language: en
   features:
-    - navigation.tabs
-    - navigation.sections
-    - toc.integrate
-    - navigation.top
-    - search.suggest
-    - search.highlight
-    - content.tabs.link
     - content.code.annotation
     - content.code.copy
-  language: en
-#  palette:
-#    - scheme: default
-#      toggle:
-#        icon: material/toggle-switch-off-outline 
-#        name: Switch to dark mode
-#      primary: teal
-#      accent: purple 
-#    - scheme: slate 
-#      toggle:
-#        icon: material/toggle-switch
-#        name: Switch to light mode    
-#      primary: teal
-#      accent: lime
+    - content.code.tabbed
+    - content.tabs.link
+    - github.edit_on_github
+    - navigation.sections
+    - navigation.tabs
+    - navigation.top
+    - user_color_mode_toggle
+    - user_font_size_toggle
+    - user_theme_toggle
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline 
+        name: Switch to dark mode
+      primary: teal
+      accent: purple 
+    - scheme: slate 
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode    
+      primary: teal
+      accent: lime
 nav:
   - Home: index.md
   - PRD: PRD.md
   - Code: docstrings.md
-  - Configuration: pyproject.md
   - Change Log: CHANGELOG.md
   - License: LICENSE.md
 plugins:
   - search:
       lang: en
+  - autorefs
   - mkdocstrings:
       handlers:
         python:
@@ -48,11 +53,17 @@ plugins:
           heading_level: 2
 markdown_extensions:
   - attr_list
+  - pymdownx.magiclink
+  - pymdownx.tabbed
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.superfences
+  - pymdownx.snippets:
+      check_paths: true
   - pymdownx.tasklist:
       custom_checkbox: true
+  - sane_lists
+  - smarty
   - toc:
       permalink: true
 validation:
