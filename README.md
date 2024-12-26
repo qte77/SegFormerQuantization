@@ -141,6 +141,9 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
   - Fix mkdocs not indenting checkbox ul
   - Fix mkdocs not including png with plain in-line html, assets/ not copied by mkdocs
   - Extend workflow to copy only files in nav of mkdocs.yaml
+- [ ] bump
+  - Fix `bump-my-version.yaml` rollback step to delete auto-created branch after `failure()`
+    - Handle error `fatal: could not read Username` & `Error: Process completed with exit code 128.`
 - [ ] Auto-generate `CHANGELOG.md`
   - Conventional Commits `.gitmessage`
   - Tools like `git-changelog`
