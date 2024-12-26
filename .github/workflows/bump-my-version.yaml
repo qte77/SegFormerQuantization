@@ -1,0 +1,94 @@
+---
+name: "bump-my-version"
+
+on:
+  # pull_request:
+  #  types: [closed]
+  #  branches: [main]
+  workflow_dispatch:
+    inputs:
+      bump_type:
+        description: 'Bump type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+        - 'major'
+        - 'minor'
+        - 'patch'
+
+env:
+  BRANCH_NEW: "bump-${{ github.run_number }}-${{ github.ref_name }}"
+  # SKIP_PR_HINT: "[skip ci bump]"
+
+jobs:
+  bump-my-version:
+    # TODO bug? currently resulting in: Unrecognized named-value: 'env'.  
+    # if: !contains(
+    #      github.event.pull_request.title,
+    #      ${{ env.SKIP_PR_HINT }}
+    #    )
+    if: github.event_name == 'workflow_dispatch'
+        # || ( github.event.pull_request.merged == true &&
+        # github.actor != 'github-actions' )
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      checks: write
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Create new branch
+        id: branch
+        run: |
+          git config user.email "bumped@qte77.gha"
+          git config user.name "bump-my-version"
+          git checkout -b ${{ env.BRANCH_NEW }}
+
+      - name: Bump version
+        id: bump
+        uses: callowayproject/bump-my-version@0.29.0
+        env:
+          BUMPVERSION_TAG: "true"
+        with:
+          args: ${{
+              github.event.inputs.bump_type ||
+              'patch'
+            }}
+          branch: ${{ env.BRANCH_NEW }}
+
+      - name: Create or modify PR
+        # modifies PR created by bump: callowayproject/bump-my-version@0.29.0
+        # uses ad-m/github-push-action and does not set proper PR meta
+        if: steps.bump.outputs.bumped == 'true'
+        uses: peter-evans/create-pull-request@v5
+        env:
+          VER_PREVIOUS: ${{ steps.bump.outputs.previous-version }}
+          VER_CURRENT: ${{ steps.bump.outputs.current-version }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ env.BRANCH_NEW }}
+          base: ${{ github.ref_name }}
+          commit-message: "Bump version: ${{ env.VER_PREVIOUS }} → ${{ env.VER_CURRENT }}"
+          title: "PR ${{ env.BRANCH_NEW }}" # ${{ env.SKIP_PR_HINT }}"
+          body: "PR automatically created from `${{ github.ref_name }}` to bump from `${{ env.VER_PREVIOUS }}` to `${{ env.VER_CURRENT }}` on `${{ env.BRANCH_NEW }}`."
+
+      - name: Rollback Changes if failure
+        if: failure()
+        run: |
+          git fetch origin
+          if git show-ref --verify --quiet refs/remotes/origin/${{ env.BRANCH_NEW }}; then
+            git push origin --delete ${{ env.BRANCH_NEW }}
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # currently bug in $GITHUB_STEP_SUMMARY: no file contents  
+#     - name: Create job summary
+#       uses: ./.github/workflows/summarize-jobs-reusable.yaml
+...

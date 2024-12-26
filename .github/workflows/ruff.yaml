@@ -1,9 +1,12 @@
 ---
-# https://github.com/chartboost/ruff-action
+# https://github.com/astral-sh/ruff-action
 # https://github.com/astral-sh/ruff
 name: ruff
 on: 
-  # [push, pull_request]
+  push:
+  pull_request:
+    types: [closed]
+    branches: [main]
   schedule:
     - cron: "0 0 * * 0"
   workflow_dispatch:
@@ -12,5 +15,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: astral-sh/ruff-action@v2
+      - uses: astral-sh/ruff-action@v3
 ...

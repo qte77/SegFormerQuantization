@@ -1,22 +1,22 @@
 [project]
-version = "0.5.8"
+version = "0.6.4"
 name = "segformer-quantization-pipeline"
 description = "An end-to-end quantization evaluation pipeline for SegFormer models on semantic segmentation tasks"
 authors = [
     {name = "qte77", email = "qte@77.gh"}
 ]
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dependencies = [
-    "torch>=2.2.0",
-    "transformers==4.44.0",
-    "evaluate==0.4.2",
+#    "torch>=2.5.1",
+    "transformers>=4.47.1",
+    "evaluate>=0.4.3",
     "quanto>=0.2.0",
     "optimum-quanto>=0.2.0",
-    "wandb==0.17.8",
+    "wandb>=0.19.1",
     "pillow>=11.0.0",
-    "datasets>=2.0.0",
-    "accelerate==0.33.0",
+    "datasets>=3.2.0",
+    "accelerate>=0.29.3",
 ]
 
 # https://docs.astral.sh/uv/concepts/projects/dependencies/#optional-dependencies
@@ -45,11 +45,11 @@ docs = [
 
 [tool.uv]
 package = false
-exclude-newer = "2024-12-21T00:00:00Z"
+exclude-newer = "2024-12-31T00:00:00Z"
 
 # https://docs.astral.sh/ruff/configuration/
 [tool.ruff]
-target-version = "py311"
+target-version = "py312"
 src = ["scripts", "src", "tests"]
 extend-exclude = ["*.ipynb"]
 
@@ -65,7 +65,7 @@ ignore = [
 unfixable = ["B"]
 
 [tool.bumpversion]
-current_version = "0.5.8"
+current_version = "0.6.4"
 parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)"
 serialize = ["{major}.{minor}.{patch}"]
 commit = true
@@ -85,15 +85,13 @@ replace = 'version = "{new_version}"'
 
 [[tool.bumpversion.files]]
 filename = "README.md"
-search = "![version](https://img.shields.io/badge/version-{current_version}-8A2BE2)"
-replace = "![version](https://img.shields.io/badge/version-{new_version}-8A2BE2)"
+search = "![Version](https://img.shields.io/badge/version-{current_version}-8A2BE2)"
+replace = "![Version](https://img.shields.io/badge/version-{new_version}-8A2BE2)"
 
 [[tool.bumpversion.files]]
 filename = "CHANGELOG.md"
 search = """
 ## [Unreleased]
-
----
 """
 replace = """
 ## [Unreleased]
