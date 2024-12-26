@@ -53,7 +53,7 @@ jobs:
     - name: Install only doc deps
       run: uv sync --only-group docs # --frozen
 
-    - name: Get repo info and stream into mkdocs.yml
+    - name: Get repo info and stream into mkdocs.yaml
       id: repo_info
       run: |
         REPO_INFO=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
@@ -63,13 +63,13 @@ jobs:
         REPO_URL=$(echo ${REPO_URL} | sed 's|/|\\/|g')
         SITE_NAME=$(sed '1!d' README.md | sed '0,/# /{s/# //}')
         SITE_DESC=$(echo $REPO_INFO | jq -r .description)
-        sed -i "s/<gha_sed_repo_url_here>/${REPO_URL}/g" mkdocs.yml
-        sed -i "s/<gha_sed_site_name_here>/${SITE_NAME}/g" mkdocs.yml
-        sed -i "s/<gha_sed_site_description_here>/${SITE_DESC}/g" mkdocs.yml
+        sed -i "s/<gha_sed_repo_url_here>/${REPO_URL}/g" mkdocs.yaml
+        sed -i "s/<gha_sed_site_name_here>/${SITE_NAME}/g" mkdocs.yaml
+        sed -i "s/<gha_sed_site_description_here>/${SITE_DESC}/g" mkdocs.yaml
 
     - name: Copy text files to be included
       run: |
-        # TODO copy only files in nav of mkdocs.yml
+        # TODO copy only files in nav of mkdocs.yaml
         cp README.md ${DOC_DIR}/index.md
         cp {CHANGELOG,LICENSE}.md ${DOC_DIR}
         # copy images, mkdocstrings does not by default
