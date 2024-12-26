@@ -8,19 +8,22 @@ skinparam handwritten true
 title SegFormerQuantization Application - System Context
 
 rectangle " " {
-    [User] as user
-    [SegFormerQuantization] as system
-    [GitHub Actions] as githubActions
-    [Hugging Face Hub] as huggingFaceHub
+    [SegFormerQuantization] as app
     [PyTorch] as pytorch
+    [Hugging Face Hub] as hfHub
+    [Weights & Biases] as wandb
+    [Scene Parse 150 Dataset] as dataset
+    [uv] as uv
+    [GitHub Actions] as gha
     [Docker] as docker
-    [MkDocs] as mkdocs
-
-    user --> system : Uses
-    system --> githubActions : Triggers
-    system --> huggingFaceHub : Fetches models
-    system --> pytorch : Uses for computation
-    system --> docker : Builds container
-    system --> mkdocs : Generates documentation
 }
+
+app --> pytorch : Utilizes for model inference
+app --> hfHub : Loads models
+app --> wandb : Logs experiments
+app --> dataset : Processes data
+app --> uv : Manages dependencies
+app --> gha : Automates CI/CD
+app --> docker : Containerizes application
+
 @enduml

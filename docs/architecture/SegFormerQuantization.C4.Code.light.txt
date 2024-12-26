@@ -11,7 +11,7 @@ rectangle " " {
     [__main__.py] as main
     [app.py] as app
     [config.py] as config
-    [utils/__init__.py] as utilsInit
+    [utils/] as utils
     [utils/data_processing.py] as dataProcessing
     [utils/evaluator.py] as evaluatorCode
     [utils/general_utils.py] as generalUtilsCode
@@ -21,13 +21,13 @@ rectangle " " {
 
     main --> app : Runs
     app --> config : Configures
-    app --> utilsInit : Imports
-    utilsInit --> dataProcessing : Includes
-    utilsInit --> evaluatorCode : Includes
-    utilsInit --> generalUtilsCode : Includes
-    utilsInit --> modelLoaderCode : Includes
-    utilsInit --> quantizationCode : Includes
-    utilsInit --> wandbUtilsCode : Includes
+    app --> utils
+    utils --> dataProcessing : Includes
+    utils --> evaluatorCode : Includes
+    utils --> generalUtilsCode : Includes
+    utils --> modelLoaderCode : Includes
+    utils --> quantizationCode : Includes
+    utils --> wandbUtilsCode : Includes
 }
 
 @enduml
