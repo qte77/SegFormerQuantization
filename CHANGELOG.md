@@ -16,6 +16,10 @@ Types of changes:
 
 ## [Unreleased]
 
+---
+
+## [0.7.0] - 2024-12-26
+
 ### Added
 
 - gh-pages deploy workflow: Conditional checkout action
