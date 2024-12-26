@@ -1,0 +1,59 @@
+---
+# https://ecanarys.com/supercharging-github-actions-with-job-summaries-and-pull-request-comments/
+# currently bug in gha summaries? summary files are empty
+# https://github.com/orgs/community/discussions/110283
+# https://github.com/orgs/community/discussions/67991
+name: Summarize workflow jobs
+
+on:
+  workflow_call:
+    outputs:
+      summary:
+        description: "Outputs summaries of jobs in a workflow"
+        value: ${{ jobs.generate_summary.outputs.summary }}
+
+jobs:
+  generate_summary:
+    name: Generate Summary
+    runs-on: ubuntu-latest
+    outputs:
+      summary: ${{ steps.generate_summary.outputs.summary }}
+    steps:
+    - name: Add job summaries
+      id: generate_summary
+      run: |
+        summary_path=$(dirname "$GITHUB_STEP_SUMMARY")
+        echo "# Job Summaries" >> $GITHUB_STEP_SUMMARY
+        echo "## Job: `${{ github.job }}` - Date: $(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_STEP_SUMMARY
+        echo "### Steps:" >> $GITHUB_STEP_SUMMARY
+        for file in "$summary_path"/step_summary_*; do
+          if [ -f "$file" ]; then
+            # Check if the file is not the same as $GITHUB_STEP_SUMMARY
+            if [ "$file" != "$GITHUB_STEP_SUMMARY" ]; then
+              # Check if the file contains valid JSON
+              if jq -e . >/dev/null 2>&1 <<< "$(cat "$file")"; then
+                # Parse and output JSON content
+                jq -r '
+                  .steps[]
+                  | select(.conclusion != null)
+                  | "- **\(.name)**: \(
+                    if .conclusion == "success" then ":white_check_mark:"
+                    elif .conclusion == "failure" then ":x:"
+                    else ":warning:" end
+                  )"
+                ' "$file" >> $GITHUB_STEP_SUMMARY
+              else
+                echo "Invalid JSON in $file." >> $GITHUB_STEP_SUMMARY
+              fi
+            else
+              echo "Skipping $file as it is the same as $GITHUB_STEP_SUMMARY." >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "File $file does not exist." >> $GITHUB_STEP_SUMMARY
+          fi
+        done
+
+#         echo '### Changed files' >> $GITHUB_STEP_SUMMARY
+#         echo '```' >> $GITHUB_STEP_SUMMARY
+#         git show --name-only --format=tformat: >> $GITHUB_STEP_SUMMARY
+...
