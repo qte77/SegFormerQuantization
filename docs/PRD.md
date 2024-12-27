@@ -6,41 +6,46 @@ Create a robust and efficient quantization evaluation pipeline for SegFormer mod
 
 ## Target Users
 
-- Machine Learning Researchers
-- Computer Vision Engineers
-- MLOps Professionals
+- **Machine Learning Researchers**
+- **Computer Vision Engineers**
+- **MLOps Professionals**
 
 ## Key Features
 
-1. Model Loading and Quantization
-   - Support for loading pre-trained SegFormer models
-   - Implementation of multiple quantization methods (float8, int8, int4, int2)
+### 1. Model Loading and Quantization
 
-2. Dataset Processing
-   - Efficient handling of large datasets through sharding
-   - Support for Scene Parse 150 dataset
+- **Support for loading pre-trained SegFormer models** from a specified path or URL.
+- **Implementation of multiple quantization methods** (float8, int8, int4, int2) to reduce model size and potentially improve inference speed.
 
-3. Evaluation Pipeline
-   - Comprehensive evaluation metrics (mean IoU, mean accuracy, overall accuracy)
-   - Batch processing for efficient evaluation
+### 2. Dataset Processing
 
-4. Experiment Tracking
-   - Integration with Weights & Biases for logging and visualizing results
-   - Automatic logging of model size and performance metrics
+- **Efficient handling of large datasets** through sharding to manage memory usage and processing time.
+- **Support for Scene Parse 150 dataset** for semantic segmentation tasks.
 
-5. Modular Design
-   - Easy extension to support additional models and datasets
-   - Flexible configuration options
+### 3. Evaluation Pipeline
+
+- **Comprehensive evaluation metrics** (mean IoU, mean accuracy, overall accuracy) to assess model performance.
+- **Batch processing** for efficient evaluation of models on large datasets.
+
+### 4. Experiment Tracking
+
+- **Integration with Weights & Biases** for logging and visualizing results, including model size, performance metrics, and experiment metadata.
+- **Automatic logging** of model size and performance metrics to track changes over time.
+
+### 5. Modular Design
+
+- **Easy extension** to support additional models and datasets through a modular architecture.
+- **Flexible configuration options** to customize the evaluation process.
 
 ## Success Criteria
 
-- Successfully evaluate SegFormer models with different quantization levels
-- Achieve a balance between model size reduction and performance maintenance
-- Provide clear, actionable insights through experiment tracking and visualization
+- **Successfully evaluate SegFormer models** with different quantization levels.
+- **Achieve a balance between model size reduction and performance maintenance** to ensure practical deployment.
+- **Provide clear, actionable insights** through experiment tracking and visualization to guide model optimization.
 
 ## Future Enhancements
 
-- Support for additional semantic segmentation datasets
-- Integration of more quantization methods
-- Automated hyperparameter tuning for optimal quantization
+- **Support for additional semantic segmentation datasets** to broaden the scope of evaluation.
+- **Integration of more quantization methods** to explore different quantization strategies.
+- **Automated hyperparameter tuning** for optimal quantization settings.
 
