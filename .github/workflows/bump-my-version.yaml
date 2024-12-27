@@ -18,7 +18,7 @@ on:
         - 'patch'
 
 env:
-  BRANCH_NEW: "bump-${{ github.run_number }}-${{ github.ref_name }}"
+  BRANCH_NEW: "bump-${{ github.ref_name }}-run#${{ github.run_number }}"
   # SKIP_PR_HINT: "[skip ci bump]"
 
 jobs:

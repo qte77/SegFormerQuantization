@@ -2,12 +2,12 @@
 
 An end-to-end evaluation pipeline for SegFormer models on semantic segmentation tasks, with support for various quantization methods.
 
-![Version](https://img.shields.io/badge/version-0.6.4-8A2BE2)
+![Version](https://img.shields.io/badge/version-0.7.0-8A2BE2)
 [![CodeFactor](https://www.codefactor.io/repository/github/qte77/SegFormerQuantization/badge)](https://www.codefactor.io/repository/github/qte77/SegFormerQuantization)
-[![CodeQL](https://github.com/qte77/SegFormerQuantization/actions/workflows/codeql.yml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/codeql.yml)
-[![ruff](https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yml)
-[![Link Checker](https://github.com/qte77/SegFormerQuantization/actions/workflows/links-fail-fast.yml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/links-fail-fast.yml)
-[![Deploy Docs](https://github.com/qte77/SegFormerQuantization/actions/workflows/generate-deploy-mkdocs-ghpages.yml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/generate-deploy-mkdocs-ghpages.yml)
+[![CodeQL](https://github.com/qte77/SegFormerQuantization/actions/workflows/codeql.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/codeql.yaml)
+[![ruff](https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yaml)
+[![Link Checker](https://github.com/qte77/SegFormerQuantization/actions/workflows/links-fail-fast.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/links-fail-fast.yaml)
+[![Deploy Docs](https://github.com/qte77/SegFormerQuantization/actions/workflows/generate-deploy-mkdocs-ghpages.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/generate-deploy-mkdocs-ghpages.yaml)
 [![vscode.dev](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=vscode.dev&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://vscode.dev/github/qte77/SegFormerQuantization)
 
 ## Status
@@ -140,7 +140,10 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
 - [ ] mkdocs
   - Fix mkdocs not indenting checkbox ul
   - Fix mkdocs not including png with plain in-line html, assets/ not copied by mkdocs
-  - Extend workflow to copy only files in nav of mkdocs.yml
+  - Extend workflow to copy only files in nav of mkdocs.yaml
+- [ ] bump
+  - Fix `bump-my-version.yaml` rollback step to delete auto-created branch after `failure()`
+    - Handle error `fatal: could not read Username` & `Error: Process completed with exit code 128.`
 - [ ] Auto-generate `CHANGELOG.md`
   - Conventional Commits `.gitmessage`
   - Tools like `git-changelog`
@@ -149,8 +152,8 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
   - Evaluate `callisto` for fast cloud-native builds
 - [ ] Push to main with PR only branch protection rules
   - [ ] Use dedicated branch `dev-auto-push-to-main`
-  - [ ] Incorporate branch to workflow `bump-my-version.yml`
-  - [ ] Create workflow `update_changelog.yml`
+  - [ ] Incorporate branch to workflow `bump-my-version.yaml`
+  - [ ] Create workflow `update_changelog.yaml`
 - [ ] Optional: Include option to call HF API instead of saving model locally
   - Might be useful for evaluation purposes
 
