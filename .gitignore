@@ -30,6 +30,7 @@ Thumbs.db
 # .idea/
 
 # Project specific
+runtime/
 models/
 tokenizers/
 datasets/

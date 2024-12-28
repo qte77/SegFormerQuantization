@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       bump_type:
-        description: 'Bump type'
+        description: '[major|minor|patch]'
         required: true
         default: 'patch'
         type: choice
@@ -18,19 +18,23 @@ on:
         - 'patch'
 
 env:
-  BRANCH_NEW: "bump-${{ github.ref_name }}-run#${{ github.run_number }}"
-  # SKIP_PR_HINT: "[skip ci bump]"
+  BRANCH_NEW: "bump-${{ github.run_number }}-${{ github.ref_name }}"
+  SKIP_PR_HINT: "[skip ci bump]"
 
 jobs:
   bump-my-version:
-    # TODO bug? currently resulting in: Unrecognized named-value: 'env'.  
+    # TODO bug? currently resulting in: Unrecognized named-value: 'env'.
+    # https://stackoverflow.com/questions/61238849/github-actions-if-contains-function-not-working-with-env-variable/61240761
     # if: !contains(
     #      github.event.pull_request.title,
     #      ${{ env.SKIP_PR_HINT }}
     #    )
-    if: github.event_name == 'workflow_dispatch'
-        # || ( github.event.pull_request.merged == true &&
-        # github.actor != 'github-actions' )
+    # TODO check for PR closed by bot to avoid PR creation loop
+    # github.actor != 'github-actions'
+    if: >
+        github.event_name == 'workflow_dispatch' ||
+        ( github.event.pull_request.merged == true &&
+        github.event.pull_request.closed_by != 'github-actions' )
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -38,7 +42,8 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - name: Checkout the code
+
+      - name: Checkout repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
@@ -56,39 +61,40 @@ jobs:
         env:
           BUMPVERSION_TAG: "true"
         with:
-          args: ${{
-              github.event.inputs.bump_type ||
-              'patch'
-            }}
+          args: ${{ inputs.bump_type }}
           branch: ${{ env.BRANCH_NEW }}
 
-      - name: Create or modify PR
-        # modifies PR created by bump: callowayproject/bump-my-version@0.29.0
-        # uses ad-m/github-push-action and does not set proper PR meta
+      - name: "Create PR '${{ env.BRANCH_NEW }}'"
         if: steps.bump.outputs.bumped == 'true'
-        uses: peter-evans/create-pull-request@v5
         env:
           VER_PREVIOUS: ${{ steps.bump.outputs.previous-version }}
           VER_CURRENT: ${{ steps.bump.outputs.current-version }}
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ env.BRANCH_NEW }}
-          base: ${{ github.ref_name }}
-          commit-message: "Bump version: ${{ env.VER_PREVIOUS }} → ${{ env.VER_CURRENT }}"
-          title: "PR ${{ env.BRANCH_NEW }}" # ${{ env.SKIP_PR_HINT }}"
-          body: "PR automatically created from `${{ github.ref_name }}` to bump from `${{ env.VER_PREVIOUS }}` to `${{ env.VER_CURRENT }}` on `${{ env.BRANCH_NEW }}`."
-
-      - name: Rollback Changes if failure
-        if: failure()
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git fetch origin
-          if git show-ref --verify --quiet refs/remotes/origin/${{ env.BRANCH_NEW }}; then
-            git push origin --delete ${{ env.BRANCH_NEW }}
-          fi
+          gh pr create \
+            --base ${{ github.ref_name }} \
+            --head ${{ env.BRANCH_NEW }} \
+            --title "PR ${{ env.BRANCH_NEW }} ${{ env.SKIP_PR_HINT }}" \
+            --body "PR automatically created from `${{ github.ref_name }}` to bump from `${{ env.VER_PREVIOUS }}` to `${{ env.VER_CURRENT }}` on `${{ env.BRANCH_NEW }}`." \
+            # --label "bump"
+
+      - name: Delete branch and PR in case of failure
+        if: failure()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # currently bug in $GITHUB_STEP_SUMMARY: no file contents  
-#     - name: Create job summary
-#       uses: ./.github/workflows/summarize-jobs-reusable.yaml
+        run: |
+            del_msg="'${{ env.BRANCH_NEW }}' force deletion attempted."
+            else_msg="'${{ env.BRANCH_NEW }}' does not exist. Skipping closure."
+            pr_msg="Closing PR'${{ env.BRANCH_NEW }}' to rollback after failure"
+            echo "PR ${del_msg}."
+            gh pr close "${{ env.BRANCH_NEW }}" --comment "${pr_msg}" || \
+              echo "PR $else_msg"
+            echo "Branch ${del_msg}"
+            gh api "repos/${{ github.repository }}/git/refs/heads/${{ env.BRANCH_NEW }}" -X DELETE && echo "Branch deleted" || echo "Branch $else_msg"
+  
+  generate_summary:
+    name: Generate Summary Report 
+    if: ${{ !cancelled() }}
+    needs: bump-my-version
+    uses: "./.github/workflows/summarize-jobs-reusable.yaml"
 ...

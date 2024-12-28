@@ -16,6 +16,7 @@ RUN set -xe \
 
 # Stage 2: Runtime Image
 FROM python:${PYTHON_VERSION}-slim AS runtime
+
 LABEL author="qte77"
 LABEL runtime=true
 
@@ -29,12 +30,14 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 #    WANDB_DISABLE_CODE=true
 
 RUN set -xe \
-    && useradd --create-home ${USER} \
-    && pip install --no-cache-dir uv
-    
+    && useradd --create-home ${USER}
 USER ${USER}
 WORKDIR ${APP_ROOT}
+RUN set -xe \
+    && pip install --no-cache-dir uv
+
 COPY --from=builder /.venv .venv
+
 COPY --chown=${USER}:${USER} ${APP_ROOT} .
 
 CMD [ \
