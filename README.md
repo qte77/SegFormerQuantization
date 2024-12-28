@@ -159,10 +159,13 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
 - [x] Use pt or cuda images to reduce loading time size, e.g.
   - `pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime`
   - `nvidia/12.6.3-base-ubuntu24.04`
-- mkdocs
-  - [x] Add .md to LICENSE/LICENSES to avoid download instead of open
-  - [x] Remove/Change #href ↑(#toc) to avoid conflict with gh-pages
-  - [x] Remove/Change #href for light/dark png to avoid conflict with gh-pages
+- [x] mkdocs
+  - Add .md to LICENSE/LICENSES to avoid download instead of open
+  - Remove/Change #href ↑(#toc) to avoid conflict with gh-pages
+  - Remove/Change #href for light/dark png to avoid conflict with gh-pages
+- [x] bump
+  - Fix `bump-my-version.yaml` rollback step to delete auto-created branch after `failure()`
+    - Handle error `fatal: could not read Username` & `Error: Process completed with exit code 128.`
 
 [↑](#toc)
 

@@ -5,6 +5,7 @@ ARG USER="appuser"
 
 # Stage 1: Builder Image
 FROM pytorch/pytorch:2.5.1-cuda12.4-cudnn9-devel AS builder
+LABEL author="qte77"
 LABEL builder=true
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
@@ -16,7 +17,6 @@ RUN set -xe \
 
 # Stage 2: Runtime Image
 FROM python:${PYTHON_VERSION}-slim AS runtime
-
 LABEL author="qte77"
 LABEL runtime=true
 
@@ -30,14 +30,12 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 #    WANDB_DISABLE_CODE=true
 
 RUN set -xe \
-    && useradd --create-home ${USER}
+    && useradd --create-home ${USER} \
+    && pip install --no-cache-dir uv
+    
 USER ${USER}
 WORKDIR ${APP_ROOT}
-RUN set -xe \
-    && pip install --no-cache-dir uv
-
 COPY --from=builder /.venv .venv
-
 COPY --chown=${USER}:${USER} ${APP_ROOT} .
 
 CMD [ \
