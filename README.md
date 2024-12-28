@@ -2,7 +2,7 @@
 
 An end-to-end evaluation pipeline for SegFormer models on semantic segmentation tasks, with support for various quantization methods.
 
-![Version](https://img.shields.io/badge/version-0.7.0-8A2BE2)
+![Version](https://img.shields.io/badge/version-0.7.1-8A2BE2)
 [![CodeFactor](https://www.codefactor.io/repository/github/qte77/SegFormerQuantization/badge)](https://www.codefactor.io/repository/github/qte77/SegFormerQuantization)
 [![CodeQL](https://github.com/qte77/SegFormerQuantization/actions/workflows/codeql.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/codeql.yaml)
 [![ruff](https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yaml)
@@ -141,9 +141,6 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
   - Fix mkdocs not indenting checkbox ul
   - Fix mkdocs not including png with plain in-line html, assets/ not copied by mkdocs
   - Extend workflow to copy only files in nav of mkdocs.yaml
-- [ ] bump
-  - Fix `bump-my-version.yaml` rollback step to delete auto-created branch after `failure()`
-    - Handle error `fatal: could not read Username` & `Error: Process completed with exit code 128.`
 - [ ] Auto-generate `CHANGELOG.md`
   - Conventional Commits `.gitmessage`
   - Tools like `git-changelog`

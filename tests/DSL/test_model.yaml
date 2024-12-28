@@ -1,0 +1,51 @@
+---
+# scenarios
+model_loading:
+  steps:
+    load_model:
+      from:
+        src.utils.model_loader: get_model_hf
+#        typing: Dict
+      action:
+        function: get_model_hf
+        docstring: "Test if model gets loaded from HF"
+        args:
+          model_checkpoint: "nvidia/mit-b0"
+          save_path: ""
+        returns:
+          - model
+      assert:
+        "model is None": "Model was not loaded"
+model_saving:
+  steps:
+    save_model:
+      from:
+        src.utils.model_loader: save_model_hf
+      action:
+        function: save_model_hf
+        docstring: ""
+        args:
+          save_path: "./runtime/models"
+        returns:
+          - model
+      assert:
+        "model is not None": "Model was loaded"
+model_quantizing:
+  steps:
+    quantize_model:
+      from:
+        src.utils.quantization: quantize_models
+      action:
+        function: quantize_models
+        docstring: ""
+        args:
+          base_model: ""
+        returns:
+          - model
+          - quantized_size
+          - original_size
+      assert:
+        model.is_quantized: "Model was not quantized"
+        "quantized_size < original_size": "Quantization did not reduce model size"
+...
+  

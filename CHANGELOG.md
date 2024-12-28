@@ -18,6 +18,16 @@ Types of changes:
 
 ---
 
+## [0.7.1] - 2024-12-28
+
+### Added
+
+- Bump workflow: Delete branch and PR if failure, calls summarize-jobs-reusable workflow
+- summarize-jobs-reusable workflow ot summarize worfklows
+- Test: DSL and test gernerator, also one basic test
+
+---
+
 ## [0.7.0] - 2024-12-26
 
 ### Added
