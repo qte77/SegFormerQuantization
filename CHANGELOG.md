@@ -16,6 +16,10 @@ Types of changes:
 
 ## [Unreleased]
 
+---
+
+## [0.7.2] - 2024-12-29
+
 ### Added
 
 - pytest workflow
