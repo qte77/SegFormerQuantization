@@ -2,7 +2,7 @@
 
 An end-to-end evaluation pipeline for SegFormer models on semantic segmentation tasks, with support for various quantization methods.
 
-![Version](https://img.shields.io/badge/version-0.7.1-8A2BE2)
+![Version](https://img.shields.io/badge/version-0.7.2-8A2BE2)
 [![CodeFactor](https://www.codefactor.io/repository/github/qte77/SegFormerQuantization/badge)](https://www.codefactor.io/repository/github/qte77/SegFormerQuantization)
 [![CodeQL](https://github.com/qte77/SegFormerQuantization/actions/workflows/codeql.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/codeql.yaml)
 [![ruff](https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yaml)
