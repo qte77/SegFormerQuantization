@@ -6,7 +6,7 @@ An end-to-end evaluation pipeline for SegFormer models on semantic segmentation 
 [![CodeFactor](https://www.codefactor.io/repository/github/qte77/SegFormerQuantization/badge)](https://www.codefactor.io/repository/github/qte77/SegFormerQuantization)
 [![CodeQL](https://github.com/qte77/SegFormerQuantization/actions/workflows/codeql.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/codeql.yaml)
 [![ruff](https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yaml)
-[![pytest](https://github.com/pdq21/SF-quant-temp/actions/workflows/pytest.yaml/badge.svg)](https://github.com/pdq21/SF-quant-temp/actions/workflows/pytest.yaml)
+[[![pytest](https://github.com/pdq21/SF-quant-temp/actions/workflows/pytest.yaml/badge.svg)](https://github.com/pdq21/SF-quant-temp/actions/workflows/pytest.yaml)](https://github.com/qte77/SegFormerQuantization/actions/workflows/pytest.yaml/badge.svg)
 [![Link Checker](https://github.com/qte77/SegFormerQuantization/actions/workflows/links-fail-fast.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/links-fail-fast.yaml)
 [![Deploy Docs](https://github.com/qte77/SegFormerQuantization/actions/workflows/generate-deploy-mkdocs-ghpages.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/generate-deploy-mkdocs-ghpages.yaml)
 [![vscode.dev](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=vscode.dev&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://vscode.dev/github/qte77/SegFormerQuantization)
