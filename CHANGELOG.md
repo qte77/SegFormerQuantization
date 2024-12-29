@@ -16,6 +16,11 @@ Types of changes:
 
 ## [Unreleased]
 
+### Added
+
+- pytest workflow
+- Bump workflow: Job output, several checks for PR, branch and tag deletion
+
 ---
 
 ## [0.7.1] - 2024-12-28
