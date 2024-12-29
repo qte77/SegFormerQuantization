@@ -1,5 +1,5 @@
 ---
-name: "bump-my-version"
+name: bump_my_version
 
 on:
   # pull_request:
@@ -17,12 +17,20 @@ on:
         - 'minor'
         - 'patch'
 
+      # FIXME remove
+      # debug_fail_on_purpose:
+      #   description: ""
+      #   required: true
+      #   default: false
+      #   type: boolean
+      # FIXME remove
+
 env:
   BRANCH_NEW: "bump-${{ github.run_number }}-${{ github.ref_name }}"
   SKIP_PR_HINT: "[skip ci bump]"
 
 jobs:
-  bump-my-version:
+  bump_my_version:
     # TODO bug? currently resulting in: Unrecognized named-value: 'env'.
     # https://stackoverflow.com/questions/61238849/github-actions-if-contains-function-not-working-with-env-variable/61240761
     # if: !contains(
@@ -36,6 +44,9 @@ jobs:
         ( github.event.pull_request.merged == true &&
         github.event.pull_request.closed_by != 'github-actions' )
     runs-on: ubuntu-latest
+    outputs:
+      branch_new: ${{ steps.create_new_branch.outputs.branch_new }}
+      summary_data: ${{ steps.set_summary.outputs.summary_data }}
     permissions:
       actions: read
       checks: write
@@ -49,11 +60,12 @@ jobs:
           fetch-depth: 1
 
       - name: Create new branch
-        id: branch
+        id: create_new_branch
         run: |
           git config user.email "bumped@qte77.gha"
           git config user.name "bump-my-version"
-          git checkout -b ${{ env.BRANCH_NEW }}
+          git checkout -b "${{ env.BRANCH_NEW }}"
+          echo "branch_new=${{ env.BRANCH_NEW }}" >> $GITHUB_OUTPUT
 
       - name: Bump version
         id: bump
@@ -71,30 +83,53 @@ jobs:
           VER_CURRENT: ${{ steps.bump.outputs.current-version }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          tag_current="v${{ env.VER_CURRENT }}"
+          pr_title="PR ${{ env.BRANCH_NEW }} ${{ env.SKIP_PR_HINT }}"
+          pr_body="PR automatically created from \`${{ github.ref_name }}\` to bump from \`${{ env.VER_PREVIOUS }}\` to \`${{ env.VER_CURRENT }}\` on \`${{ env.BRANCH_NEW }}\`."
+          pr_body="${pr_body} Tag \`${tag_current}\` will be created and has to be deleted manually if PR get's closed without merge."
+
           gh pr create \
             --base ${{ github.ref_name }} \
             --head ${{ env.BRANCH_NEW }} \
-            --title "PR ${{ env.BRANCH_NEW }} ${{ env.SKIP_PR_HINT }}" \
-            --body "PR automatically created from `${{ github.ref_name }}` to bump from `${{ env.VER_PREVIOUS }}` to `${{ env.VER_CURRENT }}` on `${{ env.BRANCH_NEW }}`." \
+            --title "${pr_title}" \
+            --body "${pr_body}"
             # --label "bump"
 
-      - name: Delete branch and PR in case of failure
-        if: failure()
+      # FIXME remove 
+      # - name: Intentional failure
+      #   if: ${{ inputs.debug_fail_on_purpose }}
+      #   run: exit 1
+      # FIXME remove 
+
+      - name: Delete branch and PR in case of failure or cancel
+        if: failure() || cancelled()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+            branch_del_api_call="repos/${{ github.repository }}/git/refs/heads/${{ env.BRANCH_NEW }}"
+            tag_to_delete="v${{ steps.bump.outputs.current-version }}"
             del_msg="'${{ env.BRANCH_NEW }}' force deletion attempted."
-            else_msg="'${{ env.BRANCH_NEW }}' does not exist. Skipping closure."
-            pr_msg="Closing PR'${{ env.BRANCH_NEW }}' to rollback after failure"
-            echo "PR ${del_msg}."
-            gh pr close "${{ env.BRANCH_NEW }}" --comment "${pr_msg}" || \
-              echo "PR $else_msg"
+            close_msg="Closing PR '${{ env.BRANCH_NEW }}' to rollback after failure"
+
+            echo "Tag ${tag_to_delete} for ${del_msg}"
+            git tag -d  "${tag_to_delete}"
+            echo "PR for ${del_msg}"
+            gh pr close "${{ env.BRANCH_NEW }}" --comment "${close_msg}"
             echo "Branch ${del_msg}"
-            gh api "repos/${{ github.repository }}/git/refs/heads/${{ env.BRANCH_NEW }}" -X DELETE && echo "Branch deleted" || echo "Branch $else_msg"
+            gh api "${branch_del_api_call}" -X DELETE && \
+              echo "Branch without error return deleted."
+
+      - name: Set summary data
+        id: set_summary
+        if: ${{ always() }}
+        run: echo "summary_data=${GITHUB_STEP_SUMMARY}" >> $GITHUB_OUTPUT
   
   generate_summary:
     name: Generate Summary Report 
-    if: ${{ !cancelled() }}
-    needs: bump-my-version
+    if: ${{ always() }}
+    needs: bump_my_version
     uses: "./.github/workflows/summarize-jobs-reusable.yaml"
+    with:
+      branch_to_summarize: ${{ needs.bump_my_version.outputs.branch_new }}
+      summary_data: ${{ needs.bump_my_version.outputs.summary_data }}
 ...

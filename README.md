@@ -6,6 +6,7 @@ An end-to-end evaluation pipeline for SegFormer models on semantic segmentation 
 [![CodeFactor](https://www.codefactor.io/repository/github/qte77/SegFormerQuantization/badge)](https://www.codefactor.io/repository/github/qte77/SegFormerQuantization)
 [![CodeQL](https://github.com/qte77/SegFormerQuantization/actions/workflows/codeql.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/codeql.yaml)
 [![ruff](https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yaml)
+[![pytest](https://github.com/pdq21/SF-quant-temp/actions/workflows/pytest.yaml/badge.svg)](https://github.com/pdq21/SF-quant-temp/actions/workflows/pytest.yaml)
 [![Link Checker](https://github.com/qte77/SegFormerQuantization/actions/workflows/links-fail-fast.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/links-fail-fast.yaml)
 [![Deploy Docs](https://github.com/qte77/SegFormerQuantization/actions/workflows/generate-deploy-mkdocs-ghpages.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/generate-deploy-mkdocs-ghpages.yaml)
 [![vscode.dev](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=vscode.dev&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://vscode.dev/github/qte77/SegFormerQuantization)
@@ -131,30 +132,26 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
 
 ## TODO
 
-- [ ] Implement tests before implementing concrete function (TDD)
+- [ ] TDD
+  - Implement tests before implementing concrete function
   - test_model_loading, test_image_preprocessing
   - test_quantization, test_predict, test_end_to_end
-- [ ] Include option to call HF API instead of saving model locally
-- [ ] Use pydantic and python typing
-- [ ] Insert link to report and project within WandB
+  - Use pydantic and python typing
 - [ ] mkdocs
-  - Fix mkdocs not indenting checkbox ul
-  - Fix mkdocs not including png with plain in-line html, assets/ not copied by mkdocs
   - Extend workflow to copy only files in nav of mkdocs.yaml
-- [ ] Auto-generate `CHANGELOG.md`
-  - Conventional Commits `.gitmessage`
-  - Tools like `git-changelog`
-- [ ] Docker
-  - Where are site-packages in Dockerfile for copy to runtime located?
-  - Evaluate `callisto` for fast cloud-native builds
-- [ ] Push to main with PR only branch protection rules
-  - [ ] Use dedicated branch `dev-auto-push-to-main`
-  - [ ] Incorporate branch to workflow `bump-my-version.yaml`
-  - [ ] Create workflow `update_changelog.yaml`
-- [ ] Optional: Include option to call HF API instead of saving model locally
-  - Might be useful for evaluation purposes
+- [ ] bump
+  - Check steps summary output json, possible bug in GHA
+- [ ] `README.md`
+  - Include badge for tests
+  - Insert link to report and project within WandB
+- [ ] Optional
+  - Hugging Face
+    - Include option to call HF API instead of saving model locally
+      - Might be useful for evaluation purposes
+  - Docker
+    - Evaluate `callisto` for fast cloud-native builds
 
-### DONE
+## DONE
 
 - [x] Use pt or cuda images to reduce loading time size, e.g.
   - `pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime`
@@ -162,10 +159,24 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
 - [x] mkdocs
   - Add .md to LICENSE/LICENSES to avoid download instead of open
   - Remove/Change #href ↑(#toc) to avoid conflict with gh-pages
-  - Remove/Change #href for light/dark png to avoid conflict with gh-pages
+  - Remove/Change #href for light/dark png to avoid conflict with
+  - Fix mkdocs not indenting checkbox ul
+  - Fix mkdocs not including png with plain in-line html, assets/ not copied by mkdocsgh-pages
 - [x] bump
   - Fix `bump-my-version.yaml` rollback step to delete auto-created branch after `failure()`
     - Handle error `fatal: could not read Username` & `Error: Process completed with exit code 128.`
+- [x] `CHANGELOG.md` auto-generate
+  - Solution: do manual bump occasionally and populate `CHANGELOG.md` before
+  - Conventional Commits `.gitmessage`
+  - Tools like `git-changelog`
+- [x] Docker
+  - Where are site-packages in Dockerfile for copy to runtime located?
+    - Solution: `.venv`
+- [x] Branch protection rules
+  - Push to main with PR only
+  - Use dedicated branch `dev-auto-push-to-main`
+  - Incorporate branch to workflow `bump-my-version.yaml`
+  - Create workflow `update_changelog.yaml`
 
 [↑](#toc)
 
