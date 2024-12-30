@@ -1,6 +1,6 @@
 import torch
 from src.utils.evaluator import infer_model
-from unittest.mock import  MagicMock
+from unittest.mock import MagicMock
 
 class MockModel:
     def __call__(self, pixel_values, labels):
