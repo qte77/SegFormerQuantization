@@ -22,7 +22,7 @@ Types of changes:
 
 ### Added
 
-- pytest workflow
+- `pytest`: Simple basic workflow to get started
 - Bump workflow: Job output, several checks for PR, branch and tag deletion
 
 ---
@@ -32,8 +32,8 @@ Types of changes:
 ### Added
 
 - Bump workflow: Delete branch and PR if failure, calls summarize-jobs-reusable workflow
-- summarize-jobs-reusable workflow ot summarize worfklows
-- Test: DSL and test gernerator, also one basic test
+- summarize-jobs-reusable workflow to summarize workflows
+- Test: DSL and test generator, also one basic test
 
 ---
 

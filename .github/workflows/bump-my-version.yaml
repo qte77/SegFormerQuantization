@@ -17,17 +17,10 @@ on:
         - 'minor'
         - 'patch'
 
-      # FIXME remove
-      # debug_fail_on_purpose:
-      #   description: ""
-      #   required: true
-      #   default: false
-      #   type: boolean
-      # FIXME remove
-
 env:
   BRANCH_NEW: "bump-${{ github.run_number }}-${{ github.ref_name }}"
   SKIP_PR_HINT: "[skip ci bump]"
+  SCRIPT_PATH: ".github/scripts"
 
 jobs:
   bump_my_version:
@@ -45,7 +38,7 @@ jobs:
         github.event.pull_request.closed_by != 'github-actions' )
     runs-on: ubuntu-latest
     outputs:
-      branch_new: ${{ steps.create_new_branch.outputs.branch_new }}
+      branch_new: ${{ steps.create_branch.outputs.branch_new }}
       summary_data: ${{ steps.set_summary.outputs.summary_data }}
     permissions:
       actions: read
@@ -59,8 +52,8 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Create new branch
-        id: create_new_branch
+      - name: Set git cfg and create branch
+        id: create_branch
         run: |
           git config user.email "bumped@qte77.gha"
           git config user.name "bump-my-version"
@@ -79,45 +72,20 @@ jobs:
       - name: "Create PR '${{ env.BRANCH_NEW }}'"
         if: steps.bump.outputs.bumped == 'true'
         env:
-          VER_PREVIOUS: ${{ steps.bump.outputs.previous-version }}
-          VER_CURRENT: ${{ steps.bump.outputs.current-version }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          tag_current="v${{ env.VER_CURRENT }}"
-          pr_title="PR ${{ env.BRANCH_NEW }} ${{ env.SKIP_PR_HINT }}"
-          pr_body="PR automatically created from \`${{ github.ref_name }}\` to bump from \`${{ env.VER_PREVIOUS }}\` to \`${{ env.VER_CURRENT }}\` on \`${{ env.BRANCH_NEW }}\`."
-          pr_body="${pr_body} Tag \`${tag_current}\` will be created and has to be deleted manually if PR get's closed without merge."
+          src="${{ env.SCRIPT_PATH }}/create_pr.sh"
+          chmod +x "$src"
+          $src "${{ github.ref_name }}" "${{ env.BRANCH_NEW }}" "${{ env.SKIP_PR_HINT }}" "${{ steps.bump.outputs.previous-version }}" "${{ steps.bump.outputs.current-version }}"
 
-          gh pr create \
-            --base ${{ github.ref_name }} \
-            --head ${{ env.BRANCH_NEW }} \
-            --title "${pr_title}" \
-            --body "${pr_body}"
-            # --label "bump"
-
-      # FIXME remove 
-      # - name: Intentional failure
-      #   if: ${{ inputs.debug_fail_on_purpose }}
-      #   run: exit 1
-      # FIXME remove 
-
-      - name: Delete branch and PR in case of failure or cancel
+      - name: Delete branch, PR and tag in case of failure or cancel
         if: failure() || cancelled()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-            branch_del_api_call="repos/${{ github.repository }}/git/refs/heads/${{ env.BRANCH_NEW }}"
-            tag_to_delete="v${{ steps.bump.outputs.current-version }}"
-            del_msg="'${{ env.BRANCH_NEW }}' force deletion attempted."
-            close_msg="Closing PR '${{ env.BRANCH_NEW }}' to rollback after failure"
-
-            echo "Tag ${tag_to_delete} for ${del_msg}"
-            git tag -d  "${tag_to_delete}"
-            echo "PR for ${del_msg}"
-            gh pr close "${{ env.BRANCH_NEW }}" --comment "${close_msg}"
-            echo "Branch ${del_msg}"
-            gh api "${branch_del_api_call}" -X DELETE && \
-              echo "Branch without error return deleted."
+          src="${{ env.SCRIPT_PATH }}/delete_branch_pr_tag.sh"
+          chmod +x "$src"
+          $src "${{ github.repository }}" "${{ env.BRANCH_NEW }}" "${{ steps.bump.outputs.current-version }}"
 
       - name: Set summary data
         id: set_summary
@@ -128,7 +96,7 @@ jobs:
     name: Generate Summary Report 
     if: ${{ always() }}
     needs: bump_my_version
-    uses: "./.github/workflows/summarize-jobs-reusable.yaml"
+    uses: ./.github/workflows/summarize-jobs-reusable.yaml
     with:
       branch_to_summarize: ${{ needs.bump_my_version.outputs.branch_new }}
       summary_data: ${{ needs.bump_my_version.outputs.summary_data }}
