@@ -2,11 +2,11 @@
 
 An end-to-end evaluation pipeline for SegFormer models on semantic segmentation tasks, with support for various quantization methods.
 
-![Version](https://img.shields.io/badge/version-0.7.2-8A2BE2)
+![Version](https://img.shields.io/badge/version-0.7.3-8A2BE2)
 [![CodeFactor](https://www.codefactor.io/repository/github/qte77/SegFormerQuantization/badge)](https://www.codefactor.io/repository/github/qte77/SegFormerQuantization)
 [![CodeQL](https://github.com/qte77/SegFormerQuantization/actions/workflows/codeql.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/codeql.yaml)
 [![ruff](https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/ruff.yaml)
-[![pytest](https://github.com/qte77/SegFormerQuantization/actions/workflows/pytest.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/pytest.yaml)
+[![pytest](https://github.com/pdq21/SF-quant-temp/actions/workflows/pytest.yaml/badge.svg)](https://github.com/pdq21/SF-quant-temp/actions/workflows/pytest.yaml)
 [![Link Checker](https://github.com/qte77/SegFormerQuantization/actions/workflows/links-fail-fast.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/links-fail-fast.yaml)
 [![Deploy Docs](https://github.com/qte77/SegFormerQuantization/actions/workflows/generate-deploy-mkdocs-ghpages.yaml/badge.svg)](https://github.com/qte77/SegFormerQuantization/actions/workflows/generate-deploy-mkdocs-ghpages.yaml)
 [![vscode.dev](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=vscode.dev&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://vscode.dev/github/qte77/SegFormerQuantization)
@@ -35,7 +35,7 @@ For version history have a look at the [CHANGELOG](CHANGELOG.md).
     - [System](#system)
     - [Code](#code)
   - [TODO](#todo)
-    - [DONE](#done)
+  - [DONE](#done)
   - [License](#license)
 
 ## Features
@@ -141,6 +141,7 @@ Adjust settings in `src/config.py` for model, dataset, and evaluation parameters
   - Extend workflow to copy only files in nav of mkdocs.yaml
 - [ ] bump
   - Check steps summary output json, possible bug in GHA
+  - Check if version tag exists, abort if so to avoid association of tag with an unrelated commit
 - [ ] `README.md`
   - Include badge for tests
   - Insert link to report and project within WandB
