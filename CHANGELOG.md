@@ -166,7 +166,7 @@ Types of changes:
 - `.gitignore`
 - Actions: `links-fail-fast.yml`, `codeql.yml`
 
-## Removed
+### Removed
 
 - `.bumpversion.cfg`
 - `requirements.txt`
