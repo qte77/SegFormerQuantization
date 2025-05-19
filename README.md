@@ -23,11 +23,9 @@ For version history have a look at the [CHANGELOG](CHANGELOG.md).
   - [Status](#status)
   - [TOC](#toc)
   - [Features](#features)
-  - [Setup](#setup)
-  - [Usage](#usage)
-    - [Python](#python)
+  - [Setup and Usage](#setup-and-usage)
+    - [CLI](#cli)
     - [Docker](#docker)
-    - [Test](#test)
   - [Configuration](#configuration)
   - [Documentation](#documentation)
   - [Project Structure](#project-structure)
@@ -47,21 +45,17 @@ For version history have a look at the [CHANGELOG](CHANGELOG.md).
 
 [↑](#toc)
 
-## Setup
+## Setup and Usage
 
-1. Install uv: `pip install uv`
-2. Install dependencies: `uv sync [--frozen]`
-3. Set up Weights & Biases API key in environment variables
+### CLI
+
+- `make setup_env` or `uv sync --frozen`
+- `make run_app` or `uv run [--locked] python -m src`
+- `make test_all` or `uv run pytest`
+
+Hint: Set up Weights & Biases API key in environment variables
 
 [↑](#toc)
-
-## Usage
-
-### Python
-
-```sh
-uv run [--locked] python -m src 
-```
 
 ### Docker
 
@@ -73,16 +67,9 @@ docker run segformer-quant-eval
 To build with different python version
 
 ```sh
-docker build --build-arg
+docker build --build-arg \
   PYTHON_VERSION=<py_version> \
   .
-```
-
-### Test
-
-```sh
-uv sync --only-group dev
-uv run pytest tests/
 ```
 
 [↑](#toc)

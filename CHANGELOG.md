@@ -16,6 +16,16 @@ Types of changes:
 
 ## [Unreleased]
 
+### Changed
+
+- Notebooks: Updated
+- Devcontainer and vscode settings
+- Makefile: New targets
+
+### Removed
+
+- Notebooks: Obsolete and unused
+
 ---
 
 ## [0.7.2] - 2024-12-29
@@ -166,7 +176,7 @@ Types of changes:
 - `.gitignore`
 - Actions: `links-fail-fast.yml`, `codeql.yml`
 
-## Removed
+### Removed
 
 - `.bumpversion.cfg`
 - `requirements.txt`
